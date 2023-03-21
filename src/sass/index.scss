@@ -1,9 +1,11 @@
 @import './common';
-@import './example';
 
 @import './utils/fonts';
 @import './utils/variables';
 @import './utils/mixins';
+
+@import './base/base';
+@import './base/container';
 
 @import './components/header';
 @import './components/categories';
@@ -13,3 +15,4 @@
 @import './components/weather';
 @import './components/pages-switcher';
 @import './components/scroll-button';
+@import './components/footer';
