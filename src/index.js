@@ -1,0 +1,11 @@
+import './js/news-service';
+import './js/news-card-markup';
+import './js/search';
+import './js/categories';
+import './js/calendar-service';
+import './js/news-grid';
+import './js/news-favourite';
+import './js/news-read';
+import './js/weather-service';
+import './js/scroll-button';
+import './js/theme-switcher';
