@@ -1,2 +1,15 @@
 @import './common';
 @import './example';
+
+@import './utils/fonts';
+@import './utils/variables';
+@import './utils/mixins';
+
+@import './components/header';
+@import './components/categories';
+@import './components/calendar';
+@import './components/news-grid';
+@import './components/news-card';
+@import './components/weather';
+@import './components/pages-switcher';
+@import './components/scroll-button';
