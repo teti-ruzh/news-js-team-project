@@ -1,11 +1,12 @@
-import './js/news-service';
+import './js/news-fetch-service';
 import './js/news-card-markup';
 import './js/search';
 import './js/categories';
 import './js/calendar-service';
-import './js/news-grid';
-import './js/news-favourite';
-import './js/news-read';
+import './js/news-gallery';
+import './js/add-to-favourite';
+import './js/add-to-read';
 import './js/weather-service';
 import './js/scroll-button';
 import './js/theme-switcher';
+import './js/pagination';
