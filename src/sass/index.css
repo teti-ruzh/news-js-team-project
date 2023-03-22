@@ -1,0 +1,216 @@
+@import '~node_modules/modern-normalize/modern-normalize.css';
+@font-face {
+  font-family: "Manrope";
+  src: url("../fonts/manrope/Manrope-Medium.eot");
+  src: url("../fonts/manrope/Manrope-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/manrope/Manrope-Medium.woff2") format("woff2"), url("../fonts/manrope/Manrope-Medium.woff") format("woff"), url("../fonts/manrope/Manrope-Medium.svg#Manrope-Medium") format("svg");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("../fonts/manrope/Manrope-Bold.eot");
+  src: url("../fonts/manrope/Manrope-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/manrope/Manrope-Bold.woff2") format("woff2"), url("../fonts/manrope/Manrope-Bold.woff") format("woff"), url("../fonts/manrope/Manrope-Bold.svg#Manrope-Bold") format("svg");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("../fonts/manrope/Manrope-Regular.eot");
+  src: url("../fonts/manrope/Manrope-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/manrope/Manrope-Regular.woff2") format("woff2"), url("../fonts/manrope/Manrope-Regular.woff") format("woff"), url("../fonts/manrope/Manrope-Regular.svg#Manrope-Regular") format("svg");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/roboto/Roboto-Regular.eot");
+  src: url("../fonts/roboto/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/roboto/Roboto-Regular.woff2") format("woff2"), url("../fonts/roboto/Roboto-Regular.woff") format("woff"), url("../fonts/roboto/Roboto-Regular.svg#Roboto-Regular") format("svg");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/poppins/Poppins-Regular.eot");
+  src: url("../fonts/poppins/Poppins-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/poppins/Poppins-Regular.woff2") format("woff2"), url("../fonts/poppins/Poppins-Regular.woff") format("woff"), url("../fonts/poppins/Poppins-Regular.svg#Poppins-Regular") format("svg");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  color: #111321;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+@media screen and (min-width: 320px) {
+  .container {
+    width: 320px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1280px;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  margin: -1px;
+}
+
+p, h1, h2 {
+  margin: 0;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -30px;
+  margin-left: -30px;
+}
+
+.card__item {
+  width: calc(33.3333333333% - 30px);
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.card__link {
+  display: block;
+  cursor: pointer;
+  margin-right: 26px;
+}
+
+.card__title {
+  color: #111321;
+  font-family: "Manrope";
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.37;
+  letter-spacing: -0.01em;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+.card__text {
+  color: #111321;
+  font-family: "Manrope";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.38;
+  margin-bottom: 20px;
+}
+
+.card__details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card__wrapper {
+  position: relative;
+}
+
+.card__category {
+  position: absolute;
+  width: 112px;
+  height: 24px;
+  left: 0px;
+  top: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(68, 64, 246, 0.7);
+  color: rgb(244, 244, 244);
+}
+
+.card__image {
+  width: 395px;
+  height: 395px;
+  margin-bottom: 20px;
+}
+
+.card__button {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 6px 12px;
+  gap: 4px;
+  position: absolute;
+  width: 168px;
+  height: 28px;
+  left: 214px;
+  top: 355px;
+  background: #F4F4F4;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.card__svg {
+  fill: rgb(75, 72, 218);
+}
+
+.footer {
+  background-color: #7A7A7A;
+  height: 120px;
+}
+@media screen and (min-width: 768px) {
+  .footer {
+    height: 146px;
+  }
+}/*# sourceMappingURL=index.css.map */
