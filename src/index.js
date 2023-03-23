@@ -10,4 +10,5 @@ import './js/weather-service';
 import './js/scroll-button';
 import './js/theme-switcher';
 import './js/pagination';
+import './js/header';
 import './js/mobile-menu';
