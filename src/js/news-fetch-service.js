@@ -13,7 +13,9 @@ export async function fetchApiPopular() {
   try {
     const response = await fetch(MOST_POPULAR_URL);
     if (response.ok) {
-      const data = await response.json();
+      const data = await response.json().then(response => {
+        return response.results;
+      });
       console.log(data);
       return data;
     }
@@ -26,7 +28,9 @@ export async function fetchApiCategory() {
   try {
     const response = await fetch(CATEGORY_URL);
     if (response.ok) {
-      const data = await response.json();
+      const data = await response.json().then(response => {
+        return response.results;
+      });
       console.log(data);
       return data;
     }
@@ -39,7 +43,9 @@ export async function fetchApiSearchQuery() {
   try {
     const response = await fetch(SEARCH_URL);
     if (response.ok) {
-      const data = await response.json();
+      const data = await response.json().then(response => {
+        return response.results;
+      });
       console.log(data);
       return data;
     }
