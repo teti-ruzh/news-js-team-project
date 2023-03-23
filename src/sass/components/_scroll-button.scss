@@ -1,0 +1,22 @@
+.up-button {
+  position: fixed;
+  bottom: 50px;
+  right: 10px;
+
+  &.is-hidden {
+    opacity: 0;
+  }
+}
+
+.up-button-link {
+  display: flex;
+  fill: $color-grey;
+  transition: fill 0.25s linear, scale 0.25s ease-in-out;
+}
+
+.up-button-link:hover,
+.up-button-link:focus {
+  scale: 1.1;
+  fill: $color-brand-translucent;
+}
+
