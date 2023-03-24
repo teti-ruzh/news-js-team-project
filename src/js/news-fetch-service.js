@@ -6,7 +6,7 @@ let query = '';
 const API_KEY = 'api-key=nb4kIc3A28NYQPkulI6xtxUAkPze1R9u';
 
 const MOST_POPULAR_URL = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?${API_KEY}`;
-const CATEGORY_URL = `https://api.nytimes.com/svc/news/v3/content/all/all.json?${API_KEY}`;
+const CATEGORY_URL = `https://api.nytimes.com/svc/news/v3/content/section-list.json?${API_KEY}`;
 const SEARCH_URL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${query}&${API_KEY}`;
 
 export async function fetchApiPopular() {
@@ -31,7 +31,6 @@ export async function fetchApiCategory() {
       const data = await response.json().then(response => {
         return response.results;
       });
-      console.log(data);
       return data;
     }
   } catch (error) {
