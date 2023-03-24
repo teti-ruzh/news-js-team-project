@@ -1,10 +1,27 @@
 <div class="container category__section">
     <div class="category__list">
-        <ul class="category__list" id="category-btn">
+        <button class="category__btn category__mobile-btn" type="button">Categories
+            <svg class="category__arrow-icon-up" width="14" height="14">
+                <use href="./images/icons.svg#icon-arrow-up"></use>
+            </svg>
+            <svg class="category__arrow-icon-down" width="14" height="14">
+                <use href="./images/icons.svg#icon-arrow-down"></use>
+            </svg>
+            <ul class="category__mobile-overlay" id="category-mob-overlay">        
+            </ul>
+        </button> 
+        
+        <ul class="category__list category__mobile-btn-hidden" id="category-btn">
         </ul>
-        <button class="category__btn" type="button" id="others-btn">
+        <button class="category__btn category__mobile-btn-hidden" type="button" id="others-btn">
             Others
+            <svg class="category__arrow-icon-up" width="14" height="14">
+                <use href="./images/icons.svg#icon-arrow-up"></use>
+            </svg>
+            <svg class="category__arrow-icon-down" width="14" height="14">
+                <use href="./images/icons.svg#icon-arrow-down"></use>
+            </svg>
         </button>
     </div>
     <div class="category__calendar">check date</div>
-</div>;
+</div>

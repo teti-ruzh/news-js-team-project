@@ -1,6 +1,10 @@
 .category__section {
     display: flex;
     justify-content: space-between;
+
+    @media screen and (min-width: 320px) {
+        gap: 16px;
+    }
 }
 
 .category__list {
@@ -25,13 +29,114 @@
 
     cursor: pointer;
 
+    @media screen and (min-width: 768px) {
+            display: flex;
+            gap: 10px;
+    }
+
+}
+
+.category__mobile-btn {
+    @media screen and (max-width: 767px) {
+        position: absolute;
+            min-width: 148px;
+            padding: 7.5px 14px;
+            display: flex;
+            justify-content: space-between;
+    }
+    
+    @media screen and (min-width: 768px) {
+            display: none;
+    }
+}
+
+.category__mobile-overlay {
+    display: none;
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    z-index: 1;
+    width: 148px;
+    height: 100vw;
+    padding: 14px;
+    
+    border: 1px solid $color-brand;
+    border-radius: 20px;
+    filter: drop-shadow(0px 10px 60px rgba(0, 0, 0, 0.1));
+
+    transition: bottom 0.5s ease;
+}
+
+.category-open {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    top: 100%
+}
+
+.category__mobile-item {
+    text-align: left;
+}
+
+.category__mobile-link {
+    color: $color-brand;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: 0.01em;
+
+    background: linear-gradient(currentColor 0 0) bottom /0 1px no-repeat;
+    transition: 0.5s;
+}
+
+.category__mobile-link:hover {
+    background-size: 100% 1px;
+}
+
+.category__btn:focus,
+.category__btn:hover,
+.category__btn:active {
+    border-color: none;
+    background-color: $color-brand;
+    color: $color-white;
+}
+
+.category__btn:focus .category__arrow-icon-up,
+.category__btn:active .category__arrow-icon-up {
+    display: block;
+    fill: $color-white;
+}
+.category__btn:hover .category__arrow-icon-down {
+    @media screen and (min-width: 768px) {
+            fill: $color-white;
+    }
+}
+
+.category__btn:focus .category__arrow-icon-down,
+.category__btn:active .category__arrow-icon-down {
+    display: none;
+}
+
+.category__arrow-icon-up {
+    display: none;
+}
+
+.category__arrow-icon-down {
+    fill: $color-brand;
+}
+
+.category__mobile-btn-hidden {
+    @media screen and (max-width: 767px) {
+    display: none;        }
 }
 
 .category__calendar {
-    width: 137px;
+    width: 124px;
     height: 31px;
     border: 1px solid $color-brand-2;
     border-radius: 20px;
-    margin-right: 52px - 16px;
     text-align: center;
+
+    @media screen and (min-width: 768px) {
+            width: 137px;
+}
 }
