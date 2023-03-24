@@ -17,53 +17,143 @@ h2 {
   margin: 0;
 }
 .favorite {
-  width: 1280px;
-  height: 2724px;
-  padding: 60px 0 300px 0px;
+  @include mobile-up {
+    width: 320px;
+    height: 3563px;
+    padding: 40px 0 60px 0px;
+    margin: 0 auto;
+  }
 
-  background: #f4f4f4;
+  background: $color-white-2;
+  @include tablet-up {
+    padding: 48px 0 100px 0px;
+    height: 2485px;
+    width: 768px;
+  }
+  @include desktop-up {
+    width: 1280px;
+    height: 2724px;
+    padding: 60px 0 300px 0px;
+  }
 }
 .card {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(-1 * $card-set-gap);
-  margin-left: calc(-1 * $card-set-gap);
+  @include mobile-up {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  @include desktop-up {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * $card-set-gap);
+    margin-left: calc(-1 * $card-set-gap);
+  }
+
+  @include tablet-up {
+    margin-top: calc(-1 * 30px);
+    margin-left: calc(-1 * 30px);
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .card__item {
-  width: calc((100% / 3) - $card-set-gap);
-  margin-top: $card-set-gap;
-  margin-left: $card-set-gap;
+  @include mobile-up {
+    width: 288px;
+  }
+  @include tablet-up {
+    width: calc((100% / 2) - 30px);
+    margin-top: 30px;
+    margin-left: 30px;
+  }
+  @include desktop-up {
+    width: calc((100% / 3) - 32px);
+    margin-top: $card-set-gap;
+    margin-left: $card-set-gap;
+  }
 }
-
 .card__wrapper {
-  position: relative;
-  margin-bottom: 8px;
+  @include mobile-up {
+    margin-bottom: 28px;
+    width: 288px;
+    height: 630px;
+    display: block;
+    position: relative;
+  }
+
+  @include desktop-up {
+    position: relative;
+    margin-bottom: 10px;
+    width: 395px;
+  }
+  @include tablet-up {
+    position: relative;
+    width: 353px;
+    margin-bottom: 0;
+  }
 }
 .card__image {
-  width: 395px;
-  height: 395px;
-  margin-bottom: 20px;
+  @include mobile-up {
+    width: 288px;
+    height: 395px;
+    margin-bottom: 20px;
+  }
+  @include desktop-up {
+    width: 395px;
+    height: 395px;
+    margin-bottom: 20px;
+  }
+
+  @include tablet-up {
+    width: 353px;
+    height: 395px;
+  }
 }
 .card__status {
-  position: absolute;
-  width: 64px;
-  height: 19px;
-  left: 300px;
-  top: 16px;
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 19px;
-  color: $color-green-status;
+  @include mobile-up {
+    display: none;
+    position: absolute;
+    width: 64px;
+    height: 19px;
+    left: 300px;
+    top: 16px;
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.37;
+    color: $color-green-status;
+  }
+  @include tablet-up {
+    left: 268px;
+    top: 20px;
+    display: block;
+  }
 }
 .card__category {
+  @include mobile-up {
+    left: 0px;
+    top: 40px;
+    font-family: 'Manrope';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.37;
+    width: 112px;
+    height: 24px;
+    border-radius: 0px 4px 4px 0px;
+  }
+  @include desktop-up {
+    width: 112px;
+    height: 24px;
+    left: 0px;
+    top: 40px;
+  }
+  @include tablet-up {
+    left: 0px;
+    top: 40px;
+  }
   position: absolute;
-  width: 112px;
-  height: 24px;
-  left: 0px;
-  top: 40px;
+
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -72,6 +162,9 @@ h2 {
 }
 
 .card__title {
+  @include mobile-up {
+    font-size: 24px;
+  }
   color: $color-black;
   font-family: 'Manrope';
   font-weight: 700;
@@ -83,6 +176,9 @@ h2 {
 }
 
 .card__text {
+  @include mobile-up {
+    font-size: 14px;
+  }
   color: $color-black;
   font-family: 'Manrope';
   font-weight: 400;
@@ -92,19 +188,27 @@ h2 {
 }
 
 .card__button {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 6px 12px;
-  gap: 4px;
-  position: absolute;
-  width: 168px;
-  height: 28px;
-  left: 214px;
-  top: 355px;
-  background: $color-white-2;
-  border-radius: 20px;
-  font-size: 12px;
+  @include mobile-up {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 6px 12px;
+    gap: 4px;
+    position: absolute;
+    left: 112px;
+    top: 355px;
+    width: 168px;
+    height: 28px;
+    background: $color-white-2;
+    border-radius: 20px;
+    font-size: 12px;
+  }
+  @include tablet-up {
+    left: 173px;
+  }
+  @include desktop-up {
+    left: 214px;
+  }
 }
 .card__svg {
   fill: rgba(75, 72, 218, 1);

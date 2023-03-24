@@ -113,27 +113,68 @@ a {
   margin: -1px;
 }
 
-p, h1, h2 {
+p,
+h1,
+h2 {
   margin: 0;
+}
+
+.favorite {
+  width: 1280px;
+  height: 2724px;
+  padding: 60px 0 300px 0px;
+  background: #f4f4f4;
 }
 
 .card {
   display: flex;
   flex-wrap: wrap;
-  margin-top: -30px;
-  margin-left: -30px;
+  margin-top: -32px;
+  margin-left: -32px;
 }
 
 .card__item {
-  width: calc(33.3333333333% - 30px);
-  margin-top: 30px;
-  margin-left: 30px;
+  width: calc(33.3333333333% - 32px);
+  margin-top: 32px;
+  margin-left: 32px;
 }
 
-.card__link {
-  display: block;
-  cursor: pointer;
-  margin-right: 26px;
+.card__wrapper {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.card__image {
+  width: 395px;
+  height: 395px;
+  margin-bottom: 20px;
+  width: 353px;
+}
+.card__status {
+  position: absolute;
+  width: 64px;
+  height: 19px;
+  left: 300px;
+  top: 16px;
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  color: #00b912;
+}
+
+.card__category {
+  position: absolute;
+  width: 112px;
+  height: 24px;
+  left: 0px;
+  top: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(68, 64, 247, 0.7);
+  color: #f4f4f4;
 }
 
 .card__title {
@@ -156,35 +197,6 @@ p, h1, h2 {
   margin-bottom: 20px;
 }
 
-.card__details {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.card__wrapper {
-  position: relative;
-}
-
-.card__category {
-  position: absolute;
-  width: 112px;
-  height: 24px;
-  left: 0px;
-  top: 40px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(68, 64, 246, 0.7);
-  color: rgb(244, 244, 244);
-}
-
-.card__image {
-  width: 395px;
-  height: 395px;
-  margin-bottom: 20px;
-}
-
 .card__button {
   display: flex;
   flex-direction: row;
@@ -196,17 +208,43 @@ p, h1, h2 {
   height: 28px;
   left: 214px;
   top: 355px;
-  background: #F4F4F4;
+  background: #f4f4f4;
   border-radius: 20px;
   font-size: 12px;
 }
 
 .card__svg {
   fill: rgb(75, 72, 218);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.card__details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card_date {
+  font-family: "Manrope";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.375;
+  color: #a8a8a8;
+}
+
+.card__link {
+  font-family: "Manrope";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.375;
+  color: #4440f6;
+  display: block;
+  cursor: pointer;
+  margin-right: 26px;
 }
 
 .footer {
-  background-color: #7A7A7A;
+  background-color: #7a7a7a;
   height: 120px;
 }
 @media screen and (min-width: 768px) {
