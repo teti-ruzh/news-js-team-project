@@ -96,7 +96,7 @@
   position: absolute;
   right: 12px;
   bottom: 12px;
-  z-index: 1;
+  z-index: 10;
 
   // display: flex;
   //   justify-content: space-evenly;
@@ -110,6 +110,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  cursor: pointer;
 
   font-family: "Manrope";
   font-style: normal;
@@ -119,18 +120,6 @@
   background: #ffffff;
   border-radius: 20px;
   border: none;
-
-  @include tablet-up {
-    // position: absolute;
-    //   left: 173px;
-    //     top: 355px;
-  }
-
-  @include desktop-up {
-    // position: absolute;
-    // left: 257px;
-    //   top: 355px;
-  }
 }
 
 .box {
@@ -149,7 +138,8 @@
   font-size: 24px;
   line-height: 1.37;
   letter-spacing: -0.01em;
-  color: $color-black;
+  // color: $color-black;
+  color: inherit;
 
   @include tablet-up {
     font-size: 32px;
@@ -167,7 +157,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 1, 36;
-  color: $color-black;
+  color: inherit;
 }
 
 .news__data {
@@ -187,6 +177,7 @@
   font-size: 14px;
   line-height: 1.36;
   color: $color-brand;
+  margin-right: 21px;
 }
 
 .news-card--position {

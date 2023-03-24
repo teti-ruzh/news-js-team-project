@@ -54,14 +54,16 @@ async function fetchMostpopularData() {
 // Оновлена розмітка Назара 24-03-2023, 16-40
 function renderNews(imagesArray) {
   let foto = '';
+  const image = new URL('../images/gallery/plugFoto.jpg', import.meta.url);
+  const svgA = new URL('../images/icons.svg', import.meta.url);
+  const svgB = 'icon-heart-bordered';
+
   const markup = imagesArray
     .map(({ url, media, section, title, abstract, published_date }) => {
       if (!Boolean(media.length)) {
-        foto =
-          'https://cdn4.riastatic.com/photosnew/auto/photo/mercedes-benz_g-class__481113344f.webp';
+        foto = image;
       } else {
         foto = media[0]['media-metadata'][2].url;
-        console.log(foto);
       }
 
       const maxLength = 130;
@@ -94,7 +96,7 @@ function renderNews(imagesArray) {
         <button class="news__favorite-button">
           Add to favorite
           <svg class="news__favorite-icon" width="16" height="16">
-            <use href="./images/icons.svg#icon-heart-bordered"></use>
+            <use href="${svgA}#${svgB}"></use>
           </svg>
         </button>
       </div>
