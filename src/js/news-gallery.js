@@ -57,7 +57,8 @@ function renderNews(imagesArray) {
   const markup = imagesArray
     .map(({ url, media, section, title, abstract, published_date }) => {
       if (!Boolean(media.length)) {
-        foto = './images/gallery/gelik.jpg';
+        foto =
+          'https://cdn4.riastatic.com/photosnew/auto/photo/mercedes-benz_g-class__481113344f.webp';
       } else {
         foto = media[0]['media-metadata'][2].url;
         console.log(foto);
