@@ -13,6 +13,7 @@ const refs = {
   switchAfter: document.querySelector('.switch__label::after'),
   mobileMenu: document.querySelector('.mobil-menu'),
 };
+let classEl = '';
 
 refs.switch.addEventListener('change', function () {
   if (this.checked) {
@@ -28,6 +29,7 @@ refs.switch.addEventListener('change', function () {
 //     checkedLightTheme();
 //   }
 // });
+
 function checkedDarkTheme() {
   if (localStorage.getItem('theme') === 'dark') {
     localStorage.removeItem('theme');
@@ -49,17 +51,19 @@ function checkedLightTheme() {
 function addDarkClassToHTML() {
   try {
     if (localStorage.getItem('theme') === 'dark') {
+      addClass(refs.iconMoon, 'theme-switch');
+      addClass(refs.switchDarkName, 'theme-switch');
+      removeClass(refs.iconSun, 'theme-switch');
+      removeClass(refs.switchLightName, 'theme-switch');
       addClass(refs.body, 'dark');
       addClass(refs.searchInput, 'dark');
       addClass(refs.burgerMenu, 'dark');
       addClass(refs.mobileMenu, 'dark');
       addClass(refs.switchLabel, 'theme-switch--bg');
       addClass(refs.switchAfter, 'theme-switch--bg');
-      addClass(refs.iconMoon, 'theme-switch');
-      addClass(refs.switchDarkName, 'theme-switch');
-      removeClass(refs.iconSun, 'theme-switch');
-      removeClass(refs.switchLightName, 'theme-switch');
     } else {
+      removeClass(refs.iconMoon, 'theme-switch');
+      removeClass(refs.switchDarkName, 'theme-switch');
       addClass(refs.iconSun, 'theme-switch');
       addClass(refs.switchLightName, 'theme-switch');
       removeClass(refs.body, 'dark');
@@ -68,13 +72,10 @@ function addDarkClassToHTML() {
       removeClass(refs.mobileMenu, 'dark');
       removeClass(refs.switchLabel, 'theme-switch--bg');
       removeClass(refs.switchAfter, 'theme-switch--bg');
-      removeClass(refs.iconMoon, 'theme-switch');
-      removeClass(refs.switchDarkName, 'theme-switch');
     }
   } catch (err) {}
 }
 
-let classEl = '';
 function addClass(el, classEl) {
   el.classList.add(classEl);
 }
