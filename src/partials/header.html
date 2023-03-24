@@ -19,14 +19,20 @@
             <use href="./images/icons.svg#icon-search"></use>
           </svg>
         </button>
-        <input class="search__input" type="text" name="query" autocomplete="off" placeholder="search" />
+        <input
+          class="search__input"
+          type="text"
+          name="query"
+          autocomplete="off"
+          placeholder="search"
+        />
       </form>
     </div>
     <div class="switch">
       <svg class="switch__icon-sun" width="21" height="21">
         <use href="./images/icons.svg#icon-sun"></use>
       </svg>
-      <span class="switch__name">light</span>
+      <span class="switch__name" id="light-name">light</span>
       <input
         class="switch__checkbox"
         type="checkbox"
@@ -35,7 +41,7 @@
         aria-label="theme switch"
       />
       <label class="switch__label" for="theme-switch"></label>
-      <span class="switch__name">dark</span>
+      <span class="switch__name" id="dark-name">dark</span>
       <svg class="switch__icon-moon" width="21" height="21">
         <use href="./images/icons.svg#icon-moon"></use>
       </svg>

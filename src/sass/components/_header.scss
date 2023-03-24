@@ -32,7 +32,7 @@
     font-weight: 700;
     font-size: 24px;
     line-height: calc(33px / 24px);
-    color: $color-black;
+    color: inherit;
     text-transform: capitalize;
     @media screen and (min-width: 768px) {
       margin-right: 48px;
@@ -64,7 +64,7 @@
     font-size: 16px;
     line-height: calc(22px / 16px);
     text-transform: capitalize;
-    color: $color-black;
+    color: inherit;
     @media screen and (min-width: 1280px) {
       font-weight: 700;
       font-size: 18px;
@@ -87,7 +87,7 @@
     line-height: calc(24px / 14px);
     letter-spacing: 0.02em;
     text-transform: capitalize;
-    color: $color-black;
+    color: inherit;
     cursor: pointer;
     @media screen and (min-width: 768px) {
       width: 213px;
@@ -110,7 +110,7 @@
     padding: 0;
     border: none;
     position: absolute;
-    background-color: $color-white;
+    background-color: inherit;
     top: 6px;
     left: 12px;
   }
@@ -190,7 +190,7 @@
   top: 28px;
   right: 16px;
   fill: $color-calendar-black;
-  background-color: $color-white;
+  background-color: inherit;
   border: none;
   @media screen and (min-width: 768px) {
     display: none;
