@@ -10,9 +10,9 @@ searchInput.addEventListener("input", selectionNews);
 function selectionNews(e) {
     e.preventDefault();
     query = e.currentTarget.elements.query.value.trim();
-// if (query === '') {
-//     return;
-//     }
+if (query === '') {
+    return;
+    }
     
     fetchApiSearchQuery(query)
         .then(console.log) 
