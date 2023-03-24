@@ -1,0 +1,19 @@
+.dark {
+  background-color: $bg-dark-theme;
+  color: $color-white-2;
+  fill: $color-white-2;
+  border-color: $color-white-2;
+}
+.theme-switch {
+  color: $color-brand-2;
+  fill: $color-brand-2;
+}
+.switch__label.theme-switch--bg {
+  background-color: $color-brand-line;
+}
+.theme-switch--bg.switch__label::after {
+  background-color: $color-white;
+}
+.theme-switch.switch__icon-sun {
+  fill: $color-dark-grey;
+}
