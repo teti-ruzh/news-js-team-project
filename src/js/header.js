@@ -1,8 +1,6 @@
 // current page
 const headerItemEls = document.querySelectorAll('.header__item');
-// console.log(headerItemEls);
 const currentUrl = window.location.href;
-// console.log(currentUrl);
 
 headerItemEls.forEach(page => {
   let currentPage = page.href;
@@ -11,3 +9,20 @@ headerItemEls.forEach(page => {
   }
   return;
 });
+
+// інпут пошуку на мобільній версії
+const searchInputEl = document.querySelector('.search__input');
+const searchBtnSubmit = document.querySelector('.search__btn');
+const searchBtnSvg = document.querySelector('.btn-search');
+const screenWidth = window.screen.width;
+
+searchBtnSvg.addEventListener('click', inputHiddenOnMobile);
+
+function inputHiddenOnMobile() {
+  if (screenWidth < 400) {
+    searchBtnSubmit.classList.add('search-hidden');
+    searchInputEl.classList.add('search-hidden');
+    searchBtnSvg.classList.add('disabled');
+  }
+  return;
+}
