@@ -41,17 +41,19 @@ h2 {
     display: flex;
     flex-wrap: wrap;
   }
-  @include tablet-up {
-    margin-top: calc(-1 * 30px);
-    margin-left: calc(-1 * 30px);
-    display: flex;
-    flex-wrap: wrap;
-  }
+
   @include desktop-up {
     display: flex;
     flex-wrap: wrap;
     margin-top: calc(-1 * $card-set-gap);
     margin-left: calc(-1 * $card-set-gap);
+  }
+
+  @include tablet-up {
+    margin-top: calc(-1 * 30px);
+    margin-left: calc(-1 * 30px);
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 
@@ -205,7 +207,7 @@ h2 {
     left: 173px;
   }
   @include desktop-up {
-    right: 9px;
+    left: 214px;
   }
 }
 .card__svg {
