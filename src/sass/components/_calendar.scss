@@ -1,0 +1,315 @@
+// -------------------------------   Main button
+
+.calendar {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0;
+    align-items: center;
+  }
+
+  .calendar__text {
+    color: var(--gallery-text-color);
+    white-space: nowrap;
+    font-size: 18px;
+    line-height: 1.3888;
+    font-weight: 700;
+    display: none;
+  
+    @media screen and (min-width: 1280px) {
+      display: block;
+    }
+  }
+  
+  .calendar__btn {
+    margin: 0;
+    width: 152px;
+    display: flex;
+    align-items: center;
+  
+    color: #a2a2a2; 
+    background-color: $calendarBgColor;
+    text-align: center;
+    padding: 5px 12px;
+    border: 1 solid;
+    // border-color: var(--calendar-border);
+    border-radius: 20px;
+    cursor: pointer;
+  
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);;
+    transition-property: background-color, border-color;
+  
+    &:hover,
+    &:focus {
+      background-color: $color-brand-2;
+      color: $color-white;
+      border-color: $color-brand-2;
+      & .calendar__icon {
+        fill: currentColor;
+      }
+    }
+  
+    & .calendar__icon {
+      fill: $color-brand-2;
+    }
+    @media screen and (min-width: 768px) {
+      width: 168px;
+    }
+    @media screen and (min-width: 1280px) {
+      margin: 0 37px;
+    }
+  }
+  
+  .calendar__icon {
+    fill: currentColor;
+  }
+  .calendar__btn:hover .calendar-btn-span {
+    color: $color-white;
+  }
+  .calendar-btn-span {
+    padding: 0 12px;
+    color: var(--calendar-text-color);
+    font-family: 'Manrope', sans-serif;;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.75;
+  
+    @media screen and (min-width: 768px) {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+
+// ---------------------------------   Modal
+.wrapper-calendar {
+    position: absolute;
+    width: 250px;
+    height: 286px;
+    overflow: hidden;
+    padding: 20px 16px;
+    pointer-events: none;
+    border-radius: 20px;
+    box-shadow: none;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-is-active + .wrapper-calendar {
+    pointer-events: all;
+    box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calendar .wrapper-calendar {
+    top: 33px;
+    right: 0;
+  
+    @media screen and (min-width: 1280px) {
+      right: 33px;
+    }
+  }
+
+  .rotate {
+    transform: rotate(-180deg);
+  }
+  
+  .modal {
+    position: absolute;
+    z-index: 999;
+    width: 250px;
+    background-color: $calendarBgColor;
+    border-radius: 20px;
+  
+    transform: translateY(-200%);
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .is-shown {
+    border-radius: 20px;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    transform: translateY(0);
+  
+    box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 27px 21px 0px 21px;
+  }
+  
+  .calendar-header .current-date {
+    display: inline-block;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.38;
+    color: $color-calendar-black;
+  }
+  
+  .current-date {
+    margin-right: 6px;
+  }
+  
+  .date {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .date span {
+    fill: $color-brand;
+    display: flex;
+  }
+  
+  .years {
+    position: absolute;
+    display: block;
+    left: 120;
+    top: 0;
+    background-color: $calendarBgColor;
+    cursor: pointer;
+  }
+  
+  .years ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .year-btn {
+    border: none;
+    background-color: $calendarBgColor;
+  }
+  
+  #prev,
+  #next,
+  .prev-year,
+  .next-year {
+    color: $color-brand-2;
+    cursor: pointer;
+  }
+  
+  .prev-year {
+    margin-right: 3px;
+  }
+  
+  .calendar-icons {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    color: $color-brand;
+  }
+  
+  .calendar-icons span {
+    fill: $color-brand;
+    display: flex;
+  }
+  
+  .calendar-icons span:hover,
+  .calendar-icons span:focus {
+    background-color: $calendarBgColor;
+  }
+  
+  .calendar-grid {
+    padding-top: 13px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 20px;
+  }
+  
+  .calendar-grid ul {
+    display: grid;
+    grid-template-columns: repeat(7, 31px);
+  }
+  
+  .calendar-grid li {
+    color: $color-calendar-black;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.8;
+    height: 31px;
+  }
+  
+  .calendar-grid .weeks li {
+     font-weight: 400;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+     color: $color-calendar-grey-translucent;
+    pointer-events: none;
+  }
+  
+  .days li:nth-child(7n + 7) .button,
+  .days li:nth-child(7n + 6) .button {
+    color: $color-calendar-grey;
+  }
+  
+  .button {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 0 auto;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.785;
+    letter-spacing: 0.38px;
+  
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .current-month-day.button {
+    color: $color-brand-2;
+    border-radius: 50%;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    border: 1px solid $color-brand-2;
+    }
+  
+  .button.inactive,
+  #inactive {
+    color: $color-calendar-grey-translucent;
+    cursor: default;
+   }
+  
+  .days li {
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+  }
+  
+  .days li .button.active {
+    color: $color-white;
+  }
+  
+  .days li .button:hover,
+  .days li .button:focus {
+    background-color: $color-brand-2;
+    color: $color-white;
+  }
+  
+  .days li .button.inactive:hover,
+  .days li .button.inactive:focus {
+    background-color: $calendarBgColor;
+  }
+  
+  .button::before {
+    position: absolute;
+    content: '';
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .button.active::before {
+    background-color: $color-brand-2;
+  }
