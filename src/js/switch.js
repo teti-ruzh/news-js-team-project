@@ -53,7 +53,7 @@ function checkedLightTheme() {
 function addDarkClassToHTML() {
   try {
     if (localStorage.getItem('theme') === 'dark') {
-      refs.switch.checked || refs.mobileSwitch === true;
+      refs.switch.checked || refs.mobileSwitch.checked === true;
       addClass(refs.iconMoon, 'theme-switch');
       addClass(refs.switchDarkName, 'theme-switch');
       addClass(refs.iconMoonMobile, 'theme-switch');
