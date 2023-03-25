@@ -1,12 +1,14 @@
 // switch theme
 const refs = {
   switch: document.querySelector('#theme-switch'),
-  mobileSwitch: document.querySelector('#theme-mobile-switch'),
+  mobileSwitch: document.querySelector('#mobile__theme-switch'),
   body: document.querySelector('body'),
   switchLightName: document.querySelector('#light-name'),
   switchDarkName: document.querySelector('#dark-name'),
   iconSun: document.querySelector('.switch__icon-sun'),
   iconMoon: document.querySelector('.switch__icon-moon'),
+  iconSunMobile: document.querySelector('.mobile-switch__icon-sun'),
+  iconMoonMobile: document.querySelector('.mobile-switch__icon-moon'),
   searchInput: document.querySelector('.search__input'),
   burgerMenu: document.querySelector('.burger-menu'),
   switchLabel: document.querySelector('.switch__label'),
@@ -22,13 +24,13 @@ refs.switch.addEventListener('change', function () {
     checkedLightTheme();
   }
 });
-// refs.mobileSwitch.addEventListener('change', function () {
-//   if (this.checked) {
-//     checkedDarkTheme();
-//   } else {
-//     checkedLightTheme();
-//   }
-// });
+refs.mobileSwitch.addEventListener('change', function () {
+  if (this.checked) {
+    checkedDarkTheme();
+  } else {
+    checkedLightTheme();
+  }
+});
 
 function checkedDarkTheme() {
   if (localStorage.getItem('theme') === 'dark') {
@@ -51,9 +53,12 @@ function checkedLightTheme() {
 function addDarkClassToHTML() {
   try {
     if (localStorage.getItem('theme') === 'dark') {
+      refs.switch.checked || refs.mobileSwitch === true;
       addClass(refs.iconMoon, 'theme-switch');
       addClass(refs.switchDarkName, 'theme-switch');
+      addClass(refs.iconMoonMobile, 'theme-switch');
       removeClass(refs.iconSun, 'theme-switch');
+      removeClass(refs.iconSunMobile, 'theme-switch');
       removeClass(refs.switchLightName, 'theme-switch');
       addClass(refs.body, 'dark');
       addClass(refs.searchInput, 'dark');
@@ -63,8 +68,10 @@ function addDarkClassToHTML() {
       addClass(refs.switchAfter, 'theme-switch--bg');
     } else {
       removeClass(refs.iconMoon, 'theme-switch');
+      removeClass(refs.iconMoonMobile, 'theme-switch');
       removeClass(refs.switchDarkName, 'theme-switch');
       addClass(refs.iconSun, 'theme-switch');
+      addClass(refs.iconSunMobile, 'theme-switch');
       addClass(refs.switchLightName, 'theme-switch');
       removeClass(refs.body, 'dark');
       removeClass(refs.searchInput, 'dark');
