@@ -1,0 +1,192 @@
+.news__category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+
+  @include tablet-up {
+    margin-top: 48px;
+  }
+
+  @include desktop-up {
+    margin-top: 60px;
+  }
+}
+
+.news__list {
+  @include tablet-up {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+}
+
+.news__item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  @include mobile-only {
+    &:not(:last-child) {
+      margin-bottom: 28px;
+    }
+  }
+
+  @include tablet-up {
+    flex-basis: calc((100% - 2 * 32px) / 2);
+  }
+
+  @include desktop-up {
+    flex-basis: calc((100% - 3 * 32px) / 3);
+  }
+}
+
+.news__images-container {
+  position: relative;
+  width: 288px;
+  height: 395px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid rgb(245, 242, 241);
+  overflow: hidden;
+
+  @include tablet-up {
+    width: 353px;
+    height: 395px;
+  }
+  @include desktop-up {
+    width: 395px;
+    height: 395px;
+  }
+}
+
+.news__foto {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news__category {
+  position: absolute;
+  left: 0px;
+  top: 40px;
+  z-index: 1;
+
+  width: 112px;
+  height: 24px;
+  padding: 4px 8px 4px 8px;
+  margin: 0;
+
+  background-color: $color-brand-translucent;
+  border-radius: 0px 4px 4px 0px;
+}
+
+.news__category-text {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: $color-white;
+}
+
+.news__favorite {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 10;
+
+  // display: flex;
+  //   justify-content: space-evenly;
+  //   align-items: center;
+}
+
+.news__favorite-button {
+  width: 126px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  background: #ffffff;
+  border-radius: 20px;
+  border: none;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.news__title {
+  flex-grow: 1;
+
+  margin-bottom: 20px;
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.37;
+  letter-spacing: -0.01em;
+  // color: $color-black;
+  color: inherit;
+
+  @include tablet-up {
+    font-size: 32px;
+    line-height: 1.37;
+  }
+}
+.news__abstruct {
+  @include tablet-up {
+    height: 50px;
+  }
+
+  margin-bottom: 20px;
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1, 36;
+  color: inherit;
+}
+
+.news__data {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.36;
+  text-align: right;
+  color: $color-grey;
+}
+
+.news__read-more {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.36;
+  color: $color-brand;
+  margin-right: 21px;
+}
+
+.news-card--position {
+  display: flex;
+  justify-content: space-between;
+}
+
+.news-box--overlay {
+  display: none;
+}
+
+.news__link {
+  color: $color-brand-2;
+}

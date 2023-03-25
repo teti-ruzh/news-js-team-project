@@ -1,3 +1,60 @@
-<header class="header">
-  <div class="container">Header</div>
+<header class="header" id="header">
+  <div class="container header__container">
+    <div class="header__container-part">
+      <a class="header__logo" href="./index.html">news </a>
+      <ul class="header__nav">
+        <li>
+          <a class="header__item" href="./index.html">home</a>
+        </li>
+        <li>
+          <a class="header__item" href="./favourite.html">favorite</a>
+        </li>
+        <li>
+          <a class="header__item" href="./read.html">read</a>
+        </li>
+      </ul>
+      <form class="search">
+        <button class="search__btn" type="submit">
+          <svg class="search__svg" width="20" height="19">
+            <use href="./images/icons.svg#icon-search"></use>
+          </svg>
+        </button>
+        <input
+          class="search__input"
+          type="text"
+          name="query"
+          autocomplete="off"
+          placeholder="search"
+        />
+      </form>
+    </div>
+    <div class="switch">
+      <svg class="switch__icon-sun" width="21" height="21">
+        <use href="./images/icons.svg#icon-sun"></use>
+      </svg>
+      <span class="switch__name" id="light-name">light</span>
+      <input
+        class="switch__checkbox"
+        type="checkbox"
+        name="theme-switch"
+        id="theme-switch"
+        aria-label="theme switch"
+      />
+      <label class="switch__label" for="theme-switch"></label>
+      <span class="switch__name" id="dark-name">dark</span>
+      <svg class="switch__icon-moon" width="21" height="21">
+        <use href="./images/icons.svg#icon-moon"></use>
+      </svg>
+    </div>
+    <button class="btn-search" type="button">
+      <svg class="search__svg" width="20" height="19">
+        <use href="./images/icons.svg#icon-search"></use>
+      </svg>
+    </button>
+    <button class="burger-menu js-open-menu">
+      <svg class="menu__icon" width="40" height="40" aria-label="Logotype">
+        <use href="./images/icons.svg#icon-menu"></use>
+      </svg>
+    </button>
+  </div>
 </header>
