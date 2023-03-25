@@ -81,27 +81,29 @@ function renderNews(imagesArray) {
       }
 
       let date = new Date(published_date);
-      let newDataFormat = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+      let newDataFormat = `${addLeadingZero(date.getDate())}/${addLeadingZero(
+        date.getMonth()
+      )}/${date.getFullYear()}`;
 
       return `<li class="news__item">
-  <a class="news__link" href="${url}">
-    <div class="news__images-container">
-      <img class="news__foto" src="${foto}" alt="" />
+  <div class="news__images-container">
+    <a class="news__link" target="_blank" href="${url}"
+      ><img class="news__foto" src="${foto}" alt=""
+    /></a>
 
-      <div class="news__category">
-        <div class="news__category-text">${section}</div>
-      </div>
-
-      <div class="news__favorite">
-        <button class="news__favorite-button">
-          Add to favorite
-          <svg class="news__favorite-icon" width="16" height="16">
-            <use href="${svgA}#${svgB}"></use>
-          </svg>
-        </button>
-      </div>
+    <div class="news__category">
+      <div class="news__category-text">${section}</div>
     </div>
-  </a>
+
+    <div class="news__favorite">
+      <button class="news__favorite-button">
+        Add to favorite
+        <svg class="news__favorite-icon" width="16" height="16">
+          <use href="${svgA}#${svgB}"></use>
+        </svg>
+      </button>
+    </div>
+  </div>
 
   <h2 class="news__title">${title}</h2>
 
@@ -111,7 +113,7 @@ function renderNews(imagesArray) {
     <div class="news-card--position">
       <div class="news__data">${newDataFormat}</div>
       <div class="news__read-more">
-        <a class="news__link" href="${url}">Read more</a>
+        <a class="news__link" target="_blank" href="${url}">Read more</a>
       </div>
     </div>
   </div>
@@ -125,4 +127,8 @@ function renderNews(imagesArray) {
     .join('');
 
   newsList.insertAdjacentHTML('beforeend', markup);
+}
+
+function addLeadingZero(value) {
+  return String(value).padStart(2, '0');
 }

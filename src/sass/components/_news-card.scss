@@ -50,8 +50,6 @@
   border: 1px solid rgb(245, 242, 241);
   overflow: hidden;
 
-  object-fit: cover;
-
   @include tablet-up {
     width: 353px;
     height: 395px;
@@ -63,9 +61,10 @@
 }
 
 .news__foto {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: inherit;
+  object-fit: cover;
 }
 
 .news__category {
@@ -110,7 +109,6 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  cursor: pointer;
 
   font-family: "Manrope";
   font-style: normal;
