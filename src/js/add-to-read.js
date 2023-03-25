@@ -9,7 +9,6 @@ let newsObj = {};
 let readedNewsData = [];
 
 function onReadMoreBtnClick(event) {
-  event.preventDefault();
 
   const readMoreBtn = event.target.closest('.news__link');
   if (readMoreBtn) {
