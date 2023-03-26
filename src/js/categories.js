@@ -1,11 +1,10 @@
 import throttle from 'lodash.throttle';
 
 import { fetchApiCategory } from './news-fetch-service';
+import { fetchArticleSearch } from './news-gallery';
 
 const refs = {
-  categoryMobileOverlay: document.querySelector(
-    '.categories__mobile #category-overlay'
-  ),
+  categoryMobileOverlay: document.querySelector('.category__mobile-overlay'),
   categoryMobileBtn: document.querySelector('.category__mobile-btn'),
   categoryList: document.querySelector('#categories__rendering'),
   categoryTabletBtn: document.querySelector('.category__tablet-btn'),
@@ -14,12 +13,10 @@ const refs = {
   categoryQuery: document.querySelectorAll('#category-overlay'),
 };
 
-changeWindow();
-
-// window.addEventListener(
-//   'resize',
-//   throttle(() => changeWindow(), 250)
-// );
+window.addEventListener(
+  'resize',
+  throttle(() => changeWindow(), 250)
+);
 
 function changeWindow() {
   if (window.matchMedia('(min-width: 1280px)').matches) {
@@ -35,11 +32,10 @@ function changeWindow() {
     refs.categoryMobileBtn.addEventListener('click', categoriesMobileRendering);
   }
 }
-console.log(refs.categoryQuery.childNodes());
 
 // function fetchCategory() {
-//   const query = refs.categoryQuery.e.currentTarget.value();
-//   console.log(query);
+//   query = evt.target.textContent;
+//   fetchArticleSearch(query.toLowerCase());
 // }
 
 // refs.categoryQuery.addEventListener('click', fetchCategory);
@@ -50,7 +46,7 @@ async function renderCategoriesMobile() {
   let categoriesRender = '';
   for (let i = 0; i < categories.length; i++) {
     const category = categories[i];
-    categoriesRender += `<li class="category__mobile-item" id="category-overlay">
+    categoriesRender += `<li class="category__item" id="category-overlay">
             ${category.display_name}
       </li>`;
   }
@@ -69,13 +65,14 @@ function categoriesMobileRendering() {
 
 async function renderCategoriesTablet() {
   const categories = await fetchApiCategory();
+  console.log(categories);
   const sortSections = categories.slice(0, 4);
 
   let btnRender = '';
   for (let i = 0; i < sortSections.length; i++) {
     const section = sortSections[i];
-    btnRender += `<li class="category__tablet-item">
-      <button class="category__btn" id="category-overlay" type="button">
+    btnRender += `<li class="category__item" id="category-overlay">
+      <button class="category__btn" type="button">
           ${section.display_name}
       </button>
     </li>`;
@@ -91,7 +88,7 @@ async function renderTabletOverlay() {
   let categoriesRender = '';
   for (let i = 0; i < sortSections.length; i++) {
     const category = sortSections[i];
-    categoriesRender += `<li class="category__tablet-item" id="category-overlay">
+    categoriesRender += `<li class="category__item" id="category-overlay">
             ${category.display_name}
       </li>`;
   }
@@ -115,8 +112,8 @@ async function renderCategoriesDesktop() {
   let btnRender = '';
   for (let i = 0; i < sortSections.length; i++) {
     const section = sortSections[i];
-    btnRender += `<li class="category__tablet-item">
-      <button class="category__btn" id="category-overlay" type="button">
+    btnRender += `<li class="category__tablet-item" id="category-overlay">
+      <button class="category__btn"  type="button">
           ${section.display_name}
       </button>
     </li>`;
@@ -132,7 +129,7 @@ async function renderDesktopOverlay() {
   let categoriesRender = '';
   for (let i = 0; i < sortSections.length; i++) {
     const category = sortSections[i];
-    categoriesRender += `<li class="category__tablet-item" id="category-overlay">
+    categoriesRender += `<li class="category__item" id="category-overlay">
             ${category.display_name}
       </li>`;
   }

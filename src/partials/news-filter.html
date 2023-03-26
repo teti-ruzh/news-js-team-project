@@ -1,33 +1,31 @@
-<div class="container category__section">
-    <div class="category__list">
-        <div class="categories__mobile">
-            <button class="category__btn category__mobile-btn" type="button">Categories
+<div class="category__mobile">
+    <button class="category__btn category__mobile-btn" type="button">Categories
+        <svg class="category__arrow-icon-up" width="14" height="14">
+                    <use href="./images/icons.svg#icon-arrow-up"></use>
+        </svg>
+        <svg class="category__arrow-icon-down" width="14" height="14">
+                    <use href="./images/icons.svg#icon-arrow-down"></use>
+        </svg>
+    </button>
+    <ul class="category__mobile-overlay" id="category-overlay">
+    </ul>
+</div>
+<div class="category__tablet">
+    <ul class="category__list" id="categories__rendering">
+    </ul>
+    <div class="category__tablet-btn-container">
+        <button class="category__btn category__tablet-btn" type="button" id="category-desktop-btn">
+            Others
             <svg class="category__arrow-icon-up" width="14" height="14">
                 <use href="./images/icons.svg#icon-arrow-up"></use>
             </svg>
             <svg class="category__arrow-icon-down" width="14" height="14">
                 <use href="./images/icons.svg#icon-arrow-down"></use>
-            </svg>            
-            </button> 
-            <ul class="category__mobile-overlay" id="category-overlay">
-            </ul>
-        </div>
-        <div class="category__tablet">
-            <ul class="category__list" id="categories__rendering">
-            </ul>
-            <div class="category__tablet-btn-container">
-                <button class="category__btn category__tablet-btn" type="button" id="category-desktop-btn">
-                    Others
-                    <svg class="category__arrow-icon-up" width="14" height="14">
-                        <use href="./images/icons.svg#icon-arrow-up"></use>
-                    </svg>
-                    <svg class="category__arrow-icon-down" width="14" height="14">
-                        <use href="./images/icons.svg#icon-arrow-down"></use>
-                    </svg>
-                </button>
-                <ul class="category__tablet-overlay" id="category-tab-overlay">
-                </ul>
-            </div>
-        </div>
+            </svg>
+        </button>
+        <ul class="category__tablet-overlay" id="category-tab-overlay">
+        </ul>
     </div>
 </div>
+                
+
