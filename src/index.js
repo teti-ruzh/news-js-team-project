@@ -10,6 +10,5 @@ import './js/add-to-favourite';
 import './js/add-to-read';
 import './js/weather-service';
 import './js/scroll-button';
-import './js/theme-switcher';
 import './js/pagination';
 import './js/mobile-menu';
