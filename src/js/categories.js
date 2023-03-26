@@ -14,7 +14,7 @@ const refs = {
   categoryDesktopBtn: document.querySelector('#category-desktop-btn'),
   categoryQuery: document.querySelectorAll('#category-overlay'),
 };
-const newApiCategory = new ApiCategory();
+
 
 let categories = [];
 
