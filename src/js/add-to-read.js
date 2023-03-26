@@ -1,31 +1,53 @@
 const STORAGE_KEY = 'add-read-more';
 
 const refs = {
-  newsList: document.querySelector('.news__list'),
+  homeNewsList: document.querySelector('.news__list'),
 };
 
-refs.newsList.addEventListener('click', onReadMoreBtnClick);
+refs.homeNewsList.addEventListener('click', onReadMoreBtnClick);
 let newsObj = {};
-let readedNewsData = [];
+
+if (localStorage.length = -1) {
+ readedNewsData = [];}
+
+ populateNewsData();
+
 
 function onReadMoreBtnClick(event) {
-
-  const readMoreBtn = event.target.closest('.news__link');
+  
+    const readMoreBtn = event.target.closest('.news__link');
   if (readMoreBtn) {
-    const newsItem = readMoreBtn.closest('.news__item');
+    const newsItem = readMoreBtn.closest('.news__item').outerHTML;
     const clickDate = new Date();
-    const date =
-      +clickDate.getDate() +
-      '/' +
-      clickDate.getMonth() +
-      '/' +
+    const date = `${clickDate.getDate()}/${clickDate.getMonth()}/${clickDate.getFullYear()}`
       clickDate.getFullYear();
-    // console.log(clickDate);
-    newsObj.id = clickDate;
+    newsObj.id = clickDate.getTime();
     newsObj.date = date;
-    newsObj.card = newsItem;
-
+    newsObj.card = `${newsItem}`;
     readedNewsData.push(newsObj);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(readedNewsData));
   }
 }
+
+
+function populateNewsData() {
+  const savedNewsData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  console.log(savedNewsData);
+  if(!savedNewsData) {
+    readedNewsData = [];
+} else {readedNewsData = JSON.parse(localStorage.getItem(STORAGE_KEY))};
+}
+
+
+
+// function renderReadedGallery() {
+// const readedNewsArray = JSON.parse(localStorage.getItem(STORAGE_KEY));
+// const markup = readedNewsArray.map(({id, date, card})=> {
+// return card;
+// }).join('');
+
+// readedNewsList.insertAdjacentHTML('beforeend', markup);
+
+// };
+
+
