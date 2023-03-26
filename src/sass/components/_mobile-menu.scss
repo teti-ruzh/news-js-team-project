@@ -15,6 +15,7 @@
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .mobil-menu.is-open {
   display: block;
 }
@@ -57,6 +58,7 @@
     justify-content: center;
     width: 32px;
     height: 32px;
+
     border-radius: 50%;
     border: 1px solid $color-white-2;
     background-color: $color-brand;
@@ -77,7 +79,8 @@
     justify-content: space-between;
     height: 44px;
 
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition-property:inherit;
+    transition-timing-function: linear;
   }
   &__list:hover,
   &__list:focus {
@@ -89,11 +92,12 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 1.37;
-    padding-left: 16px;
+    padding-left: 20px;
+    padding-right: 150px;
 
     color: inherit;
 
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
   }
   &__link:hover,
   &__link:focus {
