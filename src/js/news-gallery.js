@@ -234,10 +234,6 @@ newsList.addEventListener('click', (event) => {
   }
 });
 
-function addLeadingZero(value) {
-  return String(value).padStart(2, '0');
-}
-
 function cleanNewsGallery() {
   newsList.innerHTML = '';
 }
