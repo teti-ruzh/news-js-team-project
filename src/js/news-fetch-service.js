@@ -27,12 +27,9 @@ export async function fetchApiPopular() {
 export async function fetchApiCategory() {
   try {
     const response = await fetch(CATEGORY_URL);
-    if (response.ok) {
-      const data = await response.json().then(response => {
-        return response.results;
-      });
-      return data;
-    }
+    const data = await response.json();
+    const categories = data.results;
+    return categories;
   } catch (error) {
     console.error(error);
   }
