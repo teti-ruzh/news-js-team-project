@@ -1,3 +1,4 @@
+import { weatherBlock } from './weather-service';
 const API_KEY = 'RHHupiQoPYaFAPG2zSM05OivdA2ggJN2';
 const URL_MOST_POPULAR =
   'https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json';
@@ -80,6 +81,8 @@ function renderNews(newsArray) {
     .join('');
 
   newsList.insertAdjacentHTML('beforeend', markup);
+
+  addWeatherWidget();
 }
 
 function cutAbstractAddPoints(abstract_news, maxLength) {
@@ -215,7 +218,7 @@ function renderNewsSearch(newsArray) {
 // 2023-26-03
 // OVERLAY і функціонал кнопки add to favorite
 
-newsList.addEventListener('click', (event) => {
+newsList.addEventListener('click', event => {
   const buttonFavoriteElement = event.target.closest('.news__favorite-button');
   if (buttonFavoriteElement) {
     const newsItem = buttonFavoriteElement.closest('.news__item');
@@ -224,8 +227,7 @@ newsList.addEventListener('click', (event) => {
   }
 });
 
-
-newsList.addEventListener('click', (event) => {
+newsList.addEventListener('click', event => {
   const linkElement = event.target.closest('.news__link');
   if (linkElement) {
     const newsItem = linkElement.closest('.news__item');
@@ -238,4 +240,16 @@ function cleanNewsGallery() {
   newsList.innerHTML = '';
 }
 
-
+// Додамо віджет погоди Олексія
+function addWeatherWidget() {
+  const viewportWidth = window.innerWidth;
+  let index = 0;
+  if (viewportWidth < 768) {
+    index = 0;
+  } else if (viewportWidth >= 768 && viewportWidth < 1280) {
+    index = 1;
+  } else {
+    index = 2;
+  }
+  newsList.insertBefore(weatherBlock, newsList.children[index]);
+}
