@@ -14,6 +14,7 @@ const refs = {
   categoryDesktopBtn: document.querySelector('#category-desktop-btn'),
   categoryQuery: document.querySelectorAll('#category-overlay'),
 };
+const newApiCategory = new ApiCategory();
 
 let categories = [];
 
@@ -78,6 +79,7 @@ function categoriesMobileRendering(categories) {
   }
 }
 
+
 function renderCategoriesTablet(categories) {
   renderTabletButtons(categories);
   renderTabletOverlay(categories);
@@ -118,6 +120,7 @@ function categoriesTabletRendering() {
     refs.categoryTabletOverlay.classList.add('category__tablet-open');
   }
 }
+
 
 function renderCategoriesDesktop(categories) {
   renderDesktopButtons(categories);
