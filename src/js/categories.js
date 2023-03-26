@@ -1,6 +1,6 @@
 import throttle from 'lodash.throttle';
 
-import { fetchApiCategory } from './news-fetch-service';
+import { ApiCategory } from './news-fetch-service';
 import { fetchArticleSearch } from './news-gallery';
 
 const refs = {
@@ -14,11 +14,16 @@ const refs = {
   categoryDesktopBtn: document.querySelector('#category-desktop-btn'),
   categoryQuery: document.querySelectorAll('#category-overlay'),
 };
+const newApiCategory = new ApiCategory();
 
 window.addEventListener(
   'resize',
   throttle(() => changeWindow(), 250)
 );
+
+window.addEventListener('load', () => {
+  changeWindow();
+});
 
 function changeWindow() {
   if (window.matchMedia('(min-width: 1280px)').matches) {
@@ -35,15 +40,8 @@ function changeWindow() {
   }
 }
 
-// function fetchCategory() {
-//   query = evt.target.textContent;
-//   fetchArticleSearch(query.toLowerCase());
-// }
-
-// refs.categoryQuery.addEventListener('click', fetchCategory);
-
 async function renderCategoriesMobile() {
-  const categories = await fetchApiCategory();
+  const categories = await newApiCategory.fetchApiCategory();
 
   let categoriesRender = '';
   for (let i = 0; i < categories.length; i++) {
@@ -61,13 +59,17 @@ function categoriesMobileRendering() {
   } else {
     renderCategoriesMobile();
     refs.categoryMobileOverlay.classList.add('category__mob-open');
-    refs.categoryMobileOverlay.style.overflowY = 'scroll';
   }
 }
 
 async function renderCategoriesTablet() {
-  const categories = await fetchApiCategory();
-  console.log(categories);
+  const categories = await newApiCategory.fetchApiCategory();
+
+  renderTabletButtons(categories);
+  renderTabletOverlay(categories);
+}
+
+function renderTabletButtons(categories) {
   const sortSections = categories.slice(0, 4);
 
   let btnRender = '';
@@ -82,9 +84,7 @@ async function renderCategoriesTablet() {
   refs.categoryList.innerHTML = btnRender;
 }
 
-async function renderTabletOverlay() {
-  refs.categoryTabletOverlay.classList.add('category__tablet-open');
-  const categories = await fetchApiCategory();
+function renderTabletOverlay(categories) {
   const sortSections = categories.slice(4, categories.length);
 
   let categoriesRender = '';
@@ -101,14 +101,18 @@ function categoriesTabletRendering() {
   if (refs.categoryTabletOverlay.classList.contains('category__tablet-open')) {
     refs.categoryTabletOverlay.classList.remove('category__tablet-open');
   } else {
-    renderTabletOverlay();
     refs.categoryTabletOverlay.classList.add('category__tablet-open');
-    refs.categoryTabletOverlay.style.overflowY = 'scroll';
   }
 }
 
 async function renderCategoriesDesktop() {
-  const categories = await fetchApiCategory();
+  const categories = await newApiCategory.fetchApiCategory();
+
+  renderDesktopButtons(categories);
+  renderDesktopOverlay(categories);
+}
+
+function renderDesktopButtons(categories) {
   const sortSections = categories.slice(0, 6);
 
   let btnRender = '';
@@ -123,9 +127,7 @@ async function renderCategoriesDesktop() {
   refs.categoryList.innerHTML = btnRender;
 }
 
-async function renderDesktopOverlay() {
-  refs.categoryTabletOverlay.classList.add('category__tablet-open');
-  const categories = await fetchApiCategory();
+function renderDesktopOverlay(categories) {
   const sortSections = categories.slice(6, categories.length);
 
   let categoriesRender = '';
@@ -142,8 +144,6 @@ function categoriesDesktopRendering() {
   if (refs.categoryTabletOverlay.classList.contains('category__tablet-open')) {
     refs.categoryTabletOverlay.classList.remove('category__tablet-open');
   } else {
-    renderDesktopOverlay();
     refs.categoryTabletOverlay.classList.add('category__tablet-open');
-    refs.categoryTabletOverlay.style.overflowY = 'scroll';
   }
 }
