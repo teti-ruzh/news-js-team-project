@@ -1,25 +1,17 @@
-const weatherBlock = document.querySelector('#weather');
+export const weatherBlock = document.querySelector('#weather');
 
 const API_KEY = '0a142dd41db52da1a7f6b2fdf16ad4dd';
 
-async function loadWeather() {
+export async function loadWeather(lat, lon) {
   try {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async position => {
-        const lat = position.coords.latitude;
-        const lon = position.coords.longitude;
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        console.log(data);
-        if (response.ok) {
-          getWeatherData(data);
-        } else {
-          console.log(error);
-        }
-      });
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    console.log(data);
+    if (response.ok) {
+      getWeatherData(data);
     } else {
-      console.log('Geolocation is not supported by this browser.');
+      console.log(error);
     }
   } catch (error) {
     console.log(error);
@@ -32,10 +24,33 @@ function getWeatherData(data) {
   const temperature = Math.round(data.main.temp);
   const weatherDescription = data.weather[0].main;
   const location = data.name;
-  const currentDate = data.dt;
-  const formattedDate = new Date(currentDate * 1000).toDateString();
 
-  console.log(data);
+  const currentDate = data.dt;
+  const date = new Date(currentDate * 1000);
+  const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const dayOfWeek = daysOfWeek[date.getDay()];
+  const dayOfMonth = date.getDate();
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'July',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  const formattedDate = `${dayOfWeek} <br> ${dayOfMonth} ${month} ${year}`;
+
+  const svgA = new URL('../images/icons.svg', import.meta.url);
+  const svgB = 'icon-carbon_location-filled';
+
   const template = `
   <div class="weather__main">
   <p class="weather__temp">${temperature}&deg;</p>
@@ -43,7 +58,9 @@ function getWeatherData(data) {
   <div class="weather__container">
     <p class="weather__desk">${weatherDescription}</p>
     <div class="weather__location">
-      <svg class="weather__location-icon" src="././images/icons.svg#icon-carbon_location-filled" width=18 height=18></svg>
+      <svg class="weather__location-icon" width=18 height=18>
+        <use href="${svgA}#${svgB}"></use>
+      </svg>
       <p class="weather__location-city">${location}</p>
     </div>
   </div>
@@ -55,5 +72,26 @@ function getWeatherData(data) {
 }
 
 if (weatherBlock) {
-  loadWeather();
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      async position => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        await loadWeather(lat, lon);
+      },
+      () => {
+        console.log('Geolocation is not supported by this browser.');
+        // Нью-Йорк
+        const defaultLat = 40.7128;
+        const defaultLon = -74.006;
+        loadWeather(defaultLat, defaultLon);
+      }
+    );
+  } else {
+    console.log('Geolocation is not supported by this browser.');
+    // Нью-Йорк
+    const defaultLat = 40.7128;
+    const defaultLon = -74.006;
+    loadWeather(defaultLat, defaultLon);
+  }
 }
