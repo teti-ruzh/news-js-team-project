@@ -37,14 +37,3 @@ function populateNewsData() {
 
 
 
-// function renderReadedGallery() {
-// const readedNewsArray = JSON.parse(localStorage.getItem(STORAGE_KEY));
-// const markup = readedNewsArray.map(({id, date, card})=> {
-// return card;
-// }).join('');
-
-// readedNewsList.insertAdjacentHTML('beforeend', markup);
-
-// };
-
-
