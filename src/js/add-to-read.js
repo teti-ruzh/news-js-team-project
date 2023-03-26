@@ -6,9 +6,7 @@ const refs = {
 
 refs.homeNewsList.addEventListener('click', onReadMoreBtnClick);
 let newsObj = {};
-
-if (localStorage.length = -1) {
- readedNewsData = [];}
+let readedNewsData = [];
 
  populateNewsData();
 
@@ -32,7 +30,6 @@ function onReadMoreBtnClick(event) {
 
 function populateNewsData() {
   const savedNewsData = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  console.log(savedNewsData);
   if(!savedNewsData) {
     readedNewsData = [];
 } else {readedNewsData = JSON.parse(localStorage.getItem(STORAGE_KEY))};
