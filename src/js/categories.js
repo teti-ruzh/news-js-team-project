@@ -13,6 +13,8 @@ const refs = {
   ),
   categoryDesktopBtn: document.querySelector('#category-desktop-btn'),
   categoryQuery: document.querySelectorAll('#category-overlay'),
+  listenerMobile: document.querySelector('.category__mobile'),
+  listenerTablet: document.querySelector('.category__tablet'),
 };
 const newApiCategory = new ApiCategory();
 
@@ -58,6 +60,13 @@ function changeWindow() {
     );
   }
 }
+
+function categoryClick(event) {
+  const category = event.target.elements('#category-overlay');
+  return console.log(category);
+}
+
+refs.listenerMobile.addEventListener('click', categoryClick);
 
 function renderCategoriesMobile(categories) {
   let categoriesRender = '';
