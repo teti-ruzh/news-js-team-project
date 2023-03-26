@@ -99,6 +99,7 @@
 .news__favorite-button {
   width: 126px;
   height: 28px;
+
   padding: 0;
   display: flex;
   justify-content: space-evenly;
@@ -114,10 +115,10 @@
   fill: $color-white;
 }
 
-
 .news__favorite-button--active {
   fill: $color-brand-2;
-  font-size: 11px;
+  font-size: 12px;
+  width: 155px;
 }
 
 .box {
@@ -190,7 +191,7 @@
 .news-box--overlay {
   z-index: 4;
   position: absolute;
-    display: none;
+  display: none;
 
   top: 0;
   left: 0;
@@ -230,4 +231,3 @@
     top: 20px;
   }
 }
-
