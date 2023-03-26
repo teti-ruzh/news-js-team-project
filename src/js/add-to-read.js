@@ -5,7 +5,6 @@ const refs = {
 };
 
 refs.homeNewsList.addEventListener('click', onReadMoreBtnClick);
-let newsObj = {};
 let readedNewsData = [];
 
  populateNewsData();
@@ -19,6 +18,7 @@ function onReadMoreBtnClick(event) {
     const clickDate = new Date();
     const date = `${clickDate.getDate()}/${clickDate.getMonth()}/${clickDate.getFullYear()}`
       clickDate.getFullYear();
+      let newsObj = {};
     newsObj.id = clickDate.getTime();
     newsObj.date = date;
     newsObj.card = `${newsItem}`;
