@@ -6,9 +6,11 @@ import { fetchArticleSearch } from './news-gallery';
 const refs = {
   categoryMobileOverlay: document.querySelector('.category__mobile-overlay'),
   categoryMobileBtn: document.querySelector('.category__mobile-btn'),
-  categoryList: document.querySelector('#categories__rendering'),
+  categoryList: document.querySelector('.category__list-rendering'),
   categoryTabletBtn: document.querySelector('.category__tablet-btn'),
-  categoryTabletOverlay: document.querySelector('#category-tab-overlay'),
+  categoryTabletOverlay: document.querySelector(
+    '.category__tablet-btn-container .category__tablet-overlay'
+  ),
   categoryDesktopBtn: document.querySelector('#category-desktop-btn'),
   categoryQuery: document.querySelectorAll('#category-overlay'),
 };
