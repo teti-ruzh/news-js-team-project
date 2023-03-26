@@ -15,6 +15,16 @@
 .theme-switch--bg.switch__label::after {
   background-color: $color-white;
 }
+
 .theme-switch.switch__icon-sun {
   fill: $color-dark-grey;
+}
+
+.mobil-menu.is-open .mobile-switch__checkbox:checked + .mobile-switch__label {
+  background-color: $color-brand-line;
+}
+.mobil-menu.is-open
+  .mobile-switch__checkbox:checked
+  + .mobile-switch__label::after {
+  background-color: $color-white;
 }

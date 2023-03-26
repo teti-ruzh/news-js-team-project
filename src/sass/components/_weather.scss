@@ -2,36 +2,38 @@
     display: flex;
     flex-direction: column;
     background-color: $color-brand;
-    font-family: 'Roboto';
+    font-family: "Roboto";
     width: 288px;
     height: 469px;
     border-radius: 4px;
     margin-right: auto;
     margin-left: auto;
-    margin-bottom: 28px;
-    margin-top: 40px;
-    
-    
+
+    @include mobile-only {
+        margin-bottom: 28px;
+    }
+
+    // margin-top: 40px;
 
     @include tablet-up {
         width: 353px;
         height: 675px;
-        margin-bottom: 30px;
-        margin-top: 48px;
+        // margin-bottom: 30px;
+        // margin-top: 48px;
     }
 
     @include desktop-up {
         width: 395px;
         height: 675px;
-        margin-bottom: 40px;
-        margin-top: 60px;
+        // margin-bottom: 40px;
+        // margin-top: 60px;
     }
 }
 
 .weather__main {
     display: flex;
     align-items: center;
-    
+
     color: $color-white;
     margin-top: 32px;
     margin-left: auto;
@@ -39,10 +41,9 @@
     margin-bottom: 40px;
 
     @include tablet-up {
+        margin-top: 40px;
         margin-bottom: 89px;
     }
-
-    
 }
 
 .weather__temp {
@@ -54,7 +55,6 @@
         font-size: 64px;
         line-height: 1.17;
     }
-
 }
 
 .weather__desk {
@@ -65,55 +65,46 @@
         font-size: 36px;
         line-height: 1.17;
     }
-
 }
 
 .weather__container {
     display: flex;
     flex-direction: column;
     margin-left: 11px;
-    
 }
 
 .weather__location {
     display: flex;
+    align-items: center;
     padding: 9px 8px;
     background-color: $bg-weather-translucent;
     border-radius: 10px;
     height: 34px;
-
 }
-
-// .weather__location-icon {
-
-// }
 
 .weather__location-city {
     font-size: 14px;
     line-height: 1.14;
+    margin-left: 4px;
 
     @include tablet-up {
         font-size: 20px;
         line-height: 1.15;
     }
-    
 }
 
 .weather__icon {
-   margin-left: auto;
-   margin-right: auto;
-   margin-bottom: 40px;
-   width: 128px;
-   height: 121px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    width: 128px;
+    height: 121px;
 
-   @include tablet-up {
-      width: 165px;
-      height: 156px;
-      margin-bottom: 90px;
-
-   }
-
-   
+    @include tablet-up {
+        width: 165px;
+        height: 156px;
+        margin-bottom: 90px;
+    }
 }
 
 .current__date {
@@ -129,4 +120,3 @@
         margin-bottom: 130px;
     }
 }
-

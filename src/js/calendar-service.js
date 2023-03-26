@@ -13,7 +13,7 @@ const modalEl = document.querySelector('.modal');
 
 const yearBtnPrev = document.querySelector('.prev-year');
 const yearBtnNext = document.querySelector('.next-year');
-const yearsDiv = document.querySelector('.years ul');
+// const yearsDiv = document.querySelector('.years ul');
 
 btnEl.addEventListener('click', () => {
     if(btnEl.classList.contains('btn-is-active')){
@@ -25,7 +25,16 @@ btnEl.addEventListener('click', () => {
         calendarIcon.classList.add('rotate');
     }
 });
+btnEl.addEventListener('click', () => {
+    if(btnEl.classList.contains('btn-is-active')){
+        return;
+        } else{
+            modalEl.classList.remove('is-shown');
+            btnEl.classList.remove('btn-is-active');
+            calendarIcon.classList.remove('rotate');
+        }
 
+});
 window.addEventListener('click', hideModals);
 function hideModals(evt) {
   if (evt.target.closest('.calendar')) {

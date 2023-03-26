@@ -1,19 +1,20 @@
-<div class="container category__section">
-    <div class="category__list">
-        <button class="category__btn category__mobile-btn" type="button">Categories
-            <svg class="category__arrow-icon-up" width="14" height="14">
-                <use href="./images/icons.svg#icon-arrow-up"></use>
-            </svg>
-            <svg class="category__arrow-icon-down" width="14" height="14">
-                <use href="./images/icons.svg#icon-arrow-down"></use>
-            </svg>
-            <ul class="category__mobile-overlay" id="category-mob-overlay">        
-            </ul>
-        </button> 
-        
-        <ul class="category__list category__mobile-btn-hidden" id="category-btn">
-        </ul>
-        <button class="category__btn category__mobile-btn-hidden" type="button" id="others-btn">
+<div class="category__mobile">
+    <button class="category__btn category__mobile-btn" type="button">Categories
+        <svg class="category__arrow-icon-up" width="14" height="14">
+                    <use href="./images/icons.svg#icon-arrow-up"></use>
+        </svg>
+        <svg class="category__arrow-icon-down" width="14" height="14">
+                    <use href="./images/icons.svg#icon-arrow-down"></use>
+        </svg>
+    </button>
+    <ul class="category__mobile-overlay scrollbar scrollbar__overlay" id="scrollbar-custom" >
+    </ul>
+</div>
+<div class="category__tablet">
+    <ul class="category__list-rendering" >
+    </ul>
+    <div class="category__tablet-btn-container">
+        <button class="category__btn category__tablet-btn" type="button" id="category-desktop-btn">
             Others
             <svg class="category__arrow-icon-up" width="14" height="14">
                 <use href="./images/icons.svg#icon-arrow-up"></use>
@@ -22,5 +23,9 @@
                 <use href="./images/icons.svg#icon-arrow-down"></use>
             </svg>
         </button>
+        <ul class="category__tablet-overlay scrollbar scrollbar__overlay" id="scrollbar-custom">
+        </ul>
     </div>
 </div>
+                
+

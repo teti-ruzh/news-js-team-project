@@ -23,18 +23,31 @@ export async function fetchApiPopular() {
     console.error(error);
   }
 }
+export class ApiCategory {
+  constructor() {
+    this.searchQuery = '';
+  }
 
-export async function fetchApiCategory() {
-  try {
-    const response = await fetch(CATEGORY_URL);
-    if (response.ok) {
-      const data = await response.json().then(response => {
-        return response.results;
-      });
-      return data;
+  async fetchApiCategory() {
+    try {
+      const response = await fetch(CATEGORY_URL);
+      if (response.ok) {
+        const data = await response.json().then(response => {
+          return response.results;
+        });
+        return data;
+      }
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
+  }
+
+  get query() {
+    return this.searchQuery;
+  }
+
+  set query(newQuery) {
+    this.searchQuery = newQuery;
   }
 }
 

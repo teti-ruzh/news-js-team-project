@@ -1,80 +1,173 @@
-import { fetchApiCategory } from './news-fetch-service';
+import throttle from 'lodash.throttle';
 
-const othersBtn = document.querySelector('#others-btn');
-const categoryList = document.querySelector('#category-btn');
-const categoryListMobOverlay = document.querySelector('#category-mob-overlay');
-const categoryMobileBtn = document.querySelector('.category__mobile-btn');
-const categoryRemoveList = document.querySelector('.category__list');
+import { ApiCategory } from './news-fetch-service';
+import { fetchArticleSearch } from './news-gallery';
 
-categoryList.addEventListener('click', getCategory);
-categoryMobileBtn.addEventListener('click', renderCategoriesMobile);
-// categoryRemoveList.removeEventListener('click', removeBtnListener);
+const refs = {
+  categoryMobileOverlay: document.querySelector('.category__mobile-overlay'),
+  categoryMobileBtn: document.querySelector('.category__mobile-btn'),
+  categoryList: document.querySelector('.category__list-rendering'),
+  categoryTabletBtn: document.querySelector('.category__tablet-btn'),
+  categoryTabletOverlay: document.querySelector(
+    '.category__tablet-btn-container .category__tablet-overlay'
+  ),
+  categoryDesktopBtn: document.querySelector('#category-desktop-btn'),
+  categoryQuery: document.querySelectorAll('#category-overlay'),
+  listenerMobile: document.querySelector('.category__mobile'),
+  listenerTablet: document.querySelector('.category__tablet'),
+};
 
-if (window.matchMedia('(min-width: 1280px)').matches) {
-  renderCategoryButtonsDesktop();
-} else if (window.matchMedia('(min-width: 768px)').matches) {
-  renderCategoryButtonsTablet();
-} else {
-  categoryMobileBtn.addEventListener('click', renderCategoriesMobile);
+
+let categories = [];
+
+const newApiCategory = new ApiCategory();
+
+async function getCategories() {
+  categories = await newApiCategory.fetchApiCategory();
+  console.log(categories);
 }
 
-async function getCategory() {
-  const categories = await fetchApiCategory().then(categories => {
-    return categories.map(category => category.display_name);
-  });
-  return categories;
+getCategories();
+
+// document.addEventListener('DOMContentLoaded', async () => {
+//   await getCategories();
+//   changeWindow();
+// });
+
+window.addEventListener(
+  'resize',
+  throttle(() => changeWindow(), 250)
+);
+
+window.addEventListener('load', () => {
+  changeWindow();
+});
+
+function changeWindow() {
+  if (window.matchMedia('(min-width: 1280px)').matches) {
+    renderCategoriesDesktop(categories);
+    refs.categoryTabletBtn.addEventListener('click', () =>
+      categoriesDesktopRendering(categories)
+    );
+  } else if (window.matchMedia('(min-width: 768px)').matches) {
+    renderCategoriesTablet(categories);
+    refs.categoryTabletBtn.addEventListener('click', () =>
+      categoriesTabletRendering(categories)
+    );
+  } else {
+    refs.categoryMobileBtn.addEventListener('click', () =>
+      categoriesMobileRendering(categories)
+    );
+  }
 }
 
-async function renderCategoryButtonsDesktop() {
-  const sections = await getCategory();
-  const sortSections = sections.slice(0, 6);
+function categoryClick(event) {
+  const category = event.target.elements('#category-overlay');
+  return console.log(category);
+}
+
+refs.listenerMobile.addEventListener('click', categoryClick);
+
+function renderCategoriesMobile(categories) {
+  let categoriesRender = '';
+  for (let i = 0; i < categories.length; i++) {
+    const category = categories[i];
+    categoriesRender += `<li class="category__item" id="category-overlay">
+            ${category.display_name}
+      </li>`;
+  }
+  refs.categoryMobileOverlay.innerHTML = categoriesRender;
+}
+
+function categoriesMobileRendering(categories) {
+  if (refs.categoryMobileOverlay.classList.contains('category__mob-open')) {
+    refs.categoryMobileOverlay.classList.remove('category__mob-open');
+  } else {
+    renderCategoriesMobile(categories);
+    refs.categoryMobileOverlay.classList.add('category__mob-open');
+  }
+}
+
+
+function renderCategoriesTablet(categories) {
+  renderTabletButtons(categories);
+  renderTabletOverlay(categories);
+}
+
+function renderTabletButtons(categories) {
+  const sortSections = categories.slice(0, 4);
 
   let btnRender = '';
   for (let i = 0; i < sortSections.length; i++) {
     const section = sortSections[i];
-    btnRender += `<li class="category__item">
+    btnRender += `<li class="category__item" id="category-overlay">
       <button class="category__btn" type="button">
-          ${section}
+          ${section.display_name}
       </button>
     </li>`;
   }
-  categoryList.innerHTML = btnRender;
+  refs.categoryList.innerHTML = btnRender;
 }
 
-async function renderCategoryButtonsTablet() {
-  const sections = await getCategory();
-  const sortSections = sections.slice(0, 4);
+function renderTabletOverlay(categories) {
+  const sortSections = categories.slice(4, categories.length);
+
+  let categoriesRender = '';
+  for (let i = 0; i < sortSections.length; i++) {
+    const category = sortSections[i];
+    categoriesRender += `<li class="category__item" id="category-overlay">
+            ${category.display_name}
+      </li>`;
+  }
+  refs.categoryTabletOverlay.innerHTML = categoriesRender;
+}
+
+function categoriesTabletRendering() {
+  if (refs.categoryTabletOverlay.classList.contains('category__tablet-open')) {
+    refs.categoryTabletOverlay.classList.remove('category__tablet-open');
+  } else {
+    refs.categoryTabletOverlay.classList.add('category__tablet-open');
+  }
+}
+
+
+function renderCategoriesDesktop(categories) {
+  renderDesktopButtons(categories);
+  renderDesktopOverlay(categories);
+}
+
+function renderDesktopButtons(categories) {
+  const sortSections = categories.slice(0, 6);
 
   let btnRender = '';
   for (let i = 0; i < sortSections.length; i++) {
     const section = sortSections[i];
-    btnRender += `<li class="category__item">
-      <button class="category__btn" type="button">
-          ${section}
+    btnRender += `<li class="category__tablet-item" id="category-overlay">
+      <button class="category__btn"  type="button">
+          ${section.display_name}
       </button>
     </li>`;
   }
-  categoryList.innerHTML = btnRender;
+  refs.categoryList.innerHTML = btnRender;
 }
 
-async function renderCategoriesMobile() {
-  categoryListMobOverlay.classList.add('category-open');
+function renderDesktopOverlay(categories) {
+  const sortSections = categories.slice(6, categories.length);
 
-  const sections = await getCategory();
-
-  let btnRender = '';
-  for (let i = 0; i <= sections.length; i++) {
-    const section = sections[i];
-    btnRender += `<li class="category__mobile-item">
-      <a class="category__mobile-link" href="">
-          ${section}
-      </a>
-    </li>`;
+  let categoriesRender = '';
+  for (let i = 0; i < sortSections.length; i++) {
+    const category = sortSections[i];
+    categoriesRender += `<li class="category__item" id="category-overlay">
+            ${category.display_name}
+      </li>`;
   }
-
-  categoryListMobOverlay.innerHTML = btnRender;
+  refs.categoryTabletOverlay.innerHTML = categoriesRender;
 }
 
-function removeBtnListener() {
-  categoryListMobOverlay.classList.remove('category-open');
+function categoriesDesktopRendering() {
+  if (refs.categoryTabletOverlay.classList.contains('category__tablet-open')) {
+    refs.categoryTabletOverlay.classList.remove('category__tablet-open');
+  } else {
+    refs.categoryTabletOverlay.classList.add('category__tablet-open');
+  }
 }

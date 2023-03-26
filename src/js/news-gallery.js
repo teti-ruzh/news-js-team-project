@@ -1,3 +1,4 @@
+import { weatherBlock } from './weather-service';
 const API_KEY = 'RHHupiQoPYaFAPG2zSM05OivdA2ggJN2';
 const URL_MOST_POPULAR =
   'https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json';
@@ -23,7 +24,8 @@ function renderNews(newsArray) {
   let foto = '';
   const image = new URL('../images/gallery/plugFoto.jpg', import.meta.url);
   const svgA = new URL('../images/icons.svg', import.meta.url);
-  const svgB = 'icon-heart-bordered';
+  const svgB = 'icon-Vector';
+  const svgC = 'icon-icons8--1';
 
   const markup = newsArray
     .map(({ url, media, section, title, abstract, published_date }) => {
@@ -45,7 +47,7 @@ function renderNews(newsArray) {
 
     <div class="news__favorite">
       <button class="news__favorite-button">
-        Add to favorite
+        <span class="news-box-content">Add to favorite</span>
         <svg class="news__favorite-icon" width="16" height="16">
           <use href="${svgA}#${svgB}"></use>
         </svg>
@@ -66,15 +68,21 @@ function renderNews(newsArray) {
     </div>
   </div>
 
-  <!-- <div class="news-box--overlay">
-    <span class="news-box-text"> Already read </span>
-  </div> -->
+<div class="news-box--overlay">
+    <span class="news-box-text"> Already read 
+    <svg class="news__favorite-icon" width="16" height="16">
+          <use href="${svgA}#${svgC}"></use>
+        </svg>
+    </span>
+  </div>
 </li>
 `;
     })
     .join('');
 
   newsList.insertAdjacentHTML('beforeend', markup);
+
+  addWeatherWidget();
 }
 
 function cutAbstractAddPoints(abstract_news, maxLength) {
@@ -144,7 +152,8 @@ function renderNewsSearch(newsArray) {
   let foto = '';
   const image = new URL('../images/gallery/plugFoto.jpg', import.meta.url);
   const svgA = new URL('../images/icons.svg', import.meta.url);
-  const svgB = 'icon-heart-bordered';
+  const svgB = 'icon-Vector';
+  const svgC = 'icon-icons8--1';
 
   const markup = newsArray
     .map(
@@ -168,7 +177,7 @@ function renderNewsSearch(newsArray) {
 
     <div class="news__favorite">
       <button class="news__favorite-button">
-        Add to favorite
+        <span class="news-box-content">Add to favorite</span>
         <svg class="news__favorite-icon" width="16" height="16">
           <use href="${svgA}#${svgB}"></use>
         </svg>
@@ -189,9 +198,13 @@ function renderNewsSearch(newsArray) {
     </div>
   </div>
 
-  <!-- <div class="news-box--overlay">
-    <span class="news-box-text"> Already read </span>
-  </div> -->
+  <div class="news-box--overlay">
+    <span class="news-box-text"> Already read 
+    <svg class="news__favorite-icon" width="16" height="16">
+          <use href="${svgA}#${svgC}"></use>
+        </svg>
+</span>
+  </div>
 </li>
 `;
       }
@@ -201,6 +214,46 @@ function renderNewsSearch(newsArray) {
   newsList.insertAdjacentHTML('beforeend', markup);
 }
 
+//================================================================================================================
+// 2023-26-03
+// OVERLAY і функціонал кнопки add to favorite
+
+newsList.addEventListener('click', event => {
+  const buttonFavoriteElement = event.target.closest('.news__favorite-button');
+  if (buttonFavoriteElement) {
+    const newsItem = buttonFavoriteElement.closest('.news__item');
+    const overlayElement = newsItem.querySelector('.news-box-content');
+    const favoriteButton = newsItem.querySelector('.news__favorite-button');
+    overlayElement.textContent = favoriteButton.classList.contains('news__favorite-button--active')
+      ? 'Add to favorite'
+      : 'Remove from favorite';
+    favoriteButton.classList.toggle('news__favorite-button--active');
+  }
+});
+
+newsList.addEventListener('click', event => {
+  const linkElement = event.target.closest('.news__link');
+  if (linkElement) {
+    const newsItem = linkElement.closest('.news__item');
+    const overlayElement = newsItem.querySelector('.news-box--overlay');
+    overlayElement.classList.add('news-box--overlay-active');
+  }
+});
+
 function cleanNewsGallery() {
   newsList.innerHTML = '';
+}
+
+// Додамо віджет погоди Олексія
+function addWeatherWidget() {
+  const viewportWidth = window.innerWidth;
+  let index = 0;
+  if (viewportWidth < 768) {
+    index = 0;
+  } else if (viewportWidth >= 768 && viewportWidth < 1280) {
+    index = 1;
+  } else {
+    index = 2;
+  }
+  newsList.insertBefore(weatherBlock, newsList.children[index]);
 }

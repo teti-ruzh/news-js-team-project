@@ -1,5 +1,6 @@
 import './js/header';
 import './js/switch';
+import './js/mobile-menu';
 import './js/news-fetch-service';
 import './js/news-card-markup';
 import './js/search';
@@ -10,6 +11,4 @@ import './js/add-to-favourite';
 import './js/add-to-read';
 import './js/weather-service';
 import './js/scroll-button';
-import './js/theme-switcher';
 import './js/pagination';
-import './js/mobile-menu';
