@@ -216,9 +216,9 @@ function renderNewsSearch(newsArray) {
 // OVERLAY і функціонал кнопки add to favorite
 
 newsList.addEventListener('click', (event) => {
-  const linkElement = event.target.closest('.news__favorite-button');
-  if (linkElement) {
-    const newsItem = linkElement.closest('.news__item');
+  const buttonFavoriteElement = event.target.closest('.news__favorite-button');
+  if (buttonFavoriteElement) {
+    const newsItem = buttonFavoriteElement.closest('.news__item');
     const overlayElement = newsItem.querySelector('.news__favorite-button');
     overlayElement.classList.toggle('news__favorite-button--active');
   }
