@@ -89,12 +89,20 @@
     text-transform: capitalize;
     color: inherit;
     cursor: pointer;
+    @media screen and (max-width: 400px) {
+      display: none;
+    }
+
     @media screen and (min-width: 768px) {
       width: 213px;
     }
     @media screen and (min-width: 1280px) {
       width: 288px;
     }
+    // &:hover,
+    // &:focus {
+    //   border-color: $color-black;
+    // }
   }
   &__input::placeholder {
     width: 59px;
@@ -113,8 +121,30 @@
     background-color: inherit;
     top: 6px;
     left: 12px;
+    @media screen and (max-width: 400px) {
+      display: none;
+    }
   }
 }
+
+.search__input.search-hidden {
+  display: block;
+}
+.search__btn.search-hidden {
+  display: block;
+}
+.btn-search {
+  background-color: inherit;
+  fill: inherit;
+  border: none;
+  @media screen and (min-width: 401px) {
+    display: none;
+  }
+}
+.btn-search.disabled {
+  display: none;
+}
+
 .switch {
   display: none;
 
