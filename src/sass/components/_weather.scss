@@ -39,10 +39,9 @@
     margin-bottom: 40px;
 
     @include tablet-up {
+        margin-top: 40px;
         margin-bottom: 89px;
-    }
-
-    
+    }  
 }
 
 .weather__temp {
@@ -54,7 +53,6 @@
         font-size: 64px;
         line-height: 1.17;
     }
-
 }
 
 .weather__desk {
@@ -65,38 +63,32 @@
         font-size: 36px;
         line-height: 1.17;
     }
-
 }
 
 .weather__container {
     display: flex;
     flex-direction: column;
     margin-left: 11px;
-    
 }
 
 .weather__location {
     display: flex;
+    align-items: center;
     padding: 9px 8px;
     background-color: $bg-weather-translucent;
     border-radius: 10px;
     height: 34px;
-
 }
-
-// .weather__location-icon {
-
-// }
 
 .weather__location-city {
     font-size: 14px;
     line-height: 1.14;
+    margin-left: 4px;
 
     @include tablet-up {
         font-size: 20px;
         line-height: 1.15;
-    }
-    
+    }  
 }
 
 .weather__icon {
@@ -110,10 +102,7 @@
       width: 165px;
       height: 156px;
       margin-bottom: 90px;
-
    }
-
-   
 }
 
 .current__date {
