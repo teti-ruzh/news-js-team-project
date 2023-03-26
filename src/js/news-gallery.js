@@ -47,7 +47,7 @@ function renderNews(newsArray) {
 
     <div class="news__favorite">
       <button class="news__favorite-button">
-        Add to favorite
+        <span class="news-box-content">Add to favorite</span>
         <svg class="news__favorite-icon" width="16" height="16">
           <use href="${svgA}#${svgB}"></use>
         </svg>
@@ -177,7 +177,7 @@ function renderNewsSearch(newsArray) {
 
     <div class="news__favorite">
       <button class="news__favorite-button">
-        Add to favorite
+        <span class="news-box-content">Add to favorite</span>
         <svg class="news__favorite-icon" width="16" height="16">
           <use href="${svgA}#${svgB}"></use>
         </svg>
@@ -222,8 +222,12 @@ newsList.addEventListener('click', event => {
   const buttonFavoriteElement = event.target.closest('.news__favorite-button');
   if (buttonFavoriteElement) {
     const newsItem = buttonFavoriteElement.closest('.news__item');
-    const overlayElement = newsItem.querySelector('.news__favorite-button');
-    overlayElement.classList.toggle('news__favorite-button--active');
+    const overlayElement = newsItem.querySelector('.news-box-content');
+    const favoriteButton = newsItem.querySelector('.news__favorite-button');
+    overlayElement.textContent = favoriteButton.classList.contains('news__favorite-button--active')
+      ? 'Add to favorite'
+      : 'Remove from favorite';
+    favoriteButton.classList.toggle('news__favorite-button--active');
   }
 });
 
