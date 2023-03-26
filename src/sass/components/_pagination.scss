@@ -1,0 +1,78 @@
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 60px;
+  margin-bottom: 150px;
+}
+
+.prev-page,
+.next-page {
+  height: 28px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.36;
+  color: inherit;
+  background-color: $color-white-2;
+  border: 1px solid $color-brand;
+  border-radius: 2px;
+  cursor: pointer;
+
+  @include tablet-up {
+    font-size: 16px;
+    line-height: 1.38;
+    height: 31px;
+  }
+
+  &:disabled {
+    color: $color-grey;
+    border-color: $color-grey;
+    cursor: no-drop;
+  }
+}
+
+#pagination {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#pagination li {
+  display: flex;
+  gap: 8px;
+}
+
+#pagination li:hover a,
+#pagination li.active a {
+  color: $color-white-2;
+  background-color: $color-brand;
+}
+
+#pagination li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.36;
+
+  background-color: $color-white-2;
+  border: 1px solid $color-brand;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  pointer-events: none;
+
+  @include tablet-up {
+    width: 33px;
+    height: 31px;
+    font-size: 16px;
+    line-height: 1.38;
+  }
+}
