@@ -16,6 +16,22 @@ const refs = {
 };
 const newApiCategory = new ApiCategory();
 
+let categories = [];
+
+const newApiCategory = new ApiCategory();
+
+async function getCategories() {
+  categories = await newApiCategory.fetchApiCategory();
+  console.log(categories);
+}
+
+getCategories();
+
+// document.addEventListener('DOMContentLoaded', async () => {
+//   await getCategories();
+//   changeWindow();
+// });
+
 window.addEventListener(
   'resize',
   throttle(() => changeWindow(), 250)
@@ -27,22 +43,23 @@ window.addEventListener('load', () => {
 
 function changeWindow() {
   if (window.matchMedia('(min-width: 1280px)').matches) {
-    renderCategoriesDesktop();
-    refs.categoryTabletBtn.addEventListener(
-      'click',
-      categoriesDesktopRendering
+    renderCategoriesDesktop(categories);
+    refs.categoryTabletBtn.addEventListener('click', () =>
+      categoriesDesktopRendering(categories)
     );
   } else if (window.matchMedia('(min-width: 768px)').matches) {
-    renderCategoriesTablet();
-    refs.categoryTabletBtn.addEventListener('click', categoriesTabletRendering);
+    renderCategoriesTablet(categories);
+    refs.categoryTabletBtn.addEventListener('click', () =>
+      categoriesTabletRendering(categories)
+    );
   } else {
-    refs.categoryMobileBtn.addEventListener('click', categoriesMobileRendering);
+    refs.categoryMobileBtn.addEventListener('click', () =>
+      categoriesMobileRendering(categories)
+    );
   }
 }
 
-async function renderCategoriesMobile() {
-  const categories = await newApiCategory.fetchApiCategory();
-
+function renderCategoriesMobile(categories) {
   let categoriesRender = '';
   for (let i = 0; i < categories.length; i++) {
     const category = categories[i];
@@ -53,18 +70,17 @@ async function renderCategoriesMobile() {
   refs.categoryMobileOverlay.innerHTML = categoriesRender;
 }
 
-function categoriesMobileRendering() {
+function categoriesMobileRendering(categories) {
   if (refs.categoryMobileOverlay.classList.contains('category__mob-open')) {
     refs.categoryMobileOverlay.classList.remove('category__mob-open');
   } else {
-    renderCategoriesMobile();
+    renderCategoriesMobile(categories);
     refs.categoryMobileOverlay.classList.add('category__mob-open');
   }
 }
 
-async function renderCategoriesTablet() {
-  const categories = await newApiCategory.fetchApiCategory();
 
+function renderCategoriesTablet(categories) {
   renderTabletButtons(categories);
   renderTabletOverlay(categories);
 }
@@ -105,9 +121,8 @@ function categoriesTabletRendering() {
   }
 }
 
-async function renderCategoriesDesktop() {
-  const categories = await newApiCategory.fetchApiCategory();
 
+function renderCategoriesDesktop(categories) {
   renderDesktopButtons(categories);
   renderDesktopOverlay(categories);
 }
