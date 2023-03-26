@@ -110,7 +110,10 @@
   border-radius: 20px;
   border: none;
   cursor: pointer;
+
+  fill: $color-white;
 }
+
 
 .news__favorite-button--active {
   fill: $color-brand-2;

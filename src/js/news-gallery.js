@@ -24,7 +24,7 @@ function renderNews(newsArray) {
   let foto = '';
   const image = new URL('../images/gallery/plugFoto.jpg', import.meta.url);
   const svgA = new URL('../images/icons.svg', import.meta.url);
-  const svgB = 'icon-heart-bordered';
+  const svgB = 'icon-Vector';
   const svgC = 'icon-icons8--1';
 
   const markup = newsArray
@@ -152,7 +152,7 @@ function renderNewsSearch(newsArray) {
   let foto = '';
   const image = new URL('../images/gallery/plugFoto.jpg', import.meta.url);
   const svgA = new URL('../images/icons.svg', import.meta.url);
-  const svgB = 'icon-heart-bordered';
+  const svgB = 'icon-Vector';
   const svgC = 'icon-icons8--1';
 
   const markup = newsArray
