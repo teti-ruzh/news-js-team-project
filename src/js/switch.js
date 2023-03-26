@@ -14,10 +14,7 @@ const refs = {
   switchLabel: document.querySelector('.switch__label'),
   switchAfter: document.querySelector('.switch__label::after'),
   mobileMenu: document.querySelector('.mobil-menu'),
-  calendar: document.querySelector('.calendar-arow__color'),
 };
-
-console.log(refs.calendar);
 
 let classEl = '';
 
