@@ -14,7 +14,11 @@ const refs = {
   switchLabel: document.querySelector('.switch__label'),
   switchAfter: document.querySelector('.switch__label::after'),
   mobileMenu: document.querySelector('.mobil-menu'),
+  calendar: document.querySelector('.calendar-arow__color'),
 };
+
+console.log(refs.calendar);
+
 let classEl = '';
 
 refs.switch.addEventListener('change', function () {
@@ -24,6 +28,7 @@ refs.switch.addEventListener('change', function () {
     checkedLightTheme();
   }
 });
+
 refs.mobileSwitch.addEventListener('change', function () {
   if (this.checked) {
     checkedDarkTheme();
@@ -43,6 +48,7 @@ function checkedDarkTheme() {
 
 function checkedLightTheme() {
   if (!localStorage.getItem('theme') === 'dark') {
+    refs.switch.setAttribute('checked', false);
     return;
   } else {
     localStorage.removeItem('theme');
@@ -53,7 +59,7 @@ function checkedLightTheme() {
 function addDarkClassToHTML() {
   try {
     if (localStorage.getItem('theme') === 'dark') {
-      refs.switch.checked || refs.mobileSwitch.checked === true;
+      refs.switch.setAttribute('checked', true);
       addClass(refs.iconMoon, 'theme-switch');
       addClass(refs.switchDarkName, 'theme-switch');
       addClass(refs.iconMoonMobile, 'theme-switch');
