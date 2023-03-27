@@ -30,7 +30,7 @@ async function fetchMostpopularData() {
   }
 }
 
-function renderNews(newsArray) {
+export function renderNews(newsArray) {
   const markup = newsArray
     .map(({ url, media, section, title, abstract, published_date }) => {
       if (!media.length) {
