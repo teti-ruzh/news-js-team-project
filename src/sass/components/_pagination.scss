@@ -1,20 +1,80 @@
-.page-container {
+.page-pagination {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 40px;
+  margin-bottom: 60px;
 
-  margin-top: 60px;
-  margin-bottom: 150px;
+  @include tablet-up {
+    gap: 8px;
+    margin-top: 60px;
+    margin-bottom: 150px;
+  }
 }
 
-.prev-page,
-.next-page {
+.page-pagination__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 288px;
+
+  @include tablet-up {
+    gap: 8px;
+    width: 415px;
+  }
+}
+
+.page-pagination__list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.page-pagination__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
   height: 28px;
+
   font-weight: 500;
   font-size: 14px;
   line-height: 1.36;
-  color: inherit;
+
+  background-color: $color-white-2;
+  border: 1px solid $color-brand;
+  border-radius: 2px;
+  cursor: pointer;
+
+  @include tablet-up {
+    width: 33px;
+    height: 31px;
+    font-size: 16px;
+    line-height: 1.38;
+  }
+}
+
+.page-pagination__item:hover {
+  color: $color-white-2;
+  background-color: $color-brand;
+}
+
+.page-pagination__item--active {
+  color: $color-white-2;
+  background-color: $color-brand;
+}
+
+.page-pagination__prev-btn,
+.page-pagination__next-btn {
+  height: 28px;
+  width: 65px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.36;
+  color: $color-black;
   background-color: $color-white-2;
   border: 1px solid $color-brand;
   border-radius: 2px;
@@ -30,49 +90,5 @@
     color: $color-grey;
     border-color: $color-grey;
     cursor: no-drop;
-  }
-}
-
-#pagination {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-#pagination li {
-  display: flex;
-  gap: 8px;
-}
-
-#pagination li:hover a,
-#pagination li.active a {
-  color: $color-white-2;
-  background-color: $color-brand;
-}
-
-#pagination li a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 28px;
-  height: 28px;
-
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.36;
-
-  background-color: $color-white-2;
-  border: 1px solid $color-brand;
-  border-radius: 2px;
-  cursor: pointer;
-  text-decoration: none;
-  pointer-events: none;
-
-  @include tablet-up {
-    width: 33px;
-    height: 31px;
-    font-size: 16px;
-    line-height: 1.38;
   }
 }
