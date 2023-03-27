@@ -28,13 +28,13 @@ function renderReadedGallery() {
     );
     const cardMarkup = DatedNews.map(news => renderReadNewsCard(news)).join('');
 
-    // const svgPath = new URL('../images/icons.svg', import.meta.url);
-    // const svgName = 'icon-arrow-down';
+    const svgPath = new URL('../images/icons.svg', import.meta.url);
+    const svgName = 'icon-arrow-down';
 
     containerMarkup += `<div class="read-news__list">
       <button class="read-news__btn js-read-news-btn">
         <span>${sortedReadDates[i]}</span>
-        <svg><use href="/icons.adfc4680.svg#icon-arrow-down" width="14" height="14"></use></svg>
+        <svg><use href="${svgPath}#${svgName}" width="14" height="14"></use></svg>
       </button>
       <ul class="news__list">
       ${cardMarkup}
