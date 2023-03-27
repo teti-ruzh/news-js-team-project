@@ -13,6 +13,7 @@ const refs = {
   categoryDesktopBtn: document.querySelector('#category-desktop-btn'),
   listenerMobile: document.querySelector('.category__mobile'),
   listenerTablet: document.querySelector('.category__tablet'),
+  categoryIcon: document.querySelector('.category__arrow-icon-down'),
 };
 
 let categories = [];
@@ -132,8 +133,14 @@ function overlayIsShown() {
   ) {
     refs.categoryOverlay.classList.remove('category__overlay-open');
     refs.categoryTabletOverlay.classList.remove('category__overlay-open');
+    refs.categoryMobileBtn.classList.remove('category__btn-active');
+    refs.categoryTabletBtn.classList.remove('category__btn-active');
+    refs.categoryIcon.classList.remove('.category__icon');
   } else {
     refs.categoryOverlay.classList.add('category__overlay-open');
     refs.categoryTabletOverlay.classList.add('category__overlay-open');
+    refs.categoryMobileBtn.classList.add('category__btn-active');
+    refs.categoryTabletBtn.classList.add('category__btn-active');
+    refs.categoryIcon.classList.add('category__icon');
   }
 }
