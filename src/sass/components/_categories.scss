@@ -6,6 +6,7 @@
         gap: 16px;
         margin-bottom: 40px;
     }
+
     @media screen and (min-width: 768px) {
         margin-bottom: 60px;
     }
@@ -66,7 +67,7 @@
     }
 }
 
-.category__mobile-overlay {
+.category__overlay {
     display: none;
     position: absolute;
     top: 100%;
@@ -74,42 +75,24 @@
     width: 148px;
     padding: 14px;
 
-    border-radius: 20px;    
-
+    border-radius: 20px;
+    background-color: $color-white;
     transition: bottom 0.5s ease;
 }
 
-.category__mob-open {
+.category__overlay-tab {
+    width: 168px;
+}
+
+.category__overlay-open {
     display: flex;
     flex-direction: column;
     gap: 14px;
     z-index: 999;
 }
 
-.category__tablet-overlay {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 10;
-    width: 168px;
-    height: 380px;
-    padding: 14px;
-
-    background-color: $color-white;
-    border-radius: 20px;
-    transition: bottom 0.5s ease;
-}
-
-
-.category__tablet-open {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
 .category__item {
-position: relative;
+    position: relative;
     text-align: left;
     color: $color-brand;
     font-size: 12px;
@@ -122,7 +105,7 @@ position: relative;
 
 .category__item:hover {
     text-decoration: underline $color-brand 0.5px;
-    transition: text-decoration 0.5s ease-in-out;
+    transition: text-decoration 1s ease-in-out;
 }
 
 .category__btn:hover .category__arrow-icon-down {
@@ -130,15 +113,9 @@ position: relative;
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
-
-
-
-// .category__btn:hover .category__arrow-icon-down {
-//     @media screen and (min-width: 768px) {
-//         fill: $color-white;
-//     }
-// }
+.category__list-rendering .category__item:hover {
+    text-decoration: none;
+}
 
 .category__btn:focus,
 .category__btn:hover,
@@ -147,6 +124,7 @@ position: relative;
     background-color: $color-brand;
     color: $color-white;
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .category__btn:focus .category__arrow-icon-up,
@@ -169,4 +147,3 @@ position: relative;
 .category__arrow-icon-down {
     fill: $color-brand;
 }
-
