@@ -69,7 +69,7 @@ export function renderNews(newsArray) {
   </div>
 
 <div class="news-box--overlay">
-    <span class="news-box-text"> Already read 
+    <span class="news-box-text"> Already read
     <svg class="news__favorite-icon" width="16" height="16">
           <use href="${svgA}#${svgC}"></use>
         </svg>
@@ -199,7 +199,7 @@ function renderNewsSearch(newsArray) {
   </div>
 
   <div class="news-box--overlay">
-    <span class="news-box-text"> Already read 
+    <span class="news-box-text"> Already read
     <svg class="news__favorite-icon" width="16" height="16">
           <use href="${svgA}#${svgC}"></use>
         </svg>
