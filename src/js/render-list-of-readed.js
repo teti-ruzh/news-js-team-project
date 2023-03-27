@@ -34,6 +34,7 @@ function renderReadedGallery() {
     containerMarkup += `<div class="read-news__list">
       <button class="read-news__btn js-read-news-btn">
         <span>${sortedReadDates[i]}</span>
+        <svg><use href="/icons.adfc4680.svg#icon-arrow-down" width="14" height="14"></use></svg>
       </button>
       <ul class="news__list">
       ${cardMarkup}
@@ -80,8 +81,5 @@ function onReadNewsBtnClick({ currentTarget }) {
 }
 
 addEventHandlers();
-
-
-
 
 // {/* <svg><use href="${svgPath}#${svgName}"></use></svg> */}
