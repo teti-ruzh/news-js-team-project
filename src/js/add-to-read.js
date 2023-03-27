@@ -14,7 +14,9 @@ function onReadMoreBtnClick(event) {
   if (readMoreBtn) {
     const newsItem = readMoreBtn.closest('.news__item').outerHTML;
     const clickDate = new Date();
-    const date = `${clickDate.getDate()}/${clickDate.getMonth()}/${clickDate.getFullYear()}`;
+    const day = clickDate.getDate().toString().padStart(2,'0');
+    const month = (clickDate.getMonth()+1).toString().padStart(2,'0');
+    const date = `${day}/${month}/${clickDate.getFullYear()}`;
     clickDate.getFullYear();
     let newsObj = {};
     newsObj.id = clickDate.getTime();
