@@ -17,21 +17,22 @@ let foto = '';
 
 //=========================================================================================================================================
 // Відображення популярних статей. Загальна кільксть статей 20шт
-fetchMostpopularData();
+// fetchMostpopularData();
 
 async function fetchMostpopularData() {
   try {
     const response = await fetch(`${URL_MOST_POPULAR}?api-key=${API_KEY}`);
 
     const dataNews = await response.json();
+    return dataNews.results;
 
-    renderNews(dataNews.results);
+    // renderNews(dataNews.results);
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
   }
 }
 
-export function renderNews(newsArray) {
+function renderNews(newsArray) {
   const markup = newsArray
     .map(({ url, media, section, title, abstract, published_date }) => {
       if (!media.length) {
@@ -216,3 +217,5 @@ function addWeatherWidget() {
 }
 //================================================================================================================
 //Фільтер популярних новин по даті
+
+export { fetchMostpopularData, renderNews };
