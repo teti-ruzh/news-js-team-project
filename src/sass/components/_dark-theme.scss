@@ -32,3 +32,7 @@
   + .mobile-switch__label::after {
   background-color: $color-white;
 }
+.theme-switch--bg.switch__label:hover,
+.theme-switch--bg.switch__label:focus {
+  box-shadow: 1px 1px 7px $color-white-2;
+}
