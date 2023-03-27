@@ -15,6 +15,11 @@ const svgB = 'icon-Vector';
 const svgC = 'icon-icons8--1';
 let foto = '';
 
+
+// Відображення сторінки помилки
+const errorImage = document.querySelector('.errorImage');
+//============================================================================
+
 //=========================================================================================================================================
 // Відображення популярних статей. Загальна кільксть статей 20шт
 fetchMostpopularData();
@@ -75,6 +80,10 @@ function onSearch(event) {
   query = inputSearch.value;
 
   fetchArticleSearch();
+
+  // Додавання класу щоб прибрати відображення сторінки помилки
+  errorImage.classList.add('visually-hidden');
+  //============================================================================
 }
 
 function cleanNewsGallery() {
@@ -88,7 +97,13 @@ async function fetchArticleSearch() {
     );
 
     const dataNews = await response.json();
+// перевірка на пустий масив і прибирання класу щоб сторінка помилки відобразилась
+    if (dataNews.response.docs.length === 0) {
+      errorImage.classList.remove('visually-hidden');
 
+      return;
+    }
+    //============================================================================
     renderNewsSearch(dataNews.response.docs);
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
@@ -155,6 +170,7 @@ function onSearchSection(event) {
   console.log(querySection);
 
   fetchArticleSearchSection();
+  errorImage.classList.add('visually-hidden');
 }
 
 async function fetchArticleSearchSection() {
@@ -164,6 +180,11 @@ async function fetchArticleSearchSection() {
     );
 
     const dataNews = await response.json();
+    if (dataNews.response.docs.length === 0) {
+      errorImage.classList.remove('visually-hidden');
+      return;
+    }
+
     console.log(dataNews.response.docs);
 
     renderNewsSearch(dataNews.response.docs);
