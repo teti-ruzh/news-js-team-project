@@ -30,7 +30,7 @@ async function rendering() {
     renderDeskCategories(categories);
   } else if (window.matchMedia('(min-width: 768px)').matches) {
     renderTabCategories(categories);
-  } else {
+  } else if (window.matchMedia('(max-width: 767px)').matches) {
     renderCategories(categories);
   }
   console.log(categories);
@@ -54,7 +54,10 @@ function renderCategories(categories) {
         .then(response => response.json())
         .then(data => renderNews(data.results));
     });
-    refs.categoryOverlay.appendChild(categoryItem);
+    refs.categoryOverlay.insertAdjacentHTML(
+      'beforeend',
+      categoryItem.outerHTML
+    );
   });
 }
 
@@ -77,7 +80,6 @@ function renderTabCategories(categories) {
         .then(response => response.json())
         .then(data => renderNews(data.results));
     });
-
     refs.categoryList.appendChild(categoryItem);
   });
 
@@ -92,7 +94,10 @@ function renderTabCategories(categories) {
         .then(response => response.json())
         .then(data => renderNews(data.results));
     });
-    refs.categoryTabletOverlay.appendChild(categoryItem);
+    refs.categoryTabletOverlay.insertAdjacentHTML(
+      'beforeend',
+      categoryItem.outerHTML
+    );
   });
 }
 
@@ -130,7 +135,10 @@ function renderDeskCategories(categories) {
         .then(response => response.json())
         .then(data => renderNews(data.results));
     });
-    refs.categoryTabletOverlay.appendChild(categoryItem);
+    refs.categoryTabletOverlay.insertAdjacentHTML(
+      'beforeend',
+      categoryItem.outerHTML
+    );
   });
 }
 
