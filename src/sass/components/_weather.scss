@@ -13,97 +13,92 @@
         margin-bottom: 28px;
     }
 
-    // margin-top: 40px;
-
     @include tablet-up {
         width: 353px;
-        height: 675px;
-        // margin-bottom: 30px;
-        // margin-top: 48px;
+        height: 675px;   
     }
 
     @include desktop-up {
         width: 395px;
-        height: 675px;
-        // margin-bottom: 40px;
-        // margin-top: 60px;
+        height: 675px;  
     }
-}
 
-.weather__main {
-    display: flex;
-    align-items: center;
+    &__main {
+       display: flex;
+       align-items: center;
 
-    color: $color-white;
-    margin-top: 32px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
+       color: $color-white;
+       margin-top: 32px;
+       margin-left: auto;
+       margin-right: auto;
+       margin-bottom: 40px;
 
-    @include tablet-up {
-        margin-top: 40px;
-        margin-bottom: 89px;
+       @include tablet-up {
+          margin-top: 40px;
+          margin-bottom: 89px;
+       }
     }
-}
 
-.weather__temp {
-    font-size: 55px;
-    line-height: 1.16;
-    border-right: 1px solid $color-white;
 
-    @include tablet-up {
-        font-size: 64px;
+    &__temp {
+       font-size: 55px;
+       line-height: 1.16;
+       border-right: 1px solid $color-white;
+
+       @include tablet-up {
+          font-size: 64px;
+          line-height: 1.17;
+       }
+    }
+
+    &__desk {
+        font-size: 24px;
         line-height: 1.17;
+
+        @include tablet-up {
+            font-size: 36px;
+            line-height: 1.17;
+        }
     }
-}
 
-.weather__desk {
-    font-size: 24px;
-    line-height: 1.17;
-
-    @include tablet-up {
-        font-size: 36px;
-        line-height: 1.17;
+    &__container {
+        display: flex;
+        flex-direction: column;
+        margin-left: 11px;
     }
-}
 
-.weather__container {
-    display: flex;
-    flex-direction: column;
-    margin-left: 11px;
-}
-
-.weather__location {
-    display: flex;
-    align-items: center;
-    padding: 9px 8px;
-    background-color: $bg-weather-translucent;
-    border-radius: 10px;
-    height: 34px;
-}
-
-.weather__location-city {
-    font-size: 14px;
-    line-height: 1.14;
-    margin-left: 4px;
-
-    @include tablet-up {
-        font-size: 20px;
-        line-height: 1.15;
+    &__location {
+        display: flex;
+        align-items: center;
+        padding: 9px 8px;
+        background-color: $bg-weather-translucent;
+        border-radius: 10px;
+        height: 34px;
     }
-}
 
-.weather__icon {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-    width: 128px;
-    height: 121px;
+    &__location-city {
+        font-size: 14px;
+        line-height: 1.14;
+        margin-left: 4px;
 
-    @include tablet-up {
-        width: 165px;
-        height: 156px;
-        margin-bottom: 90px;
+        @include tablet-up {
+            font-size: 20px;
+            line-height: 1.15;
+        }
+    }
+
+    &__icon {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 40px;
+        width: 128px;
+        height: 121px;
+
+        @include tablet-up {
+            width: 165px;
+            height: 156px;
+            margin-bottom: 90px;
+        }
     }
 }
 
