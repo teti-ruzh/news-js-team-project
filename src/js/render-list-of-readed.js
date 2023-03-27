@@ -12,9 +12,12 @@ const readedNewsArray = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
 const markup = readedNewsArray.map(({id, date, card})=> {
 
-const cardBeg = card.slice(0, length-305);
-const cardEnd = card.slice(length-6, card.length);
-const cardToRender = `${cardBeg}${cardEnd}`;
+// const cardBeg = card.slice(0, card.length-305);
+// const cardEnd = card.slice(card.length-6, card.length);
+// const cardToRender = `${cardBeg}${cardEnd}`;
+
+const cardToRender = card.replace('news-box--overlay-active', '');
+console.log(cardToRender);
 return cardToRender;
 
 }).join('');

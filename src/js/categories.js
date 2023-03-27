@@ -1,173 +1,156 @@
 import throttle from 'lodash.throttle';
 
 import { ApiCategory } from './news-fetch-service';
-import { fetchArticleSearch } from './news-gallery';
+import { renderNews } from './news-gallery';
 
 const refs = {
-  categoryMobileOverlay: document.querySelector('.category__mobile-overlay'),
+  categoryOverlay: document.querySelector('.category__overlay'),
   categoryMobileBtn: document.querySelector('.category__mobile-btn'),
   categoryList: document.querySelector('.category__list-rendering'),
   categoryTabletBtn: document.querySelector('.category__tablet-btn'),
   categoryTabletOverlay: document.querySelector(
-    '.category__tablet-btn-container .category__tablet-overlay'
+    '.category__tablet-btn-container .category__overlay'
   ),
   categoryDesktopBtn: document.querySelector('#category-desktop-btn'),
-  categoryQuery: document.querySelectorAll('#category-overlay'),
   listenerMobile: document.querySelector('.category__mobile'),
   listenerTablet: document.querySelector('.category__tablet'),
 };
 
-
 let categories = [];
 
+const API_KEY = 'api-key=nb4kIc3A28NYQPkulI6xtxUAkPze1R9u';
 const newApiCategory = new ApiCategory();
 
-async function getCategories() {
-  categories = await newApiCategory.fetchApiCategory();
+refs.categoryMobileBtn.addEventListener('click', overlayIsShown);
+refs.categoryTabletBtn.addEventListener('click', overlayIsShown);
+
+async function rendering() {
+  await getCategories();
+  if (window.matchMedia('(min-width: 1280px)').matches) {
+    renderDeskCategories(categories);
+  } else if (window.matchMedia('(min-width: 768px)').matches) {
+    renderTabCategories(categories);
+  } else if (window.matchMedia('(max-width: 767px)').matches) {
+    renderCategories(categories);
+  }
   console.log(categories);
 }
+rendering();
 
-getCategories();
+async function getCategories() {
+  const categoriesArr = await newApiCategory.fetchApiCategory();
+  categories = categoriesArr.map(category => category.display_name);
+}
 
-// document.addEventListener('DOMContentLoaded', async () => {
-//   await getCategories();
-//   changeWindow();
-// });
-
-window.addEventListener(
-  'resize',
-  throttle(() => changeWindow(), 250)
-);
-
-window.addEventListener('load', () => {
-  changeWindow();
-});
-
-function changeWindow() {
-  if (window.matchMedia('(min-width: 1280px)').matches) {
-    renderCategoriesDesktop(categories);
-    refs.categoryTabletBtn.addEventListener('click', () =>
-      categoriesDesktopRendering(categories)
+function renderCategories(categories) {
+  categories.forEach(category => {
+    const categoryItem = document.createElement('li');
+    categoryItem.classList.add('category__item');
+    categoryItem.textContent = category;
+    categoryItem.addEventListener('click', () => {
+      fetch(
+        `https://api.nytimes.com/svc/news/v3/content/all/${category}.json?${API_KEY}`
+      )
+        .then(response => response.json())
+        .then(data => renderNews(data.results));
+    });
+    refs.categoryOverlay.insertAdjacentHTML(
+      'beforeend',
+      categoryItem.outerHTML
     );
-  } else if (window.matchMedia('(min-width: 768px)').matches) {
-    renderCategoriesTablet(categories);
-    refs.categoryTabletBtn.addEventListener('click', () =>
-      categoriesTabletRendering(categories)
+  });
+}
+
+function renderTabCategories(categories) {
+  const firstFourCategories = categories.slice(0, 4);
+  const remainingCategories = categories.slice(4, categories.length);
+
+  firstFourCategories.forEach((category, index) => {
+    const categoryItem = document.createElement('li');
+    categoryItem.classList.add(
+      'category__btn',
+      'category__item',
+      'category__tablet-btn'
     );
-  } else {
-    refs.categoryMobileBtn.addEventListener('click', () =>
-      categoriesMobileRendering(categories)
+    categoryItem.textContent = category;
+    categoryItem.addEventListener('click', () => {
+      fetch(
+        `https://api.nytimes.com/svc/news/v3/content/all/${category}.json?${API_KEY}`
+      )
+        .then(response => response.json())
+        .then(data => renderNews(data.results));
+    });
+    refs.categoryList.appendChild(categoryItem);
+  });
+
+  remainingCategories.forEach(category => {
+    const categoryItem = document.createElement('li');
+    categoryItem.classList.add('category__item');
+    categoryItem.textContent = category;
+    categoryItem.addEventListener('click', () => {
+      fetch(
+        `https://api.nytimes.com/svc/news/v3/content/all/${category}.json?${API_KEY}`
+      )
+        .then(response => response.json())
+        .then(data => renderNews(data.results));
+    });
+    refs.categoryTabletOverlay.insertAdjacentHTML(
+      'beforeend',
+      categoryItem.outerHTML
     );
-  }
+  });
 }
 
-function categoryClick(event) {
-  const category = event.target.elements('#category-overlay');
-  return console.log(category);
+function renderDeskCategories(categories) {
+  const firstSixCategories = categories.slice(0, 6);
+  const remainingCategories = categories.slice(6, categories.length);
+
+  firstSixCategories.forEach((category, index) => {
+    const categoryItem = document.createElement('li');
+    categoryItem.classList.add(
+      'category__btn',
+      'category__item',
+      'category__tablet-btn'
+    );
+    categoryItem.textContent = category;
+    categoryItem.addEventListener('click', () => {
+      fetch(
+        `https://api.nytimes.com/svc/news/v3/content/all/${category}.json?${API_KEY}`
+      )
+        .then(response => response.json())
+        .then(data => renderNews(data.results));
+    });
+
+    refs.categoryList.appendChild(categoryItem);
+  });
+
+  remainingCategories.forEach(category => {
+    const categoryItem = document.createElement('li');
+    categoryItem.classList.add('category__item');
+    categoryItem.textContent = category;
+    categoryItem.addEventListener('click', () => {
+      fetch(
+        `https://api.nytimes.com/svc/news/v3/content/all/${category}.json?${API_KEY}`
+      )
+        .then(response => response.json())
+        .then(data => renderNews(data.results));
+    });
+    refs.categoryTabletOverlay.insertAdjacentHTML(
+      'beforeend',
+      categoryItem.outerHTML
+    );
+  });
 }
 
-refs.listenerMobile.addEventListener('click', categoryClick);
-
-function renderCategoriesMobile(categories) {
-  let categoriesRender = '';
-  for (let i = 0; i < categories.length; i++) {
-    const category = categories[i];
-    categoriesRender += `<li class="category__item" id="category-overlay">
-            ${category.display_name}
-      </li>`;
-  }
-  refs.categoryMobileOverlay.innerHTML = categoriesRender;
-}
-
-function categoriesMobileRendering(categories) {
-  if (refs.categoryMobileOverlay.classList.contains('category__mob-open')) {
-    refs.categoryMobileOverlay.classList.remove('category__mob-open');
+function overlayIsShown() {
+  if (
+    refs.categoryOverlay.classList.contains('category__overlay-open') ||
+    refs.categoryTabletOverlay.classList.contains('category__overlay-open')
+  ) {
+    refs.categoryOverlay.classList.remove('category__overlay-open');
+    refs.categoryTabletOverlay.classList.remove('category__overlay-open');
   } else {
-    renderCategoriesMobile(categories);
-    refs.categoryMobileOverlay.classList.add('category__mob-open');
-  }
-}
-
-
-function renderCategoriesTablet(categories) {
-  renderTabletButtons(categories);
-  renderTabletOverlay(categories);
-}
-
-function renderTabletButtons(categories) {
-  const sortSections = categories.slice(0, 4);
-
-  let btnRender = '';
-  for (let i = 0; i < sortSections.length; i++) {
-    const section = sortSections[i];
-    btnRender += `<li class="category__item" id="category-overlay">
-      <button class="category__btn" type="button">
-          ${section.display_name}
-      </button>
-    </li>`;
-  }
-  refs.categoryList.innerHTML = btnRender;
-}
-
-function renderTabletOverlay(categories) {
-  const sortSections = categories.slice(4, categories.length);
-
-  let categoriesRender = '';
-  for (let i = 0; i < sortSections.length; i++) {
-    const category = sortSections[i];
-    categoriesRender += `<li class="category__item" id="category-overlay">
-            ${category.display_name}
-      </li>`;
-  }
-  refs.categoryTabletOverlay.innerHTML = categoriesRender;
-}
-
-function categoriesTabletRendering() {
-  if (refs.categoryTabletOverlay.classList.contains('category__tablet-open')) {
-    refs.categoryTabletOverlay.classList.remove('category__tablet-open');
-  } else {
-    refs.categoryTabletOverlay.classList.add('category__tablet-open');
-  }
-}
-
-
-function renderCategoriesDesktop(categories) {
-  renderDesktopButtons(categories);
-  renderDesktopOverlay(categories);
-}
-
-function renderDesktopButtons(categories) {
-  const sortSections = categories.slice(0, 6);
-
-  let btnRender = '';
-  for (let i = 0; i < sortSections.length; i++) {
-    const section = sortSections[i];
-    btnRender += `<li class="category__tablet-item" id="category-overlay">
-      <button class="category__btn"  type="button">
-          ${section.display_name}
-      </button>
-    </li>`;
-  }
-  refs.categoryList.innerHTML = btnRender;
-}
-
-function renderDesktopOverlay(categories) {
-  const sortSections = categories.slice(6, categories.length);
-
-  let categoriesRender = '';
-  for (let i = 0; i < sortSections.length; i++) {
-    const category = sortSections[i];
-    categoriesRender += `<li class="category__item" id="category-overlay">
-            ${category.display_name}
-      </li>`;
-  }
-  refs.categoryTabletOverlay.innerHTML = categoriesRender;
-}
-
-function categoriesDesktopRendering() {
-  if (refs.categoryTabletOverlay.classList.contains('category__tablet-open')) {
-    refs.categoryTabletOverlay.classList.remove('category__tablet-open');
-  } else {
-    refs.categoryTabletOverlay.classList.add('category__tablet-open');
+    refs.categoryOverlay.classList.add('category__overlay-open');
+    refs.categoryTabletOverlay.classList.add('category__overlay-open');
   }
 }

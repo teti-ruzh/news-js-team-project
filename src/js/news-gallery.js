@@ -20,7 +20,7 @@ async function fetchMostpopularData() {
   }
 }
 
-function renderNews(newsArray) {
+export function renderNews(newsArray) {
   let foto = '';
   const image = new URL('../images/gallery/plugFoto.jpg', import.meta.url);
   const svgA = new URL('../images/icons.svg', import.meta.url);
