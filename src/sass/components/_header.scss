@@ -1,10 +1,14 @@
 .header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 28px;
+
   &__container {
     padding-top: 24px;
     padding-bottom: 24px;
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
+
     @media screen and (min-width: 480px) {
       min-width: 480px;
     }
@@ -214,6 +218,11 @@
 
 .switch__checkbox:checked + .switch__label:after {
   transform: translateX(140%) translateY(-50%);
+}
+
+.switch__label:hover,
+.switch__label:focus {
+  box-shadow: 1px 1px 7px $color-brand-2;
 }
 
 .burger-menu {
