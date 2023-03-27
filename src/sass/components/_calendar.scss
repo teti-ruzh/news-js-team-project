@@ -20,7 +20,13 @@
       display: block;
     }
   }
-  
+  .categories__icon {
+    fill: #a2a2a2;
+  }
+
+  .icon-arrov__color{
+    fill: $color-brand;
+  }
   .calendar__btn {
     margin: 0;
     width: 152px;
@@ -28,11 +34,10 @@
     align-items: center;
   
     color: #a2a2a2; 
-    background-color: $calendarBgColor;
+    background-color: inherit;
     text-align: center;
     padding: 5px 12px;
     border: 1 solid;
-    // border-color: var(--calendar-border);
     border-radius: 20px;
     cursor: pointer;
   
