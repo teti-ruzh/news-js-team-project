@@ -216,6 +216,11 @@
   transform: translateX(140%) translateY(-50%);
 }
 
+.switch__label:hover,
+.switch__label:focus {
+  box-shadow: 1px 1px 7px $color-brand-2;
+}
+
 .burger-menu {
   display: block;
   top: 28px;
