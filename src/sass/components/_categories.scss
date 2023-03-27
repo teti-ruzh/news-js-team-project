@@ -4,11 +4,13 @@
 
     @media screen and (min-width: 320px) {
         gap: 16px;
-        margin-bottom: 40px;
+        padding-bottom: 40px;
+        padding-top: 24px;
     }
 
     @media screen and (min-width: 768px) {
-        margin-bottom: 60px;
+        padding-bottom: 60px;
+        padding-top: 28px;
     }
 }
 
@@ -51,6 +53,9 @@
 
     cursor: pointer;
 
+    transition: background-color .25s cubic-bezier(.4, 0, .2, 1);
+    
+
     @media screen and (min-width: 768px) {
         display: flex;
         gap: 10px;
@@ -77,7 +82,7 @@
 
     border-radius: 20px;
     background-color: $color-white;
-    transition: bottom 0.5s ease;
+    transition: background-color .25s cubic-bezier(.4, 0, .2, 1),bottom .25s cubic-bezier(.4, 0, .2, 1);
 }
 
 .category__overlay-tab {
@@ -100,17 +105,18 @@
     letter-spacing: 0.01em;
     cursor: pointer;
 
-    transition: text-decoration 0.5s ease-in-out;
+    transition: text-decoration .25s cubic-bezier(.4, 0, .2, 1);
 }
 
 .category__item:hover {
     text-decoration: underline $color-brand 0.5px;
-    transition: text-decoration 1s ease-in-out;
+    transition: text-decoration .25s cubic-bezier(.4, 0, .2, 1), bottom .25s cubic-bezier(.4, 0, .2, 1);
+    
 }
 
 .category__btn:hover .category__arrow-icon-down {
     fill: $color-white;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .category__list-rendering .category__item:hover {
@@ -123,27 +129,28 @@
     border-color: none;
     background-color: $color-brand;
     color: $color-white;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .category__btn:focus .category__arrow-icon-up,
 .category__btn:active .category__arrow-icon-up {
     display: block;
     fill: $color-white;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .category__btn:focus .category__arrow-icon-down,
 .category__btn:active .category__arrow-icon-down {
     display: none;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .category__arrow-icon-up {
     display: none;
+    transition: fill .25s cubic-bezier(.4, 0, .2, 1);
 }
 
 .category__arrow-icon-down {
     fill: $color-brand;
+    transition: fill .25s cubic-bezier(.4, 0, .2, 1);
 }
