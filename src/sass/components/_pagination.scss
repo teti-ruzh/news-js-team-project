@@ -29,6 +29,7 @@
 .page-pagination__list {
   display: flex;
   align-items: center;
+  justify-content: space-around;
   flex-wrap: wrap;
   gap: 8px;
 }
@@ -44,6 +45,7 @@
   font-size: 14px;
   line-height: 1.36;
 
+  color: $color-black;
   background-color: $color-white-2;
   border: 1px solid $color-brand;
   border-radius: 2px;
@@ -91,4 +93,8 @@
     border-color: $color-grey;
     cursor: no-drop;
   }
+}
+
+.hidden {
+  display: none;
 }
