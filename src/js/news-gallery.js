@@ -13,6 +13,7 @@ const image = new URL('../images/gallery/plugFoto.jpg', import.meta.url);
 const svgA = new URL('../images/icons.svg', import.meta.url);
 const svgB = 'icon-Vector';
 const svgC = 'icon-icons8--1';
+let foto = '';
 
 //=========================================================================================================================================
 // Відображення популярних статей. Загальна кільксть статей 20шт
