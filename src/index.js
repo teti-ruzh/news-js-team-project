@@ -11,4 +11,5 @@ import './js/add-to-favourite';
 import './js/add-to-read';
 import './js/weather-service';
 import './js/scroll-button';
+import './js/error-image';
 import './js/pagination';
