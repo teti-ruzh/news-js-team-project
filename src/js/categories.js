@@ -54,7 +54,10 @@ function renderCategories(categories) {
         .then(response => response.json())
         .then(data => renderNews(data.results));
     });
-    refs.categoryOverlay.appendChild(categoryItem);
+    refs.categoryOverlay.insertAdjacentHTML(
+      'beforeend',
+      categoryItem.outerHTML
+    );
   });
 }
 
@@ -78,7 +81,7 @@ function renderTabCategories(categories) {
         .then(data => renderNews(data.results));
     });
 
-    refs.categoryList.appendChild(categoryItem);
+    refs.categoryList.insertAdjacentHTML('beforeend', categoryItem.outerHTML);
   });
 
   remainingCategories.forEach(category => {
@@ -92,7 +95,10 @@ function renderTabCategories(categories) {
         .then(response => response.json())
         .then(data => renderNews(data.results));
     });
-    refs.categoryTabletOverlay.appendChild(categoryItem);
+    refs.categoryTabletOverlay.insertAdjacentHTML(
+      'beforeend',
+      categoryItem.outerHTML
+    );
   });
 }
 
@@ -116,7 +122,7 @@ function renderDeskCategories(categories) {
         .then(data => renderNews(data.results));
     });
 
-    refs.categoryList.appendChild(categoryItem);
+    refs.categoryList.insertAdjacentHTML('beforeend', categoryItem.outerHTML);
   });
 
   remainingCategories.forEach(category => {
@@ -130,7 +136,10 @@ function renderDeskCategories(categories) {
         .then(response => response.json())
         .then(data => renderNews(data.results));
     });
-    refs.categoryTabletOverlay.appendChild(categoryItem);
+    refs.categoryTabletOverlay.insertAdjacentHTML(
+      'beforeend',
+      categoryItem.outerHTML
+    );
   });
 }
 
