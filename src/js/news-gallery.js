@@ -15,9 +15,9 @@ const svgB = 'icon-Vector';
 const svgC = 'icon-icons8--1';
 let foto = '';
 
-
 // Відображення сторінки помилки
 const errorImage = document.querySelector('.errorImage');
+const paginationEl = document.querySelector('.page-pagination');
 //============================================================================
 
 //=========================================================================================================================================
@@ -84,6 +84,9 @@ function onSearch(event) {
 
   // Додавання класу щоб прибрати відображення сторінки помилки
   errorImage.classList.add('visually-hidden');
+
+  // При повторному пошуку відновлення видимості пагінатора
+  paginationEl.classList.remove('hidden');
   //============================================================================
 }
 
@@ -98,9 +101,12 @@ async function fetchArticleSearch() {
     );
 
     const dataNews = await response.json();
-// перевірка на пустий масив і прибирання класу щоб сторінка помилки відобразилась
+    // перевірка на пустий масив і прибирання класу щоб сторінка помилки відобразилась
     if (dataNews.response.docs.length === 0) {
       errorImage.classList.remove('visually-hidden');
+
+      // видалення пагінатора при помилці на сторінці
+      paginationEl.classList.add('hidden');
 
       return;
     }
@@ -172,6 +178,7 @@ function onSearchSection(event) {
 
   fetchArticleSearchSection();
   errorImage.classList.add('visually-hidden');
+  paginationEl.classList.remove('hidden');
 }
 
 async function fetchArticleSearchSection() {
@@ -183,6 +190,7 @@ async function fetchArticleSearchSection() {
     const dataNews = await response.json();
     if (dataNews.response.docs.length === 0) {
       errorImage.classList.remove('visually-hidden');
+      paginationEl.classList.add('hidden');
       return;
     }
 
