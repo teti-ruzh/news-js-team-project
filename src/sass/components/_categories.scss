@@ -114,40 +114,24 @@
     
 }
 
-.category__btn:hover .category__arrow-icon-down {
-    fill: $color-white;
-    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 .category__list-rendering .category__item:hover {
     text-decoration: none;
 }
 
-.category__btn:focus,
-.category__btn:hover,
-.category__btn:active {
-    border-color: none;
+.category__btn-active,
+.category__btn:hover {
     background-color: $color-brand;
     color: $color-white;
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.category__btn:focus .category__arrow-icon-up,
-.category__btn:active .category__arrow-icon-up {
+.category__btn:hover .category__arrow-icon-down, .category__icon {
     display: block;
     fill: $color-white;
     transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.category__btn:focus .category__arrow-icon-down,
-.category__btn:active .category__arrow-icon-down {
-    display: none;
-    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.category__arrow-icon-up {
-    display: none;
-    transition: fill .25s cubic-bezier(.4, 0, .2, 1);
+.category__icon {
+    transform: rotate(180deg);
 }
 
 .category__arrow-icon-down {
