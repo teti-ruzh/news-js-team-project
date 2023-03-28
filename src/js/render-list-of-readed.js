@@ -5,6 +5,8 @@ const refs = {
   readNewsGallery: document.querySelector('.news-gallery'),
 };
 
+const svgPath = new URL('../images/icons.svg', import.meta.url);
+const svgName = 'icon-arrow-down';
 const readedNewsArray = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
 updateReadGalleryUI();
@@ -28,12 +30,10 @@ function renderReadedGallery() {
     );
     const cardMarkup = DatedNews.map(news => renderReadNewsCard(news)).join('');
 
-    // const svgPath = new URL('../images/icons.svg', import.meta.url);
-    // const svgName = 'icon-arrow-down';
-
     containerMarkup += `<div class="read-news__list">
       <button class="read-news__btn js-read-news-btn">
         <span>${sortedReadDates[i]}</span>
+        <svg><use href="${svgPath}#${svgName}" width="14" height="14"></use></svg>
       </button>
       <ul class="news__list">
       ${cardMarkup}
@@ -80,8 +80,5 @@ function onReadNewsBtnClick({ currentTarget }) {
 }
 
 addEventHandlers();
-
-
-
 
 // {/* <svg><use href="${svgPath}#${svgName}"></use></svg> */}
