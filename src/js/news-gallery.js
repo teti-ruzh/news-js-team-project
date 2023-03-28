@@ -50,23 +50,30 @@ function cleanNewsGallery() {
   newsList.innerHTML = '';
 }
 
+// Відображення сторінки помилки
+const errorImage = document.querySelector('.errorImage');
+const paginationEl = document.querySelector('.page-pagination');
+//============================================================================
+
 //=========================================================================================================================================
 // Відображення популярних статей. Загальна кільксть статей 20шт
-fetchMostpopularData();
+// fetchMostpopularData();
 
 async function fetchMostpopularData() {
   try {
     const response = await fetch(`${URL_MOST_POPULAR}?api-key=${API_KEY}`);
 
     const dataNews = await response.json();
+    return dataNews.results;
 
-    renderNews(dataNews.results);
+    // renderNews(dataNews.results);
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
   }
 }
 
-export function renderNews(newsArray) {
+
+function renderNews(newsArray) {
   containerRenderNewsCardMarkup(newsArray);
 
   function containerRenderNewsCardMarkup(newsArray) {
@@ -136,6 +143,17 @@ function onSearch(event) {
 
   fetchArticleSearch();
   localStorage.setItem('selectedDate', '');
+
+  // Додавання класу щоб прибрати відображення сторінки помилки
+  errorImage.classList.add('visually-hidden');
+
+  // При повторному пошуку відновлення видимості пагінатора
+  paginationEl.classList.remove('hidden');
+  //============================================================================
+}
+
+function cleanNewsGallery() {
+  newsList.innerHTML = '';
 }
 
 async function fetchArticleSearch() {
@@ -166,7 +184,16 @@ async function fetchArticleSearch() {
     const response = await fetch(`${URL_ARTICLE_SEARCH}?` + params.toString());
 
     const dataNews = await response.json();
+    // перевірка на пустий масив і прибирання класу щоб сторінка помилки відобразилась
+    if (dataNews.response.docs.length === 0) {
+      errorImage.classList.remove('visually-hidden');
 
+      // видалення пагінатора при помилці на сторінці
+      paginationEl.classList.add('hidden');
+
+      return;
+    }
+    //============================================================================
     renderNewsSearch(dataNews.response.docs);
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
@@ -232,6 +259,8 @@ function onSearchSection(event) {
 
   fetchArticleSearchSection();
   localStorage.setItem('selectedDate', '');
+  errorImage.classList.add('visually-hidden');
+  paginationEl.classList.remove('hidden');
 }
 
 async function fetchArticleSearchSection() {
@@ -261,6 +290,14 @@ async function fetchArticleSearchSection() {
     const response = await fetch(`${URL_ARTICLE_SEARCH}?` + params.toString());
 
     const dataNews = await response.json();
+
+    if (dataNews.response.docs.length === 0) {
+      errorImage.classList.remove('visually-hidden');
+      paginationEl.classList.add('hidden');
+      return;
+    }
+
+    console.log(dataNews.response.docs);
 
     renderNewsSearch(dataNews.response.docs);
   } catch (error) {
@@ -310,3 +347,8 @@ function addWeatherWidget() {
   }
   newsList.insertBefore(weatherBlock, newsList.children[index]);
 }
+
+//================================================================================================================
+//Фільтер популярних новин по даті
+
+export { fetchMostpopularData, renderNews };
