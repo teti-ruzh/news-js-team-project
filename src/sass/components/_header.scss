@@ -1,7 +1,6 @@
 .header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin-bottom: 28px;
-
+ 
   &__container {
     padding-top: 24px;
     padding-bottom: 24px;
@@ -93,6 +92,7 @@
     text-transform: capitalize;
     color: inherit;
     cursor: pointer;
+   
     @media screen and (max-width: 400px) {
       display: none;
     }
