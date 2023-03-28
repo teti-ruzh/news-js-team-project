@@ -1,6 +1,23 @@
 <div class="errorImage visually-hidden">
     <p class="error__text">We haven’t found news from this category</p>
-
+    <picture>
+        <source srcset="
+              ./images/image-1280.jpg 1x,
+              ./images/image-1280@2x.jpg 2x
+            " media="(min-width: 1280px)" />
+        <source srcset="
+              ./images/image-768.jpg 1x,
+              ./images/image-768@2x.jpg 2x
+            " media="(min-width: 768px)" />
+        <source srcset="
+              ./images/image-320.jpg 1x,
+              ./images/image-320@2x.jpg 2x
+            " media="(max-width: 767px)" />
+        <img src="./images/image-1280.jpg" alt="photo" class="error_img" loading="lazy" />
+    </picture>
+</div>
+<div class="errorImageRead visually-hidden">
+    <p class="error__text">"You have no read news yet"</p>
     <picture>
         <source srcset="
               ./images/image-1280.jpg 1x,
