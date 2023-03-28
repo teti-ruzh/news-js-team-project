@@ -1,6 +1,7 @@
 import throttle from 'lodash.throttle';
 
 import { ApiCategory } from './news-fetch-service';
+import { onSearchSection } from './news-gallery';
 
 const refs = {
   categoryOverlay: document.querySelector('.category__overlay'),
@@ -18,6 +19,7 @@ const refs = {
 };
 
 let categories = [];
+let checkedCategory = '';
 
 const newApiCategory = new ApiCategory();
 
@@ -147,10 +149,28 @@ function overlayIsShown() {
   return;
 }
 
-function categoryIsChecked() {
-  refs.categoryItem.classList.add('category__item-active');
-}
+refs.categoryList.addEventListener('click', event => {
+  if (event.target.nodeName === 'LI') {
+    checkedCategory = event.target.textContent;
+    console.log(checkedCategory);
+    // onSearchSection(event);
+  }
+});
 
-refs.categoryItem.forEach(item => {
-  item.addEventListener('click', categoryIsChecked);
+refs.categoryOverlay.addEventListener('click', event => {
+  if (event.target.nodeName === 'LI') {
+    checkedCategory = event.target.textContent;
+    console.log(checkedCategory);
+    event.target.classList.add('category__item-active');
+    // onSearchSection(event);
+  }
+});
+
+refs.categoryTabletOverlay.addEventListener('click', event => {
+  if (event.target.nodeName === 'LI') {
+    checkedCategory = event.target.textContent;
+    console.log(checkedCategory);
+    event.target.classList.add('category__item-active');
+    // onSearchSection(event);
+  }
 });
