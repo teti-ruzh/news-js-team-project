@@ -17,7 +17,7 @@ function onReadMoreBtnClick(event) {
     const title = newsItem.querySelector('.news__title').textContent;
     const section = newsItem.querySelector('.news__category-text').textContent;
     const foto = newsItem.querySelector('.news__foto').getAttribute('src');
-    const abstruct = newsItem.querySelector('.news__abstruct').textContent;
+    const abstract = newsItem.querySelector('.news__abstruct').textContent;
     const publishDate = newsItem.querySelector('.news__data').textContent;
     const url = newsItem.querySelector('.news__link').getAttribute('href');
 
@@ -34,9 +34,8 @@ function onReadMoreBtnClick(event) {
     // newsObj.card = `${newsItem}`;
     
 
-    const newsObj = { url, foto, section, title, abstruct, publishDate, clickID, date };
+    const newsObj = { url, foto, section, title, abstract, publishDate, clickID, date };
 
-    console.log(newsObj);
     readedNewsData.push(newsObj);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(readedNewsData));
   }
