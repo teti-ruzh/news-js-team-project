@@ -1,11 +1,13 @@
 // current page
 const headerItemEls = document.querySelectorAll('.header__item');
+const homePage = document.querySelector('#home-page');
 const currentUrl = window.location.href;
 
 headerItemEls.forEach(page => {
   let currentPage = page.href;
   if (currentPage === currentUrl) {
     page.classList.add('current-page');
+    homePage.classList.remove('current');
   }
   return;
 });
