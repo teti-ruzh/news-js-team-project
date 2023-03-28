@@ -72,7 +72,6 @@ async function fetchMostpopularData() {
   }
 }
 
-
 function renderNews(newsArray) {
   containerRenderNewsCardMarkup(newsArray);
 
@@ -242,20 +241,21 @@ function renderNewsSearch(newsArray) {
 // 2023-27-03
 // Відображення статей за КАТЕГОРІЯМИ у хедері
 
-const gallerySections = document.querySelector('.gallery__sections');
-
+const gallerySections = document.querySelector('.container.category__section');
+console.log(gallerySections);
 let querySection = '';
 
 gallerySections.addEventListener('click', onSearchSection);
 
 function onSearchSection(event) {
-  // if (event.target.nodeName !== 'BUTTON') {
-  //   return;
-  // }
+  if (event.target.nodeName !== 'LI') {
+    return;
+  }
 
   cleanNewsGallery();
 
-  querySection = event.target.textContent;
+  querySection = event.target.textContent.toLowerCase();
+  console.log(querySection);
 
   fetchArticleSearchSection();
   localStorage.setItem('selectedDate', '');
