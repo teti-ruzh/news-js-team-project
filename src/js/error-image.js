@@ -1,8 +1,6 @@
 
 // import { renderFavourite } from './favourite.js';
 
-
-
 const errorImage = document.querySelector(".errorImage");
 const search = document.querySelector(".search");
 const searchInput = document.querySelector(".search__input");

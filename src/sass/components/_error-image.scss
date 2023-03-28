@@ -44,3 +44,50 @@
         width: 600px;
     }
 }
+
+.errorImageRead {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.35;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0 20px;
+    padding-bottom: 59px;
+
+    max-width: 480px;
+
+    @media screen and (min-width: 768px) {
+        max-width: 768px;
+        font-size: 40px;
+        line-height: 1.375;
+        padding: 0 104px;
+        padding-bottom: 101px;
+        padding-top: 40px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        max-width: 1280px;
+        padding: 0 340px;
+        padding-top: 60px;
+        padding-bottom: 226px;
+    }
+}
+
+.errorImageRead picture {
+    display: flex;
+    justify-content: center;
+}
+
+.errorImageRead p {
+    width: 280px;
+    margin-bottom: 40px;
+
+    @media screen and (min-width: 768px) {
+        width: 600px;
+    }
+}
