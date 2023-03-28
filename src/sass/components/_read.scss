@@ -30,14 +30,14 @@
     padding-right: 0;
     padding-bottom: 12px;
 
-    margin-bottom: 28px;
+    margin-top: 40px;
     
     @include tablet-up {
-        margin-bottom: 30px;
+        margin-top: 48px;
     }
 
     @include desktop-up {
-        margin-bottom: 40px;   
+        margin-top: 60px;   
     }
    
     display: flex;

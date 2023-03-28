@@ -15,5 +15,9 @@
 @include desktop-up {
     width: 1280px;
 }
+
+&--fixed {
+    min-height: 1200px;
+}
 }
 
