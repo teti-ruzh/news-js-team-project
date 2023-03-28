@@ -22,6 +22,9 @@
   }
   .categories__icon {
     fill: #a2a2a2;
+    @media screen and (max-width: 767px){
+    display: none;
+  }
   }
 
   .icon-arrov__color{
@@ -37,7 +40,7 @@
     background-color: inherit;
     text-align: center;
     padding: 5px 12px;
-    border: 1 solid;
+    border: 1px solid #111321;
     border-radius: 20px;
     cursor: pointer;
   
@@ -57,8 +60,10 @@
     & .calendar__icon {
       fill: $color-brand-2;
     }
-    @media screen and (max-width: 420px){
+    @media screen and (max-width: 767px){
         width: 100%;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
     @media screen and (min-width: 768px) {
       width: 168px;
@@ -81,6 +86,12 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 1.75;
+    @media screen and (max-width: 767px){
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-right: 0;
+      padding-left: 5px;
+  }
   
     @media screen and (min-width: 768px) {
       font-size: 14px;

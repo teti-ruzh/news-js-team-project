@@ -8,9 +8,6 @@
     align-items: center;
     flex-wrap: nowrap;
 
-    @media screen and (min-width: 480px) {
-      min-width: 480px;
-    }
     @media screen and (min-width: 768px) {
       align-items: center;
       min-width: 768px;
@@ -238,6 +235,16 @@
   position: relative;
 }
 .header__nav .current-page::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  left: 0;
+  bottom: -5px;
+  background: $color-brand-line;
+  border-radius: 2px;
+}
+.current::after {
   content: '';
   position: absolute;
   width: 100%;

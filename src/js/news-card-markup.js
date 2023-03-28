@@ -1,4 +1,4 @@
-export default function newsCardMarkup( 
+export default function newsCardMarkup(
   url,
   foto,
   section,
@@ -9,7 +9,7 @@ export default function newsCardMarkup(
   svgB,
   svgC
 ) {
-  return `<li class="news__item" >
+  return `<li class="news__item">
   <div class="news__images-container">
     <a class="news__link" target="_blank" href="${url}"
       ><img class="news__foto" src="${foto}" alt=""
@@ -72,10 +72,10 @@ function renderNewDateFormat(publish_date) {
   let date = new Date(publish_date);
 
   return `${addLeadingZero(date.getDate())}/${addLeadingZero(
-    date.getMonth()
+    date.getMonth() + 1
   )}/${date.getFullYear()}`;
-}
 
-function addLeadingZero(value) {
-  return String(value).padStart(2, '0');
+  function addLeadingZero(value) {
+    return String(value).padStart(2, '0');
+  }
 }
