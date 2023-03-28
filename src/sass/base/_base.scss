@@ -49,3 +49,17 @@ a {
   clip-path: inset(50%);
   margin: -1px;
 }
+
+footer {
+  position: relative;
+}
+
+.created-by {
+  color: $color-white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
+
