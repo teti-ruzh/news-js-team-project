@@ -57,8 +57,10 @@
     & .calendar__icon {
       fill: $color-brand-2;
     }
-    @media screen and (max-width: 420px){
+    @media screen and (max-width: 767px){
         width: 100%;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
     @media screen and (min-width: 768px) {
       width: 168px;
@@ -81,6 +83,12 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 1.75;
+    @media screen and (max-width: 767px){
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-right: 0;
+      padding-left: 0;
+  }
   
     @media screen and (min-width: 768px) {
       font-size: 14px;
