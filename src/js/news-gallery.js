@@ -152,9 +152,9 @@ function onSearch(event) {
   //============================================================================
 }
 
-function cleanNewsGallery() {
-  newsList.innerHTML = '';
-}
+// function cleanNewsGallery() {
+//   newsList.innerHTML = '';
+// }
 
 async function fetchArticleSearch() {
   try {

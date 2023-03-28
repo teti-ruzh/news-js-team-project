@@ -1,5 +1,4 @@
 export default function newsCardMarkup(
-  id,
   url,
   foto,
   section,
@@ -10,7 +9,7 @@ export default function newsCardMarkup(
   svgB,
   svgC
 ) {
-  return `<li class="news__item" data-id =${id}>
+  return `<li class="news__item">
   <div class="news__images-container">
     <a class="news__link" target="_blank" href="${url}"
       ><img class="news__foto" src="${foto}" alt=""
