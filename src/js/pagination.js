@@ -14,6 +14,7 @@ const valuePage = {
   totalPages: 0,
 };
 
+// пагінація по популярних новинах
 fetchMostpopularData().then(news => {
   if (window.matchMedia('(max-width: 767px)').matches) {
     newsPerPage = 4;
@@ -23,10 +24,7 @@ fetchMostpopularData().then(news => {
     newsPerPage = 7;
   }
 
-  // valuePage.totalPages = Math.ceil(news.length / newsPerPage);
-
-  // для наглядного приклладу, щоб розібратися із шириною пагінатора в мобілці
-  valuePage.totalPages = Math.ceil(100 / newsPerPage);
+  valuePage.totalPages = Math.ceil(news.length / newsPerPage);
 
   if (valuePage.totalPages === 0) {
     pagePaginationEl.classList.add('hidden');
@@ -54,7 +52,7 @@ fetchMostpopularData().then(news => {
       pagination(valuePage);
       handleButtonLeft();
       handleButtonRight();
-      // smoothScrollUp();
+      smoothScrollUp();
       displayList(news, newsPerPage, valuePage.curPage);
     }
   });
@@ -63,57 +61,104 @@ fetchMostpopularData().then(news => {
   function pagination() {
     const { totalPages, curPage, numLinksTwoSide: delta } = valuePage;
 
-    const range = delta + 4; // use for handle visible number of links left side
-
+    let range = 0;
     let render = '';
     let renderTwoSide = '';
     let dot = `<li class="page-pagination__dots">...</li>`;
     let countTruncate = 0; // use for ellipsis - truncate left side or right side
-
-    // use for truncate two side
-    const numberTruncateLeft = curPage - delta;
-    const numberTruncateRight = curPage + delta;
-
     let active = '';
-    for (let pos = 1; pos <= totalPages; pos++) {
-      active = pos === curPage ? 'active' : '';
 
-      // truncate
-      if (totalPages >= 2 * range - 1) {
-        if (
-          numberTruncateLeft > 3 &&
-          numberTruncateRight < totalPages - 3 + 1
-        ) {
-          // truncate 2 side
-          if (pos >= numberTruncateLeft && pos <= numberTruncateRight) {
-            renderTwoSide += renderPage(pos, active);
-          }
-        } else {
-          // truncate left side or right side
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      range = delta + 1; // use for handle visible number of links left side
+
+      // use for truncate two side
+      const numberTruncateLeft = curPage - delta;
+      const numberTruncateRight = curPage + delta;
+
+      for (let pos = 1; pos <= totalPages; pos++) {
+        active = pos === curPage ? 'active' : '';
+
+        // truncate
+        if (totalPages >= 1 * range - 1) {
           if (
-            (curPage < range && pos <= range) ||
-            (curPage > totalPages - range && pos >= totalPages - range + 1) ||
-            pos === totalPages ||
-            pos === 1
+            numberTruncateLeft > 0 &&
+            numberTruncateRight < totalPages - 1 + 1
           ) {
-            render += renderPage(pos, active);
+            // truncate 2 side
+            if (pos > numberTruncateLeft && pos < numberTruncateRight) {
+              renderTwoSide += renderPage(pos, active);
+            }
           } else {
-            countTruncate += 1;
-            if (countTruncate === 1) render += dot;
+            // truncate left side or right side
+            if (
+              (curPage < range && pos <= range) ||
+              (curPage > totalPages - range && pos >= totalPages - range + 1) ||
+              pos === totalPages ||
+              pos === 1
+            ) {
+              render += renderPage(pos, active);
+            } else {
+              countTruncate += 1;
+              if (countTruncate === 1) render += dot;
+            }
           }
         }
-      } else {
-        // not truncate
-        render += renderPage(pos, active);
       }
-    }
 
-    if (renderTwoSide) {
-      renderTwoSide =
-        renderPage(1) + dot + renderTwoSide + dot + renderPage(totalPages);
-      listPaginationEl.innerHTML = renderTwoSide;
-    } else {
-      listPaginationEl.innerHTML = render;
+      if (renderTwoSide) {
+        renderTwoSide =
+          renderPage(1) + dot + renderTwoSide + dot + renderPage(totalPages);
+        listPaginationEl.innerHTML = renderTwoSide;
+      } else {
+        listPaginationEl.innerHTML = render;
+      }
+    } else if (window.matchMedia('(min-width: 768px)').matches) {
+      range = delta + 4; // use for handle visible number of links left side
+
+      // use for truncate two side
+      const numberTruncateLeft = curPage - delta;
+      const numberTruncateRight = curPage + delta;
+
+      for (let pos = 1; pos <= totalPages; pos++) {
+        active = pos === curPage ? 'active' : '';
+
+        // truncate
+        if (totalPages >= 2 * range - 1) {
+          if (
+            numberTruncateLeft > 3 &&
+            numberTruncateRight < totalPages - 3 + 1
+          ) {
+            // truncate 2 side
+            if (pos >= numberTruncateLeft && pos <= numberTruncateRight) {
+              renderTwoSide += renderPage(pos, active);
+            }
+          } else {
+            // truncate left side or right side
+            if (
+              (curPage < range && pos <= range) ||
+              (curPage > totalPages - range && pos >= totalPages - range + 1) ||
+              pos === totalPages ||
+              pos === 1
+            ) {
+              render += renderPage(pos, active);
+            } else {
+              countTruncate += 1;
+              if (countTruncate === 1) render += dot;
+            }
+          }
+        } else {
+          // not truncate
+          render += renderPage(pos, active);
+        }
+      }
+
+      if (renderTwoSide) {
+        renderTwoSide =
+          renderPage(1) + dot + renderTwoSide + dot + renderPage(totalPages);
+        listPaginationEl.innerHTML = renderTwoSide;
+      } else {
+        listPaginationEl.innerHTML = render;
+      }
     }
   }
 
@@ -136,7 +181,7 @@ fetchMostpopularData().then(news => {
       btnPrevPg.disabled = false;
     }
 
-    // smoothScrollUp();
+    smoothScrollUp();
     displayList(news, newsPerPage, valuePage.curPage);
   }
 
