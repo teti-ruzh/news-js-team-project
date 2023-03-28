@@ -7,18 +7,18 @@ const refs = {
 refs.homeNewsList.addEventListener('click', onReadMoreBtnClick);
 let readedNewsData = [];
 
- populateNewsData();
-
+populateNewsData();
 
 function onReadMoreBtnClick(event) {
-  
-    const readMoreBtn = event.target.closest('.news__link');
+  const readMoreBtn = event.target.closest('.news__link');
   if (readMoreBtn) {
     const newsItem = readMoreBtn.closest('.news__item').outerHTML;
     const clickDate = new Date();
-    const date = `${clickDate.getDate()}/${clickDate.getMonth()}/${clickDate.getFullYear()}`
-      clickDate.getFullYear();
-      let newsObj = {};
+    const day = clickDate.getDate().toString().padStart(2,'0');
+    const month = (clickDate.getMonth()+1).toString().padStart(2,'0');
+    const date = `${day}/${month}/${clickDate.getFullYear()}`;
+    clickDate.getFullYear();
+    let newsObj = {};
     newsObj.id = clickDate.getTime();
     newsObj.date = date;
     newsObj.card = `${newsItem}`;
@@ -27,13 +27,11 @@ function onReadMoreBtnClick(event) {
   }
 }
 
-
 function populateNewsData() {
   const savedNewsData = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  if(!savedNewsData) {
+  if (!savedNewsData) {
     readedNewsData = [];
-} else {readedNewsData = JSON.parse(localStorage.getItem(STORAGE_KEY))};
+  } else {
+    readedNewsData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  }
 }
-
-
-

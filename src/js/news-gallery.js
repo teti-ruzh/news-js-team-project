@@ -1,4 +1,6 @@
 import { weatherBlock } from './weather-service';
+import newsCardMarkup from './news-card-markup';
+
 const API_KEY = 'RHHupiQoPYaFAPG2zSM05OivdA2ggJN2';
 const URL_MOST_POPULAR =
   'https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json';
@@ -7,26 +9,35 @@ const URL_ARTICLE_SEARCH =
 
 const newsList = document.querySelector('.news__list');
 
-fetchMostpopularData();
+const image = new URL('../images/gallery/plugFoto.jpg', import.meta.url);
+const svgA = new URL('../images/icons.svg', import.meta.url);
+const svgB = 'icon-Vector';
+const svgC = 'icon-icons8--1';
+let foto = '';
+
+// Відображення сторінки помилки
+const errorImage = document.querySelector('.errorImage');
+const paginationEl = document.querySelector('.page-pagination');
+//============================================================================
+
+//=========================================================================================================================================
+// Відображення популярних статей. Загальна кільксть статей 20шт
+// fetchMostpopularData();
 
 async function fetchMostpopularData() {
   try {
     const response = await fetch(`${URL_MOST_POPULAR}?api-key=${API_KEY}`);
-    const dataNews = await response.json();
 
-    renderNews(dataNews.results);
+    const dataNews = await response.json();
+    return dataNews.results;
+
+    // renderNews(dataNews.results);
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
   }
 }
 
-export function renderNews(newsArray) {
-  let foto = '';
-  const image = new URL('../images/gallery/plugFoto.jpg', import.meta.url);
-  const svgA = new URL('../images/icons.svg', import.meta.url);
-  const svgB = 'icon-Vector';
-  const svgC = 'icon-icons8--1';
-
+function renderNews(newsArray) {
   const markup = newsArray
     .map(({ id, url, media, section, title, abstract, published_date }) => {
       if (!media.length) {
@@ -35,81 +46,23 @@ export function renderNews(newsArray) {
         foto = media[0]['media-metadata'][2].url;
       }
 
-      return `<li class="news__item" data-id =${id}>
-  <div class="news__images-container">
-    <a class="news__link" target="_blank" href="${url}"
-      ><img class="news__foto" src="${foto}" alt=""
-    /></a>
-
-    <div class="news__category">
-      <div class="news__category-text">${section}</div>
-    </div>
-
-    <div class="news__favorite">
-      <button class="news__favorite-button">
-        <span class="news-box-content">Add to favorite</span>
-        <svg class="news__favorite-icon" width="16" height="16">
-          <use href="${svgA}#${svgB}"></use>
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  <h2 class="news__title">${cutAbstractAddPoints(title, 45)}</h2>
-
-  <div class="box">
-    <p class="news__abstruct">${cutAbstractAddPoints(abstract, 130)}</p>
-
-    <div class="news-card--position">
-      <div class="news__data">${renderNewDateFormat(published_date)}</div>
-      <div class="news__read-more">
-        <a class="news__link" target="_blank" href="${url}">Read more</a>
-      </div>
-    </div>
-  </div>
-
-<div class="news-box--overlay">
-    <span class="news-box-text"> Already read
-    <svg class="news__favorite-icon" width="16" height="16">
-          <use href="${svgA}#${svgC}"></use>
-        </svg>
-    </span>
-  </div>
-</li>
-`;
+      return newsCardMarkup(
+        url,
+        foto,
+        section,
+        title,
+        abstract,
+        published_date,
+        svgA,
+        svgB,
+        svgC
+      );
     })
     .join('');
 
   newsList.insertAdjacentHTML('beforeend', markup);
 
   addWeatherWidget();
-}
-
-function cutAbstractAddPoints(abstract_news, maxLength) {
-  const threePoint = ['...'];
-
-  let abstractLength = abstract_news.split('').length;
-  if (abstractLength > maxLength) {
-    return abstract_news
-      .split('')
-      .slice(0, maxLength)
-      .concat(threePoint)
-      .join('');
-  } else {
-    return abstract_news;
-  }
-}
-
-function renderNewDateFormat(publish_date) {
-  let date = new Date(publish_date);
-
-  return `${addLeadingZero(date.getDate())}/${addLeadingZero(
-    date.getMonth()
-  )}/${date.getFullYear()}`;
-}
-
-function addLeadingZero(value) {
-  return String(value).padStart(2, '0');
 }
 
 //================================================================================================================
@@ -128,18 +81,119 @@ function onSearch(event) {
   query = inputSearch.value;
 
   fetchArticleSearch();
+
+  // Додавання класу щоб прибрати відображення сторінки помилки
+  errorImage.classList.add('visually-hidden');
+
+  // При повторному пошуку відновлення видимості пагінатора
+  paginationEl.classList.remove('hidden');
+  //============================================================================
+}
+
+function cleanNewsGallery() {
+  newsList.innerHTML = '';
 }
 
 async function fetchArticleSearch() {
   try {
-    const a = 5;
     const response = await fetch(
-      `${URL_ARTICLE_SEARCH}?q=${query}&api-key=${API_KEY}&page=${a}`
+      `${URL_ARTICLE_SEARCH}?q=${query}&api-key=${API_KEY}`
     );
-    const dataNews = await response.json();
 
-    console.log(dataNews);
-    console.log(dataNews.response);
+    const dataNews = await response.json();
+    // перевірка на пустий масив і прибирання класу щоб сторінка помилки відобразилась
+    if (dataNews.response.docs.length === 0) {
+      errorImage.classList.remove('visually-hidden');
+
+      // видалення пагінатора при помилці на сторінці
+      paginationEl.classList.add('hidden');
+
+      return;
+    }
+    //============================================================================
+    renderNewsSearch(dataNews.response.docs);
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error);
+  }
+}
+
+function renderNewsSearch(newsArray) {
+  const markup = newsArray
+    .map(elements => {
+      let {
+        web_url: url,
+        multimedia,
+        section_name: section,
+        headline,
+        abstract,
+        pub_date: published_date,
+      } = elements;
+
+      let title = headline.main;
+
+      if (!multimedia.length) {
+        foto = image;
+      } else {
+        // foto = image;
+        foto = `https://static01.nyt.com/${multimedia[0].url}`;
+      }
+
+      return newsCardMarkup(
+        url,
+        foto,
+        section,
+        title,
+        abstract,
+        published_date,
+        svgA,
+        svgB,
+        svgC
+      );
+    })
+    .join('');
+
+  newsList.insertAdjacentHTML('beforeend', markup);
+}
+
+//================================================================================================================
+// 2023-27-03
+// Відображення статей за КАТЕГОРІЯМИ у хедері
+
+const gallerySections = document.querySelector('.gallery__sections');
+
+let querySection = '';
+let querySectionPubDate = '2023-02-10';
+
+gallerySections.addEventListener('click', onSearchSection);
+
+function onSearchSection(event) {
+  if (event.target.nodeName !== 'BUTTON') {
+    return;
+  }
+
+  cleanNewsGallery();
+
+  querySection = event.target.textContent;
+  console.log(querySection);
+
+  fetchArticleSearchSection();
+  errorImage.classList.add('visually-hidden');
+  paginationEl.classList.remove('hidden');
+}
+
+async function fetchArticleSearchSection() {
+  try {
+    const response = await fetch(
+      `${URL_ARTICLE_SEARCH}?api-key=${API_KEY}&fq=section_name:${querySection} AND pub_date:${querySectionPubDate}`
+    );
+
+    const dataNews = await response.json();
+    if (dataNews.response.docs.length === 0) {
+      errorImage.classList.remove('visually-hidden');
+      paginationEl.classList.add('hidden');
+      return;
+    }
+
     console.log(dataNews.response.docs);
 
     renderNewsSearch(dataNews.response.docs);
@@ -148,83 +202,9 @@ async function fetchArticleSearch() {
   }
 }
 
-function renderNewsSearch(newsArray) {
-  let foto = '';
-  const image = new URL('../images/gallery/plugFoto.jpg', import.meta.url);
-  const svgA = new URL('../images/icons.svg', import.meta.url);
-  const svgB = 'icon-Vector';
-  const svgC = 'icon-icons8--1';
-
-  const markup = newsArray
-    .map(
-      ({
-        id,
-        web_url,
-        multimedia,
-        section_name,
-        headline,
-        abstract,
-        pub_date,
-      }) => {
-        if (!multimedia.length) {
-          foto = image;
-        } else {
-          // foto = image;
-          foto = `https://static01.nyt.com/${multimedia[0].url}`;
-        }
-
-        return `<li class="news__item" >
-  <div class="news__images-container">
-    <a class="news__link" target="_blank" href="${web_url}"
-      ><img class="news__foto" src="${foto}" alt=""
-    /></a>
-
-    <div class="news__category">
-      <div class="news__category-text">${section_name}</div>
-    </div>
-
-    <div class="news__favorite">
-      <button class="news__favorite-button">
-        <span class="news-box-content">Add to favorite</span>
-        <svg class="news__favorite-icon" width="16" height="16">
-          <use href="${svgA}#${svgB}"></use>
-        </svg>
-      </button>
-    </div>
-  </div>
-
-  <h2 class="news__title">${cutAbstractAddPoints(headline.main, 45)}</h2>
-
-  <div class="box">
-    <p class="news__abstruct">${cutAbstractAddPoints(abstract, 130)}</p>
-
-    <div class="news-card--position">
-      <div class="news__data">${renderNewDateFormat(pub_date)}</div>
-      <div class="news__read-more">
-        <a class="news__link" target="_blank" href="${web_url}">Read more</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="news-box--overlay">
-    <span class="news-box-text"> Already read
-    <svg class="news__favorite-icon" width="16" height="16">
-          <use href="${svgA}#${svgC}"></use>
-        </svg>
-</span>
-  </div>
-</li>
-`;
-      }
-    )
-    .join('');
-
-  newsList.insertAdjacentHTML('beforeend', markup);
-}
-
 //================================================================================================================
 // 2023-26-03
-// OVERLAY і функціонал кнопки add to favorite
+// OVERLAY і функціонал кнопки add to favorite (Назар)
 
 newsList.addEventListener('click', event => {
   const buttonFavoriteElement = event.target.closest('.news__favorite-button');
@@ -250,10 +230,7 @@ newsList.addEventListener('click', event => {
   }
 });
 
-function cleanNewsGallery() {
-  newsList.innerHTML = '';
-}
-
+//================================================================================================================
 // Додамо віджет погоди Олексія
 function addWeatherWidget() {
   const viewportWidth = window.innerWidth;
@@ -267,3 +244,7 @@ function addWeatherWidget() {
   }
   newsList.insertBefore(weatherBlock, newsList.children[index]);
 }
+//================================================================================================================
+//Фільтер популярних новин по даті
+
+export { fetchMostpopularData, renderNews };

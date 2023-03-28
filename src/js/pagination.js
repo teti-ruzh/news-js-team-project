@@ -1,131 +1,124 @@
-import { fetchApiPopular } from './news-fetch-service';
+import { fetchMostpopularData, renderNews } from './news-gallery';
 
-const pg = document.getElementById('pagination');
-const btnNextPg = document.querySelector('button.next-page');
-const btnPrevPg = document.querySelector('button.prev-page');
+const newsList = document.querySelector('.news__list');
+const listPaginationEl = document.querySelector('.page-pagination__list');
+const btnPrevPg = document.querySelector('button.page-pagination__prev-btn');
+const btnNextPg = document.querySelector('button.page-pagination__next-btn');
+const pagePaginationEl = document.querySelector('.page-pagination');
 
-let totalPages = 0;
-let curPage = 1;
+let currenPage = 1;
 let newsPerPage = 0;
-let numLinksTwoSide = 1;
 
-if (window.matchMedia('(max-width: 767px)').matches) {
-  newsPerPage = 4;
-} else if (window.matchMedia('(min-width: 1280px)').matches) {
-  newsPerPage = 8;
-} else if (window.matchMedia('(min-width: 768px)').matches) {
-  newsPerPage = 7;
-}
+fetchMostpopularData().then(news => {
+  if (window.matchMedia('(max-width: 767px)').matches) {
+    newsPerPage = 4;
+  } else if (window.matchMedia('(min-width: 1280px)').matches) {
+    newsPerPage = 8;
+  } else if (window.matchMedia('(min-width: 768px)').matches) {
+    newsPerPage = 7;
+  }
 
-fetchApiPopular().then(news => {
-  totalPages = Math.ceil(news.length / newsPerPage);
-  console.log('fetchApiPopular  totalPages:', totalPages);
+  const pagesCount = Math.ceil(news.length / newsPerPage);
 
-  pagination(totalPages, curPage, newsPerPage, numLinksTwoSide);
+  function displayList(arrData, newsPerPage, page) {
+    newsList.innerHTML = '';
+    page -= 1;
 
-  pg.addEventListener('click', e => {
-    const ele = e.target;
+    const start = newsPerPage * page;
+    const end = start + newsPerPage;
+    const paginedData = arrData.slice(start, end);
 
-    if (ele.dataset.page) {
-      const pageNumber = parseInt(e.target.dataset.page, 10);
+    renderNews(paginedData);
+  }
 
-      curPage = pageNumber;
-      pagination(totalPages, curPage, newsPerPage, numLinksTwoSide);
-      handleButtonLeft();
-      handleButtonRight();
+  function displayPagination(pagesCount) {
+    for (let i = 0; i < pagesCount; i += 1) {
+      const itemPaginationEl = displayPaginationPage(i + 1);
+      listPaginationEl.appendChild(itemPaginationEl);
     }
-  });
-});
+  }
 
-// DYNAMIC PAGINATION
-function pagination() {
-  const range = numLinksTwoSide + 4; // use for handle visible number of links left side
+  function displayPaginationPage(page) {
+    const itemPaginationEl = document.createElement('li');
+    itemPaginationEl.classList.add('page-pagination__item');
+    itemPaginationEl.innerText = page;
 
-  let render = '';
-  let renderTwoSide = '';
-  let dot = `<li class="pg-item"><a class="pg-link">...</a></li>`;
-  let countTruncate = 0; // use for ellipsis - truncate left side or right side
+    if (currenPage === page) {
+      itemPaginationEl.classList.add('page-pagination__item--active');
+    }
 
-  // use for truncate two side
-  const numberTruncateLeft = curPage - numLinksTwoSide;
-  const numberTruncateRight = curPage + numLinksTwoSide;
+    handleButtonLeft();
+    handleButtonRight();
 
-  let active = '';
-  for (let pos = 1; pos <= totalPages; pos++) {
-    active = pos === curPage ? 'active' : '';
+    itemPaginationEl.addEventListener('click', () => {
+      currenPage = page;
 
-    // truncate
-    if (totalPages >= 2 * range - 1) {
-      if (numberTruncateLeft > 3 && numberTruncateRight < totalPages - 3 + 1) {
-        // truncate 2 side
-        if (pos >= numberTruncateLeft && pos <= numberTruncateRight) {
-          renderTwoSide += renderPage(pos, active);
-        }
-      } else {
-        // truncate left side or right side
-        if (
-          (curPage < range && pos <= range) ||
-          (curPage > totalPages - range && pos >= totalPages - range + 1) ||
-          pos === totalPages ||
-          pos === 1
-        ) {
-          render += renderPage(pos, active);
-        } else {
-          countTruncate++;
-          if (countTruncate === 1) render += dot;
-        }
+      displayList(news, newsPerPage, currenPage);
+      smoothScrollUp();
+
+      let currentItemEl = document.querySelector(
+        'li.page-pagination__item--active'
+      );
+      currentItemEl.classList.remove('page-pagination__item--active');
+
+      itemPaginationEl.classList.add('page-pagination__item--active');
+
+      if (currenPage !== 1) {
+        btnPrevPg.disabled = false;
       }
-    } else {
-      // not truncate
-      render += renderPage(pos, active);
-    }
+      if (currenPage === pagesCount) {
+        btnNextPg.disabled = true;
+      }
+
+      if (currenPage === 1) {
+        btnPrevPg.disabled = true;
+      }
+      if (currenPage !== pagesCount) {
+        btnNextPg.disabled = false;
+      }
+    });
+    return itemPaginationEl;
   }
 
-  if (renderTwoSide) {
-    renderTwoSide =
-      renderPage(1) + dot + renderTwoSide + dot + renderPage(totalPages);
-    pg.innerHTML = renderTwoSide;
-  } else {
-    pg.innerHTML = render;
-  }
-}
-
-function renderPage(index, active = '') {
-  return ` <li class="pg-item ${active}" data-page="${index}">
-        <a class="pg-link" href="#">${index}</a>
-    </li>`;
-}
-
-document
-  .querySelector('.page-container')
-  .addEventListener('click', function (e) {
+  pagePaginationEl.addEventListener('click', function (e) {
     handleButton(e.target);
   });
 
-function handleButton(element) {
-  if (element.classList.contains('prev-page')) {
-    curPage -= 1;
-    handleButtonLeft();
-    btnNextPg.disabled = false;
-  } else if (element.classList.contains('next-page')) {
-    curPage += 1;
-    handleButtonRight();
-    btnPrevPg.disabled = false;
+  function handleButton(e) {
+    if (e.classList.contains('page-pagination__prev-btn')) {
+      currenPage -= 1;
+      handleButtonLeft();
+      btnNextPg.disabled = false;
+    } else if (e.classList.contains('page-pagination__next-btn')) {
+      currenPage += 1;
+      handleButtonRight();
+      btnPrevPg.disabled = false;
+    }
+    displayList(news, newsPerPage, currenPage);
   }
-  pagination();
-}
-function handleButtonLeft() {
-  if (curPage === 1) {
-    btnPrevPg.disabled = true;
-  } else {
-    btnPrevPg.disabled = false;
+
+  function handleButtonLeft() {
+    if (currenPage === 1) {
+      btnPrevPg.disabled = true;
+    } else {
+      btnPrevPg.disabled = false;
+    }
   }
-}
-function handleButtonRight() {
-  if (curPage === totalPages) {
-    console.log(curPage);
-    btnNextPg.disabled = true;
-  } else {
-    btnNextPg.disabled = false;
+  function handleButtonRight() {
+    if (currenPage === pagesCount) {
+      btnNextPg.disabled = true;
+    } else {
+      btnNextPg.disabled = false;
+    }
   }
+
+  displayList(news, newsPerPage, currenPage);
+  displayPagination(pagesCount);
+});
+
+function smoothScrollUp() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
 }
