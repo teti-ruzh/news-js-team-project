@@ -2,6 +2,7 @@ const STORAGE_KEY = 'add-read-more';
 
 const refs = {
   readNewsGallery: document.querySelector('.news-gallery'),
+  readErrorImage: document.querySelector('.errorImageRead')
 };
 
 const svgPath = new URL('../images/icons.svg', import.meta.url);
@@ -15,6 +16,7 @@ updateReadGalleryUI();
 function updateReadGalleryUI() {
   const markup = renderReadedGallery();
   refs.readNewsGallery.innerHTML = markup;
+  refs.readErrorImage.classList.add('visually-hidden');
 }
 
 function renderReadedGallery() {
