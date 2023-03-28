@@ -1,7 +1,6 @@
 import throttle from 'lodash.throttle';
 
 import { ApiCategory } from './news-fetch-service';
-import { onSearchSection } from './news-gallery';
 
 const refs = {
   categoryOverlay: document.querySelector('.category__overlay'),
@@ -153,7 +152,7 @@ refs.categoryList.addEventListener('click', event => {
   if (event.target.nodeName === 'LI') {
     checkedCategory = event.target.textContent;
     console.log(checkedCategory);
-    // onSearchSection(event);
+    // renderNews(event);
   }
 });
 
@@ -162,7 +161,7 @@ refs.categoryOverlay.addEventListener('click', event => {
     checkedCategory = event.target.textContent;
     console.log(checkedCategory);
     event.target.classList.add('category__item-active');
-    // onSearchSection(event);
+    // renderNews(event);
   }
 });
 
@@ -171,6 +170,6 @@ refs.categoryTabletOverlay.addEventListener('click', event => {
     checkedCategory = event.target.textContent;
     console.log(checkedCategory);
     event.target.classList.add('category__item-active');
-    // onSearchSection(event);
+    // renderNews(event);
   }
 });
