@@ -8,9 +8,6 @@
     align-items: center;
     flex-wrap: nowrap;
 
-    @media screen and (min-width: 480px) {
-      min-width: 480px;
-    }
     @media screen and (min-width: 768px) {
       align-items: center;
       min-width: 768px;
