@@ -29,6 +29,7 @@ function renderReadedGallery() {
     const cardMarkup = readedNewsArray.filter(
       news => news.date === sortedReadDates[i]
     )
+    // .sort((news[i].clickID, news[i+1].clickID) => {news[i+1].clickID - news[i].clickID})
     .map(news => readNewsCardMarkup(news)).join('');
 
 
