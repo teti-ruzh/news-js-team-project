@@ -10,12 +10,7 @@
   clip-path: inset(50%);
   margin: -1px;
 }
-$card-set-gap: 32px;
-p,
-h1,
-h2 {
-  margin: 0;
-}
+
 .favorite {
   @include mobile-up {
     width: 320px;
@@ -24,7 +19,7 @@ h2 {
     margin: 0 auto;
   }
 
-  background: $color-white-2;
+  background: inherit;
   @include tablet-up {
     padding: 48px 0 100px 0px;
     height: 2485px;
@@ -36,201 +31,32 @@ h2 {
     padding: 60px 0 300px 0px;
   }
 }
-.card {
-  @include mobile-up {
+
+.favourite__list {
+  @include tablet-up {
     display: flex;
     flex-wrap: wrap;
-  }
-  @include tablet-up {
-    margin-top: calc(-1 * 30px);
-    margin-left: calc(-1 * 30px);
-    display: flex;
-    flex-wrap: wrap;
-  }
-  @include desktop-up {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: calc(-1 * $card-set-gap);
-    margin-left: calc(-1 * $card-set-gap);
+    gap: 30px;
   }
 }
-
-.card__item {
-  @include mobile-up {
-    width: 288px;
-  }
-  @include tablet-up {
-    width: calc((100% / 2) - 30px);
-    margin-top: 30px;
-    margin-left: 30px;
-  }
-  @include desktop-up {
-    width: calc((100% / 3) - 32px);
-    margin-top: $card-set-gap;
-    margin-left: $card-set-gap;
-  }
-}
-.card__wrapper {
-  @include mobile-up {
-    margin-bottom: 28px;
-    width: 288px;
-    height: 630px;
-    display: block;
-    position: relative;
-  }
-
-  @include desktop-up {
-    position: relative;
-    margin-bottom: 10px;
-    width: 395px;
-  }
-  @include tablet-up {
-    position: relative;
-    width: 353px;
-    margin-bottom: 0;
-  }
-}
-.card__image {
-  @include mobile-up {
-    width: 288px;
-    height: 395px;
-    margin-bottom: 20px;
-  }
-  @include desktop-up {
-    width: 395px;
-    height: 395px;
-    margin-bottom: 20px;
-  }
-
-  @include tablet-up {
-    width: 353px;
-    height: 395px;
-  }
-}
-.card__status {
-  @include mobile-up {
-    display: none;
-    position: absolute;
-    width: 64px;
-    height: 19px;
-    left: 300px;
-    top: 16px;
-    font-family: 'Manrope';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.37;
-    color: $color-green-status;
-  }
-  @include tablet-up {
-    left: 268px;
-    top: 20px;
-    display: block;
-  }
-}
-.card__category {
-  @include mobile-up {
-    left: 0px;
-    top: 40px;
-    font-family: 'Manrope';
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.37;
-    width: 112px;
-    height: 24px;
-    border-radius: 0px 4px 4px 0px;
-  }
-  @include desktop-up {
-    width: 112px;
-    height: 24px;
-    left: 0px;
-    top: 40px;
-  }
-  @include tablet-up {
-    left: 0px;
-    top: 40px;
-  }
-  position: absolute;
-
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background-color: $color-brand-translucent;
-  color: $color-white-2;
-}
-
-.card__title {
-  @include mobile-up {
-    font-size: 24px;
-  }
-  color: $color-black;
-  font-family: 'Manrope';
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 1.37;
-  letter-spacing: -0.01em;
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
-
-.card__text {
-  @include mobile-up {
-    font-size: 14px;
-  }
-  color: $color-black;
-  font-family: 'Manrope';
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.38;
-  margin-bottom: 20px;
-}
-
-.card__button {
-  @include mobile-up {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 6px 12px;
-    gap: 4px;
-    position: absolute;
-    left: 112px;
-    top: 355px;
-    width: 168px;
-    height: 28px;
-    background: $color-white-2;
-    border-radius: 20px;
-    font-size: 12px;
-  }
-  @include tablet-up {
-    left: 173px;
-  }
-  @include desktop-up {
-    right: 9px;
-  }
-}
-.card__svg {
-  fill: rgba(75, 72, 218, 1);
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-}
-.card__details {
+.favorite__remove-button {
+  width: 168px;
+  height: 28px;
+  padding: 0;
   display: flex;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: space-between;
-}
-.card_date {
+
   font-family: 'Manrope';
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.375;
-  color: $color-grey;
-}
-.card__link {
-  font-family: 'Manrope';
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.375;
-  color: $color-brand;
-  display: block;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  background: #ffffff;
+  border-radius: 20px;
+  border: none;
   cursor: pointer;
-  margin-right: 26px;
+}
+.favorite__remove-icon {
+  fill: $color-brand-line;
 }

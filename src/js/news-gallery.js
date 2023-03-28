@@ -39,7 +39,7 @@ async function fetchMostpopularData() {
 
 function renderNews(newsArray) {
   const markup = newsArray
-    .map(({ url, media, section, title, abstract, published_date }) => {
+    .map(({ id, url, media, section, title, abstract, published_date }) => {
       if (!media.length) {
         foto = image;
       } else {
