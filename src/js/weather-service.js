@@ -2,21 +2,28 @@ export const weatherBlock = document.querySelector('#weather');
 
 const API_KEY = '0a142dd41db52da1a7f6b2fdf16ad4dd';
 
+//Функція запиту на сервер погоди//
+
 export async function loadWeather(lat, lon) {
+  showLoading();
   try {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
     console.log(data);
     if (response.ok) {
+      hideLoading();
       getWeatherData(data);
     } else {
       console.log(error);
     }
   } catch (error) {
     console.log(error);
+    hideLoading();
   }
 }
+
+// Функція отримання данних з відповіді від сервера погоди та розмітки цих двнних//
 
 function getWeatherData(data) {
   const weatherIcon = data.weather[0].icon;
@@ -71,6 +78,8 @@ function getWeatherData(data) {
   weatherBlock.innerHTML = template;
 }
 
+// Перевірка геолокації //
+
 if (weatherBlock) {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -81,7 +90,7 @@ if (weatherBlock) {
       },
       () => {
         console.log('Geolocation is not supported by this browser.');
-        // Нью-Йорк
+        // за замовчуванням геолокація Нью-Йорк
         const defaultLat = 40.7128;
         const defaultLon = -74.006;
         loadWeather(defaultLat, defaultLon);
@@ -89,9 +98,19 @@ if (weatherBlock) {
     );
   } else {
     console.log('Geolocation is not supported by this browser.');
-    // Нью-Йорк
+    // за замовчуванням геолокація Нью-Йорк
     const defaultLat = 40.7128;
     const defaultLon = -74.006;
     loadWeather(defaultLat, defaultLon);
   }
+}
+
+const loading = document.getElementById('loading');
+
+function showLoading() {
+  loading.style.display = 'block';
+}
+
+function hideLoading() {
+  loading.style.display = 'none';
 }
