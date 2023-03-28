@@ -28,6 +28,14 @@ function onReadMoreBtnClick(event) {
     const date = `${day}/${month}/${clickDate.getFullYear()}`;
     clickDate.getFullYear();
     
+    if (readedNewsData.length > 0) {
+      for (let i=0; i < readedNewsData.length; i+=1) {
+         if (readedNewsData[i].title === title) {
+          readedNewsData[i] = {};
+         };
+      };
+    };
+
     // let newsObj = {};
     // newsObj.id = clickDate.getTime();
     // newsObj.date = date;
