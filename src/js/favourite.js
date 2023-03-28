@@ -1,4 +1,6 @@
+
 const favouriteList = document.querySelector('.favourite__list');
+const errorImage = document.querySelector('.errorImage');
 
 const myData = JSON.parse(localStorage.getItem('favorite'));
 
@@ -49,6 +51,14 @@ function renderFavourite(myData) {
     .join('');
 
   favouriteList.innerHTML = markup;
+
+  // // перевіркана і додавання заглушки з текстом
+
+  if (myData.length === 0) {
+    errorImage.classList.remove('none');
+  } else {
+    errorImage.classList.add('none');
+  }
 }
 
 favouriteList.addEventListener('click', removeArticle);
@@ -63,5 +73,12 @@ function removeArticle(e) {
     const myData = JSON.parse(localStorage.getItem('favorite'));
     const newData = myData.filter(item => item.title !== title);
     localStorage.setItem('favorite', JSON.stringify(newData));
+
+  // // перевіркана і додавання заглушки з текстом
+
+    if (newData.length === 0) {
+      errorImage.classList.remove('none');
+    }
   }
 }
+
