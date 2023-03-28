@@ -18,6 +18,7 @@ const refs = {
 };
 
 let categories = [];
+let checkedCategory = '';
 
 const newApiCategory = new ApiCategory();
 
@@ -147,10 +148,28 @@ function overlayIsShown() {
   return;
 }
 
-function categoryIsChecked() {
-  refs.categoryItem.classList.add('category__item-active');
-}
+refs.categoryList.addEventListener('click', event => {
+  if (event.target.nodeName === 'LI') {
+    checkedCategory = event.target.textContent;
+    console.log(checkedCategory);
+    // renderNews(event);
+  }
+});
 
-refs.categoryItem.forEach(item => {
-  item.addEventListener('click', categoryIsChecked);
+refs.categoryOverlay.addEventListener('click', event => {
+  if (event.target.nodeName === 'LI') {
+    checkedCategory = event.target.textContent;
+    console.log(checkedCategory);
+    event.target.classList.add('category__item-active');
+    // renderNews(event);
+  }
+});
+
+refs.categoryTabletOverlay.addEventListener('click', event => {
+  if (event.target.nodeName === 'LI') {
+    checkedCategory = event.target.textContent;
+    console.log(checkedCategory);
+    event.target.classList.add('category__item-active');
+    // renderNews(event);
+  }
 });
