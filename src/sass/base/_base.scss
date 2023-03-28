@@ -55,11 +55,42 @@ footer {
 }
 
 .created-by {
-  color: $color-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: absolute;
   top: 50%;
   left: 50%;
+    
   margin-right: -50%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
+ 
+  color: $color-white;
+  font-size: 10px;
+
+  @include tablet-up {
+    font-size: 12px;
+  }
+
+  @include desktop-up {
+    font-size: 15px;
+  }
+}
+
+.created-by__icon {
+  width: 40px;
+  height: 25px;
+  fill: $color-white;
+
+  @include tablet-up {
+    width: 45px;
+    height: 30px;
+  }
+
+  @include desktop-up {
+    width: 55px;
+    height: 40px;
+  }
 }
 
