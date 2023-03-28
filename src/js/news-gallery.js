@@ -47,6 +47,7 @@ function renderNews(newsArray) {
       }
 
       return newsCardMarkup(
+        id,
         url,
         foto,
         section,
