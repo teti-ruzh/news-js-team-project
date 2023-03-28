@@ -1,6 +1,5 @@
 .header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin-bottom: 28px;
 
   &__container {
     padding-top: 24px;
@@ -85,6 +84,7 @@
     width: 173px;
     height: 31px;
     padding: 6px 12px 6px 48px;
+    border: 1px solid;
     border-radius: 20px;
     font-weight: 400;
     font-size: 14px;
@@ -103,15 +103,11 @@
     @media screen and (min-width: 1280px) {
       width: 288px;
     }
-    // &:hover,
-    // &:focus {
-    //   border-color: $color-black;
-    // }
   }
   &__input::placeholder {
     width: 59px;
     padding-left: 4px;
-    border-right: 2px solid rgba(17, 19, 33, 0.4);
+    border-right: 1px solid rgba(17, 19, 33, 0.4);
     @media screen and (min-width: 768px) {
       padding-left: 8px;
     }
