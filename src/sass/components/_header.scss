@@ -247,3 +247,13 @@
   background: $color-brand-line;
   border-radius: 2px;
 }
+.current::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  left: 0;
+  bottom: -5px;
+  background: $color-brand-line;
+  border-radius: 2px;
+}
