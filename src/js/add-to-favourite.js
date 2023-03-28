@@ -1,6 +1,8 @@
 const newsList = document.querySelector('.news__list');
-newsList.addEventListener('click', onAddButtonClick);
 let renderData = [];
+populateFavorite();
+newsList.addEventListener('click', onAddButtonClick);
+
 function onAddButtonClick(event) {
   if (event.target.closest('.news__favorite-button')) {
     const newsItem = event.target.closest('.news__item');
@@ -25,3 +27,13 @@ function onAddButtonClick(event) {
     localStorage.setItem('favorite', JSON.stringify(renderData));
   }
 }
+
+// Збереження локал сторедж при оновленні сторінки
+function populateFavorite() {
+  const savedFavData = JSON.parse(localStorage.getItem('favorite'));
+  if (!savedFavData) {
+    renderData = [];
+  } else {
+    renderData = JSON.parse(localStorage.getItem('favorite'));
+  }
+};
