@@ -17,7 +17,11 @@
 }
 
 &--fixed {
-    min-height: 1200px;
+    min-height: 450px;
+
+    @include tablet-up {
+        min-height: 700px;
+    }
 }
 }
 
