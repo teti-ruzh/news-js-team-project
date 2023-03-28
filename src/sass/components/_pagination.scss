@@ -64,9 +64,16 @@
   background-color: $color-brand;
 }
 
-.page-pagination__item--active {
+.page-pagination__item.active {
   color: $color-white-2;
   background-color: $color-brand;
+}
+
+.page-pagination__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-black;
 }
 
 .page-pagination__prev-btn,
@@ -88,8 +95,14 @@
     height: 31px;
   }
 
+  &:hover {
+    color: $color-white-2;
+    background-color: $color-brand;
+  }
+
   &:disabled {
     color: $color-grey;
+    background-color: $color-white-2;
     border-color: $color-grey;
     cursor: no-drop;
   }
