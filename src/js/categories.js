@@ -13,10 +13,12 @@ const refs = {
   categoryDesktopBtn: document.querySelector('#category-desktop-btn'),
   listenerMobile: document.querySelector('.category__mobile'),
   listenerTablet: document.querySelector('.category__tablet'),
-  categoryIcon: document.querySelector('.category__arrow-icon-down'),
+  categoryIcon: document.querySelectorAll('.category__arrow-icon-down'),
+  categoryItem: document.querySelectorAll('.category__item'),
 };
 
 let categories = [];
+let checkedCategory = '';
 
 const newApiCategory = new ApiCategory();
 
@@ -135,12 +137,39 @@ function overlayIsShown() {
     refs.categoryTabletOverlay.classList.remove('category__overlay-open');
     refs.categoryMobileBtn.classList.remove('category__btn-active');
     refs.categoryTabletBtn.classList.remove('category__btn-active');
-    refs.categoryIcon.classList.remove('.category__icon');
+    refs.categoryIcon.forEach(icon => icon.classList.remove('category__icon'));
   } else {
     refs.categoryOverlay.classList.add('category__overlay-open');
     refs.categoryTabletOverlay.classList.add('category__overlay-open');
     refs.categoryMobileBtn.classList.add('category__btn-active');
     refs.categoryTabletBtn.classList.add('category__btn-active');
-    refs.categoryIcon.classList.add('category__icon');
+    refs.categoryIcon.forEach(icon => icon.classList.add('category__icon'));
   }
+  return;
 }
+
+refs.categoryList.addEventListener('click', event => {
+  if (event.target.nodeName === 'LI') {
+    checkedCategory = event.target.textContent;
+    console.log(checkedCategory);
+    // renderNews(event);
+  }
+});
+
+refs.categoryOverlay.addEventListener('click', event => {
+  if (event.target.nodeName === 'LI') {
+    checkedCategory = event.target.textContent;
+    console.log(checkedCategory);
+    event.target.classList.add('category__item-active');
+    // renderNews(event);
+  }
+});
+
+refs.categoryTabletOverlay.addEventListener('click', event => {
+  if (event.target.nodeName === 'LI') {
+    checkedCategory = event.target.textContent;
+    console.log(checkedCategory);
+    event.target.classList.add('category__item-active');
+    // renderNews(event);
+  }
+});
