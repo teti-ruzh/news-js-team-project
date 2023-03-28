@@ -28,14 +28,14 @@ export function renderNews(newsArray) {
   const svgC = 'icon-icons8--1';
 
   const markup = newsArray
-    .map(({ url, media, section, title, abstract, published_date }) => {
+    .map(({ id, url, media, section, title, abstract, published_date }) => {
       if (!media.length) {
         foto = image;
       } else {
         foto = media[0]['media-metadata'][2].url;
       }
 
-      return `<li class="news__item">
+      return `<li class="news__item" data-id =${id}>
   <div class="news__images-container">
     <a class="news__link" target="_blank" href="${url}"
       ><img class="news__foto" src="${foto}" alt=""
@@ -157,7 +157,15 @@ function renderNewsSearch(newsArray) {
 
   const markup = newsArray
     .map(
-      ({ web_url, multimedia, section_name, headline, abstract, pub_date }) => {
+      ({
+        id,
+        web_url,
+        multimedia,
+        section_name,
+        headline,
+        abstract,
+        pub_date,
+      }) => {
         if (!multimedia.length) {
           foto = image;
         } else {
@@ -165,7 +173,7 @@ function renderNewsSearch(newsArray) {
           foto = `https://static01.nyt.com/${multimedia[0].url}`;
         }
 
-        return `<li class="news__item">
+        return `<li class="news__item" >
   <div class="news__images-container">
     <a class="news__link" target="_blank" href="${web_url}"
       ><img class="news__foto" src="${foto}" alt=""
@@ -224,7 +232,9 @@ newsList.addEventListener('click', event => {
     const newsItem = buttonFavoriteElement.closest('.news__item');
     const overlayElement = newsItem.querySelector('.news-box-content');
     const favoriteButton = newsItem.querySelector('.news__favorite-button');
-    overlayElement.textContent = favoriteButton.classList.contains('news__favorite-button--active')
+    overlayElement.textContent = favoriteButton.classList.contains(
+      'news__favorite-button--active'
+    )
       ? 'Add to favorite'
       : 'Remove from favorite';
     favoriteButton.classList.toggle('news__favorite-button--active');

@@ -12,4 +12,3 @@ import './js/add-to-read';
 import './js/weather-service';
 import './js/scroll-button';
 import './js/pagination';
-import './js/favourite';
