@@ -73,10 +73,10 @@ function renderNewDateFormat(publish_date) {
   let date = new Date(publish_date);
 
   return `${addLeadingZero(date.getDate())}/${addLeadingZero(
-    date.getMonth()
+    date.getMonth() + 1
   )}/${date.getFullYear()}`;
-}
 
-function addLeadingZero(value) {
-  return String(value).padStart(2, '0');
+  function addLeadingZero(value) {
+    return String(value).padStart(2, '0');
+  }
 }
