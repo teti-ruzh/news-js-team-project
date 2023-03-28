@@ -14,7 +14,6 @@
 .favorite {
   @include mobile-up {
     width: 320px;
-    height: 3563px;
     padding: 40px 0 60px 0px;
     margin: 0 auto;
   }
@@ -22,12 +21,12 @@
   background: inherit;
   @include tablet-up {
     padding: 48px 0 100px 0px;
-    height: 2485px;
+
     width: 768px;
   }
   @include desktop-up {
     width: 1280px;
-    height: 2724px;
+
     padding: 60px 0 300px 0px;
   }
 }

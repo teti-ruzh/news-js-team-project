@@ -15,6 +15,41 @@ const svgB = 'icon-Vector';
 const svgC = 'icon-icons8--1';
 let foto = '';
 
+function renderNewDateFormat(publish_date) {
+  let date = new Date(publish_date);
+
+  return `${addLeadingZero(date.getDate())}/${addLeadingZero(
+    date.getMonth() + 1
+  )}/${date.getFullYear()}`;
+
+  function addLeadingZero(value) {
+    return String(value).padStart(2, '0');
+  }
+}
+
+function renderApiNewDateFormat(publish_date) {
+  if (!publish_date) {
+    return '';
+  }
+  let date = new Date(publish_date);
+  // console.log(date);
+  // console.log(date.toISOString().slice(0, 10));
+
+  // return date.toISOString().slice(0, 10);
+
+  return `${String(addLeadingZero(date.getFullYear()))}-${String(
+    addLeadingZero(date.getMonth() + 1)
+  )}-${String(date.getDate())}`;
+
+  function addLeadingZero(value) {
+    return String(value).padStart(2, '0');
+  }
+}
+
+function cleanNewsGallery() {
+  newsList.innerHTML = '';
+}
+
 // Відображення сторінки помилки
 const errorImage = document.querySelector('.errorImage');
 const paginationEl = document.querySelector('.page-pagination');
@@ -37,32 +72,57 @@ async function fetchMostpopularData() {
   }
 }
 
+
 function renderNews(newsArray) {
-  const markup = newsArray
-    .map(({ id, url, media, section, title, abstract, published_date }) => {
-      if (!media.length) {
-        foto = image;
-      } else {
-        foto = media[0]['media-metadata'][2].url;
-      }
+  containerRenderNewsCardMarkup(newsArray);
 
-      return newsCardMarkup(
-        url,
-        foto,
-        section,
-        title,
-        abstract,
-        published_date,
-        svgA,
-        svgB,
-        svgC
-      );
-    })
-    .join('');
+  function containerRenderNewsCardMarkup(newsArray) {
+    const markup = newsArray
+      .map(({ url, media, section, title, abstract, published_date }) => {
+        if (!media.length) {
+          foto = image;
+        } else {
+          foto = media[0]['media-metadata'][2].url;
+        }
 
-  newsList.insertAdjacentHTML('beforeend', markup);
+        return newsCardMarkup(
+          url,
+          foto,
+          section,
+          title,
+          abstract,
+          published_date,
+          svgA,
+          svgB,
+          svgC
+        );
+      })
+      .join('');
+
+    newsList.insertAdjacentHTML('beforeend', markup);
+  }
 
   addWeatherWidget();
+
+  // Фильтер по популярным новостям по ДАТЕ ПУБЛИКАЦИИ ==============
+
+  const btnDayCalendar = document.querySelector('.wrapper-calendar .days');
+  btnDayCalendar.addEventListener('click', onBtnDayCalendar);
+  function onBtnDayCalendar(event) {
+    cleanNewsGallery();
+
+    let dataCalendar = localStorage.getItem('selectedDate');
+
+    const newsPopularFilterData = newsArray.filter(
+      news =>
+        renderNewDateFormat(dataCalendar) ===
+        renderNewDateFormat(news.published_date)
+    );
+
+    containerRenderNewsCardMarkup(newsPopularFilterData);
+
+    // localStorage.setItem('selectedDate', '');
+  }
 }
 
 //================================================================================================================
@@ -72,15 +132,17 @@ function renderNews(newsArray) {
 const searchBtn = document.querySelector('.search');
 const inputSearch = document.querySelector('.search__input');
 let query = '';
-
+let pagePagination = 0;
 searchBtn.addEventListener('submit', onSearch);
 
 function onSearch(event) {
   event.preventDefault();
   cleanNewsGallery();
+
   query = inputSearch.value;
 
   fetchArticleSearch();
+  localStorage.setItem('selectedDate', '');
 
   // Додавання класу щоб прибрати відображення сторінки помилки
   errorImage.classList.add('visually-hidden');
@@ -90,15 +152,36 @@ function onSearch(event) {
   //============================================================================
 }
 
-function cleanNewsGallery() {
-  newsList.innerHTML = '';
-}
+// function cleanNewsGallery() {
+//   newsList.innerHTML = '';
+// }
 
 async function fetchArticleSearch() {
   try {
-    const response = await fetch(
-      `${URL_ARTICLE_SEARCH}?q=${query}&api-key=${API_KEY}`
+    const apiDate = renderApiNewDateFormat(
+      localStorage.getItem('selectedDate')
     );
+
+    let params = new URLSearchParams({
+      q: query,
+      'api-key': API_KEY,
+    });
+    console.log(apiDate);
+
+    let fqParams = [];
+
+    if (apiDate) {
+      fqParams.push(`pub_date:${apiDate}`);
+    }
+    if (pagePagination) {
+      fqParams.push(`page=${pagePagination}`);
+    }
+
+    if (fqParams.length) {
+      params.set('fq', fqParams.join(' AND '));
+    }
+
+    const response = await fetch(`${URL_ARTICLE_SEARCH}?` + params.toString());
 
     const dataNews = await response.json();
     // перевірка на пустий масив і прибирання класу щоб сторінка помилки відобразилась
@@ -162,32 +245,52 @@ function renderNewsSearch(newsArray) {
 const gallerySections = document.querySelector('.gallery__sections');
 
 let querySection = '';
-let querySectionPubDate = '2023-02-10';
 
 gallerySections.addEventListener('click', onSearchSection);
 
 function onSearchSection(event) {
-  if (event.target.nodeName !== 'BUTTON') {
-    return;
-  }
+  // if (event.target.nodeName !== 'BUTTON') {
+  //   return;
+  // }
 
   cleanNewsGallery();
 
   querySection = event.target.textContent;
-  console.log(querySection);
 
   fetchArticleSearchSection();
+  localStorage.setItem('selectedDate', '');
   errorImage.classList.add('visually-hidden');
   paginationEl.classList.remove('hidden');
 }
 
 async function fetchArticleSearchSection() {
   try {
-    const response = await fetch(
-      `${URL_ARTICLE_SEARCH}?api-key=${API_KEY}&fq=section_name:${querySection} AND pub_date:${querySectionPubDate}`
+    const apiDate = renderApiNewDateFormat(
+      localStorage.getItem('selectedDate')
     );
 
+    let params = new URLSearchParams({
+      q: querySection,
+      'api-key': API_KEY,
+    });
+
+    let fqParams = [];
+
+    if (querySection) {
+      fqParams.push(`section_name:${querySection}`);
+    }
+    if (apiDate) {
+      fqParams.push(`pub_date:${apiDate}`);
+    }
+
+    if (fqParams.length) {
+      params.set('fq', fqParams.join(' AND '));
+    }
+
+    const response = await fetch(`${URL_ARTICLE_SEARCH}?` + params.toString());
+
     const dataNews = await response.json();
+
     if (dataNews.response.docs.length === 0) {
       errorImage.classList.remove('visually-hidden');
       paginationEl.classList.add('hidden');
@@ -244,6 +347,7 @@ function addWeatherWidget() {
   }
   newsList.insertBefore(weatherBlock, newsList.children[index]);
 }
+
 //================================================================================================================
 //Фільтер популярних новин по даті
 

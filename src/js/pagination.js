@@ -6,9 +6,15 @@ const btnPrevPg = document.querySelector('button.page-pagination__prev-btn');
 const btnNextPg = document.querySelector('button.page-pagination__next-btn');
 const pagePaginationEl = document.querySelector('.page-pagination');
 
-let currenPage = 1;
 let newsPerPage = 0;
 
+const valuePage = {
+  curPage: 1,
+  numLinksTwoSide: 1,
+  totalPages: 0,
+};
+
+// пагінація по популярних новинах
 fetchMostpopularData().then(news => {
   if (window.matchMedia('(max-width: 767px)').matches) {
     newsPerPage = 4;
@@ -18,7 +24,11 @@ fetchMostpopularData().then(news => {
     newsPerPage = 7;
   }
 
-  const pagesCount = Math.ceil(news.length / newsPerPage);
+  valuePage.totalPages = Math.ceil(news.length / newsPerPage);
+
+  if (valuePage.totalPages === 0) {
+    pagePaginationEl.classList.add('hidden');
+  }
 
   function displayList(arrData, newsPerPage, page) {
     newsList.innerHTML = '';
@@ -29,55 +39,131 @@ fetchMostpopularData().then(news => {
     const paginedData = arrData.slice(start, end);
 
     renderNews(paginedData);
+    pagination();
   }
 
-  function displayPagination(pagesCount) {
-    for (let i = 0; i < pagesCount; i += 1) {
-      const itemPaginationEl = displayPaginationPage(i + 1);
-      listPaginationEl.appendChild(itemPaginationEl);
-    }
-  }
+  listPaginationEl.addEventListener('click', e => {
+    const ele = e.target;
 
-  function displayPaginationPage(page) {
-    const itemPaginationEl = document.createElement('li');
-    itemPaginationEl.classList.add('page-pagination__item');
-    itemPaginationEl.innerText = page;
+    if (ele.dataset.page) {
+      const pageNumber = parseInt(e.target.dataset.page, 10);
 
-    if (currenPage === page) {
-      itemPaginationEl.classList.add('page-pagination__item--active');
-    }
-
-    handleButtonLeft();
-    handleButtonRight();
-
-    itemPaginationEl.addEventListener('click', () => {
-      currenPage = page;
-
-      displayList(news, newsPerPage, currenPage);
+      valuePage.curPage = pageNumber;
+      pagination(valuePage);
+      handleButtonLeft();
+      handleButtonRight();
       smoothScrollUp();
+      displayList(news, newsPerPage, valuePage.curPage);
+    }
+  });
 
-      let currentItemEl = document.querySelector(
-        'li.page-pagination__item--active'
-      );
-      currentItemEl.classList.remove('page-pagination__item--active');
+  // DYNAMIC PAGINATION
+  function pagination() {
+    const { totalPages, curPage, numLinksTwoSide: delta } = valuePage;
 
-      itemPaginationEl.classList.add('page-pagination__item--active');
+    let range = 0;
+    let render = '';
+    let renderTwoSide = '';
+    let dot = `<li class="page-pagination__dots">...</li>`;
+    let countTruncate = 0; // use for ellipsis - truncate left side or right side
+    let active = '';
 
-      if (currenPage !== 1) {
-        btnPrevPg.disabled = false;
-      }
-      if (currenPage === pagesCount) {
-        btnNextPg.disabled = true;
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      range = delta + 1; // use for handle visible number of links left side
+
+      // use for truncate two side
+      const numberTruncateLeft = curPage - delta;
+      const numberTruncateRight = curPage + delta;
+
+      for (let pos = 1; pos <= totalPages; pos++) {
+        active = pos === curPage ? 'active' : '';
+
+        // truncate
+        if (totalPages >= 1 * range - 1) {
+          if (
+            numberTruncateLeft > 0 &&
+            numberTruncateRight < totalPages - 1 + 1
+          ) {
+            // truncate 2 side
+            if (pos > numberTruncateLeft && pos < numberTruncateRight) {
+              renderTwoSide += renderPage(pos, active);
+            }
+          } else {
+            // truncate left side or right side
+            if (
+              (curPage < range && pos <= range) ||
+              (curPage > totalPages - range && pos >= totalPages - range + 1) ||
+              pos === totalPages ||
+              pos === 1
+            ) {
+              render += renderPage(pos, active);
+            } else {
+              countTruncate += 1;
+              if (countTruncate === 1) render += dot;
+            }
+          }
+        }
       }
 
-      if (currenPage === 1) {
-        btnPrevPg.disabled = true;
+      if (renderTwoSide) {
+        renderTwoSide =
+          renderPage(1) + dot + renderTwoSide + dot + renderPage(totalPages);
+        listPaginationEl.innerHTML = renderTwoSide;
+      } else {
+        listPaginationEl.innerHTML = render;
       }
-      if (currenPage !== pagesCount) {
-        btnNextPg.disabled = false;
+    } else if (window.matchMedia('(min-width: 768px)').matches) {
+      range = delta + 4; // use for handle visible number of links left side
+
+      // use for truncate two side
+      const numberTruncateLeft = curPage - delta;
+      const numberTruncateRight = curPage + delta;
+
+      for (let pos = 1; pos <= totalPages; pos++) {
+        active = pos === curPage ? 'active' : '';
+
+        // truncate
+        if (totalPages >= 2 * range - 1) {
+          if (
+            numberTruncateLeft > 3 &&
+            numberTruncateRight < totalPages - 3 + 1
+          ) {
+            // truncate 2 side
+            if (pos >= numberTruncateLeft && pos <= numberTruncateRight) {
+              renderTwoSide += renderPage(pos, active);
+            }
+          } else {
+            // truncate left side or right side
+            if (
+              (curPage < range && pos <= range) ||
+              (curPage > totalPages - range && pos >= totalPages - range + 1) ||
+              pos === totalPages ||
+              pos === 1
+            ) {
+              render += renderPage(pos, active);
+            } else {
+              countTruncate += 1;
+              if (countTruncate === 1) render += dot;
+            }
+          }
+        } else {
+          // not truncate
+          render += renderPage(pos, active);
+        }
       }
-    });
-    return itemPaginationEl;
+
+      if (renderTwoSide) {
+        renderTwoSide =
+          renderPage(1) + dot + renderTwoSide + dot + renderPage(totalPages);
+        listPaginationEl.innerHTML = renderTwoSide;
+      } else {
+        listPaginationEl.innerHTML = render;
+      }
+    }
+  }
+
+  function renderPage(index, active = '') {
+    return ` <li class="page-pagination__item ${active}" data-page="${index}">${index}</li>`;
   }
 
   pagePaginationEl.addEventListener('click', function (e) {
@@ -86,34 +172,36 @@ fetchMostpopularData().then(news => {
 
   function handleButton(e) {
     if (e.classList.contains('page-pagination__prev-btn')) {
-      currenPage -= 1;
+      valuePage.curPage -= 1;
       handleButtonLeft();
       btnNextPg.disabled = false;
     } else if (e.classList.contains('page-pagination__next-btn')) {
-      currenPage += 1;
+      valuePage.curPage += 1;
       handleButtonRight();
       btnPrevPg.disabled = false;
     }
-    displayList(news, newsPerPage, currenPage);
+
+    smoothScrollUp();
+    displayList(news, newsPerPage, valuePage.curPage);
   }
 
   function handleButtonLeft() {
-    if (currenPage === 1) {
+    if (valuePage.curPage === 1) {
       btnPrevPg.disabled = true;
     } else {
       btnPrevPg.disabled = false;
     }
   }
+
   function handleButtonRight() {
-    if (currenPage === pagesCount) {
+    if (valuePage.curPage === valuePage.totalPages) {
       btnNextPg.disabled = true;
     } else {
       btnNextPg.disabled = false;
     }
   }
 
-  displayList(news, newsPerPage, currenPage);
-  displayPagination(pagesCount);
+  displayList(news, newsPerPage, valuePage.curPage);
 });
 
 function smoothScrollUp() {
