@@ -18,7 +18,7 @@ const refs = {
 };
 
 let categories = [];
-let checkedCategory = '';
+let checkedCategory = [];
 
 const newApiCategory = new ApiCategory();
 
@@ -28,6 +28,10 @@ window.addEventListener(
   'resize',
   throttle(() => rendering(categories), 250)
 );
+// window.addEventListener('click', () => {
+//   refs.categoryOverlay.classList.remove('category__overlay-open');
+//   refs.categoryTabletOverlay.classList.remove('category__overlay-open');
+// });
 
 waitingCategories();
 
@@ -149,27 +153,28 @@ function overlayIsShown() {
 }
 
 refs.categoryList.addEventListener('click', event => {
-  if (event.target.nodeName === 'LI') {
-    checkedCategory = event.target.textContent;
-    console.log(checkedCategory);
-    // renderNews(event);
+  // refs.categoryItem.classList.remove('category__btn-active');
+  const target = event.target;
+  if (target.nodeName === 'LI') {
+    target.classList.add('category__btn-active');
   }
+  console.log(checkedCategory);
 });
 
 refs.categoryOverlay.addEventListener('click', event => {
-  if (event.target.nodeName === 'LI') {
-    checkedCategory = event.target.textContent;
-    console.log(checkedCategory);
-    event.target.classList.add('category__item-active');
-    // renderNews(event);
+  // refs.categoryItem.classList.remove('category__btn-active');
+  const target = event.target;
+  if (target.nodeName === 'LI') {
+    target.classList.add('category__item-active');
+    refs.categoryOverlay.classList.remove('category__overlay-open');
   }
 });
 
 refs.categoryTabletOverlay.addEventListener('click', event => {
-  if (event.target.nodeName === 'LI') {
-    checkedCategory = event.target.textContent;
-    console.log(checkedCategory);
-    event.target.classList.add('category__item-active');
-    // renderNews(event);
+  // refs.categoryItem.classList.remove('category__btn-active');
+  const target = event.target;
+  if (target.nodeName === 'LI') {
+    target.classList.add('category__item-active');
+    refs.categoryTabletOverlay.classList.remove('category__overlay-open');
   }
 });

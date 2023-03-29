@@ -121,6 +121,7 @@
 }
 
 .category__btn-active,
+.category__btn:active,
 .category__btn:hover {
     background-color: $color-brand;
     color: $color-white;
