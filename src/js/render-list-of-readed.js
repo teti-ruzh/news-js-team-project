@@ -2,7 +2,7 @@ const STORAGE_KEY = 'add-read-more';
 
 const refs = {
   readNewsGallery: document.querySelector('.news-gallery'),
-  readErrorImage: document.querySelector('.errorImageRead')
+  readErrorImage: document.querySelector('.errorImageRead'),
 };
 
 const svgPath = new URL('../images/icons.svg', import.meta.url);
@@ -133,4 +133,21 @@ function readNewsCardMarkup
     </div>
   </li>
   `;
+  };
+
+
+  refs.readNewsGallery.addEventListener('click', onFavClick);
+
+  function onFavClick(event) {
+    const btnFavorite = event.target.closest('.news__favorite-button');
+  if (btnFavorite) {
+    const newsItem = btnFavorite.closest('.news__item');
+    const overlayElement = newsItem.querySelector('.news-box-content');
+    const favoriteButton = newsItem.querySelector('.news__favorite-button');
+    overlayElement.textContent = favoriteButton.classList.contains(
+      'news__favorite-button--active')
+      ? 'Add to favorite'
+      : 'Remove from favorite';
+    favoriteButton.classList.toggle('news__favorite-button--active');
   }
+}
