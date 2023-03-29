@@ -11,21 +11,23 @@ searchInput.addEventListener("submit", selectionNews);
  function selectionNews(e) {
     e.preventDefault();
    const query = e.currentTarget.elements.query.value.trim();
-     if (!Boolean(query)) {
-    // Дів в який внесли розмітку
-      //  renderFavourite(myData);
-       errorImage.classList.add('visually-hidden');
-        return;
-     }
+  //  renderFavourite(myData);
+
+
+    //  if (!Boolean(query)) {
+    // // Дів в який внесли розмітку
+    //    renderFavourite(myData);
+    //    errorImage.classList.add('visually-hidden');
+    //     return;
+    //  }
      
   let markup = '';
   let foundNews = [];
 
 markup = myData.map(
-    ({ id, url, foto, section, title, newsAbstruct, newDataFormat }) => {
+    ({ url, foto, section, title, newsAbstruct, newDataFormat }) => {
       if (title.toLowerCase().includes(query.toLowerCase())) {
         foundNews.push({
-          id: `${id}`,
           url: `${url}`,
           foto: `${foto}`,
           section: `${section}`,
@@ -44,4 +46,8 @@ markup = myData.map(
    
    
    
+
+
+
+
 
