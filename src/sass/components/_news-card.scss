@@ -203,10 +203,10 @@
   pointer-events: none;
   transition: transform 1000ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  @include mobile-only {
-    width: 288px;
-    height: 630px;
-  }
+  // @include mobile-only {
+  //   width: 288px;
+  //   height: 630px;
+  // }
 }
 
 .news-box--overlay-active {
