@@ -10,7 +10,7 @@ export async function loadWeather(lat, lon) {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     if (response.ok) {
       hideLoading();
       getWeatherData(data);
