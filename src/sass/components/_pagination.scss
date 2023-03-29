@@ -78,8 +78,13 @@
 
 .page-pagination__prev-btn,
 .page-pagination__next-btn {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
   height: 28px;
   width: 65px;
+  padding: 4px 3px;
   font-weight: 500;
   font-size: 14px;
   line-height: 1.36;
@@ -105,6 +110,15 @@
     background-color: $color-white-2;
     border-color: $color-grey;
     cursor: no-drop;
+  }
+}
+
+.page-pagination__btn-icon {
+  display: block;
+  fill: currentColor;
+
+  &--dg {
+    rotate: 180deg;
   }
 }
 
