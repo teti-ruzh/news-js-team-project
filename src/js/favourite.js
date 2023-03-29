@@ -7,6 +7,7 @@ const myData = JSON.parse(localStorage.getItem('favorite'));
 const image = new URL('../images/gallery/plugFoto.jpg', import.meta.url);
 const svgA = new URL('../images/icons.svg', import.meta.url);
 const svgB = 'icon-Vector';
+const svgC = 'icon-icons8--1';
 
 renderFavourite(myData);
 
@@ -45,6 +46,13 @@ function renderFavourite(myData) {
       </div>
     </div>
   </div>
+  <div class="news-box--overlay">
+      <span class="news-box-text"> Have read 
+      <svg class="news__favorite-icon" width="16" height="16">
+            <use href="${svgA}#${svgC}"></use>
+          </svg>
+      </span>
+    </div>
 </li>
 `;
     })

@@ -14,6 +14,10 @@ function onReadMoreBtnClick(event) {
   if (readMoreBtn) {
     // const newsItem = readMoreBtn.closest('.news__item').outerHTML;
     const newsItem = readMoreBtn.closest('.news__item');
+
+    const overlayElement = newsItem.querySelector('.news-box--overlay');
+    overlayElement.classList.add('news-box--overlay-active');
+
     const title = newsItem.querySelector('.news__title').textContent;
     const section = newsItem.querySelector('.news__category-text').textContent;
     const foto = newsItem.querySelector('.news__foto').getAttribute('src');
