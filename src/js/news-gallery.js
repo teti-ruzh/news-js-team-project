@@ -165,7 +165,7 @@ async function fetchArticleSearch() {
       q: query,
       'api-key': API_KEY,
     });
-    console.log(apiDate);
+    // console.log(apiDate);
 
     let fqParams = [];
 
@@ -242,7 +242,7 @@ function renderNewsSearch(newsArray) {
 // Відображення статей за КАТЕГОРІЯМИ у хедері
 
 const gallerySections = document.querySelector('.container.category__section');
-console.log(gallerySections);
+// console.log(gallerySections);
 let querySection = '';
 
 gallerySections.addEventListener('click', onSearchSection);
@@ -255,7 +255,7 @@ function onSearchSection(event) {
   cleanNewsGallery();
 
   querySection = event.target.textContent.toLowerCase();
-  console.log(querySection);
+  // console.log(querySection);
 
   fetchArticleSearchSection();
   localStorage.setItem('selectedDate', '');
@@ -297,7 +297,7 @@ async function fetchArticleSearchSection() {
       return;
     }
 
-    console.log(dataNews.response.docs);
+    // console.log(dataNews.response.docs);
 
     renderNewsSearch(dataNews.response.docs);
   } catch (error) {
