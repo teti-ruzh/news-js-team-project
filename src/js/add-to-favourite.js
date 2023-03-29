@@ -4,9 +4,8 @@ populateFavorite();
 newsList.addEventListener('click', onAddButtonClick);
 
 function onAddButtonClick(event) {
-  const btnFavoriteElement = event.target.closest('.news__favorite-button');
-  if (btnFavoriteElement) {
-    const newsItem = btnFavoriteElement.closest('.news__item');
+  if (event.target.closest('.news__favorite-button')) {
+    const newsItem = event.target.closest('.news__item');
 
     const title = newsItem.querySelector('.news__title').textContent;
     const section = newsItem.querySelector('.news__category-text').textContent;
@@ -26,15 +25,6 @@ function onAddButtonClick(event) {
     renderData.push(newsObject);
 
     localStorage.setItem('favorite', JSON.stringify(renderData));
-    
-    const overlayElement = newsItem.querySelector('.news-box-content');
-    const favoriteButton = newsItem.querySelector('.news__favorite-button');
-    overlayElement.textContent = favoriteButton.classList.contains(
-      'news__favorite-button--active'
-    )
-      ? 'Add to favorite'
-      : 'Remove from favorite';
-    favoriteButton.classList.toggle('news__favorite-button--active');
   }
 }
 

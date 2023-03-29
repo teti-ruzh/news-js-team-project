@@ -88,5 +88,16 @@ function removeArticle(e) {
       errorImage.classList.remove('none');
     }
   }
+};
+
+favouriteList.addEventListener('click', onReadClick);
+
+function onReadClick(event){
+  const readMoreBtn = event.target.closest('.news__link');
+  if (readMoreBtn) {
+    const newsItem = readMoreBtn.closest('.news__item');
+    const overlayElement = newsItem.querySelector('.news-box--overlay');
+    overlayElement.classList.add('news-box--overlay-active');
+  }
 }
 
