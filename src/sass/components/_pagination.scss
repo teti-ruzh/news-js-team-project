@@ -3,13 +3,13 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  margin-top: 40px;
-  margin-bottom: 60px;
+  padding-top: 40px;
+  padding-bottom: 60px;
 
   @include tablet-up {
     gap: 8px;
-    margin-top: 60px;
-    margin-bottom: 150px;
+    padding-top: 60px;
+    padding-bottom: 150px;
   }
 }
 

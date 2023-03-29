@@ -120,6 +120,7 @@ function renderNews(newsArray) {
 
     containerRenderNewsCardMarkup(newsPopularFilterData);
 
+    paginationEl.classList.add('hidden');
     // localStorage.setItem('selectedDate', '');
   }
 }
@@ -146,8 +147,7 @@ function onSearch(event) {
   // Додавання класу щоб прибрати відображення сторінки помилки
   errorImage.classList.add('visually-hidden');
 
-  // При повторному пошуку відновлення видимості пагінатора
-  paginationEl.classList.remove('hidden');
+  paginationEl.classList.add('hidden');
   //============================================================================
 }
 
