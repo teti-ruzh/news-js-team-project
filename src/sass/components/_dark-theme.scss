@@ -45,3 +45,17 @@
 .dark .calendar__btn {
   border-color: $color-white-2;
 }
+.dark .header__login-btn {
+  border-color: $color-white-2;
+}
+.dark .login-modal {
+  background-color: $bg-dark-theme;
+}
+.dark .login-backdrop {
+  background-color: $bg-weather-translucent;
+}
+.dark .login-form__input {
+  background-color: $bg-dark-theme;
+  border-color: $color-white-2;
+  color: $color-white-2;
+}
