@@ -90,7 +90,7 @@
     text-transform: capitalize;
     color: inherit;
     cursor: pointer;
-   
+
     @media screen and (max-width: 400px) {
       display: none;
     }
@@ -203,15 +203,15 @@
     position: absolute;
     border-radius: 50%;
     top: 50%;
-    left: -1px;
+    // left: -1px;
     transition: 0.5s;
 
-    transform: translateY(-50%);
+    transform: translateY(-51%);
   }
 }
 
 .switch__checkbox:checked + .switch__label:after {
-  transform: translateX(140%) translateY(-50%);
+  transform: translateX(140%) translateY(-51%);
 }
 
 .switch__label:hover,
