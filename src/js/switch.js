@@ -46,6 +46,7 @@ function checkedDarkTheme() {
 function checkedLightTheme() {
   if (!localStorage.getItem('theme') === 'dark') {
     refs.switch.setAttribute('checked', false);
+    refs.mobileSwitch.setAttribute('checked', false);
     return;
   } else {
     localStorage.removeItem('theme');
@@ -57,6 +58,7 @@ function addDarkClassToHTML() {
   try {
     if (localStorage.getItem('theme') === 'dark') {
       refs.switch.setAttribute('checked', true);
+      refs.mobileSwitch.setAttribute('checked', true);
       addClass(refs.iconMoon, 'theme-switch');
       addClass(refs.switchDarkName, 'theme-switch');
       addClass(refs.iconMoonMobile, 'theme-switch');
