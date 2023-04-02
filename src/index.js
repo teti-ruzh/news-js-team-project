@@ -14,3 +14,4 @@ import './js/weather-service';
 import './js/scroll-button';
 import './js/error-image';
 import './js/pagination';
+import './js/registration';
