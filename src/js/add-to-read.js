@@ -28,13 +28,16 @@ function onReadMoreBtnClick(event) {
     const date = `${day}/${month}/${clickDate.getFullYear()}`;
     clickDate.getFullYear();
     
-    // if (readedNewsData.length > 0) {
-    //   for (let i=0; i < readedNewsData.length; i+=1) {
-    //      if (readedNewsData[i].title === title) {
-    //       readedNewsData[i] = {};
-    //      };
-    //   };
-    // };
+    if (readedNewsData.length > 0) {
+      for (const article of readedNewsData) {
+         if (article.title === title) {
+          const unicReadNews = readedNewsData.filter(article => article.title !== title);
+      // localStorage.removeItem(STORAGE_KEY);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(unicReadNews));
+      populateNewsData();
+         };
+      };
+    };
 
     // let newsObj = {};
     // newsObj.id = clickDate.getTime();
