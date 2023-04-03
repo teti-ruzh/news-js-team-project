@@ -1,4 +1,5 @@
 export const weatherBlock = document.querySelector('#weather');
+// const weatherBtn = document.querySelector('.weather__btn');
 
 const API_KEY = '0a142dd41db52da1a7f6b2fdf16ad4dd';
 
@@ -10,7 +11,7 @@ export async function loadWeather(lat, lon) {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
     const response = await fetch(apiUrl);
     const data = await response.json();
-    // console.log(data);
+
     if (response.ok) {
       hideLoading();
       getWeatherData(data);
@@ -73,7 +74,8 @@ function getWeatherData(data) {
   </div>
   </div>
   <img class="weather__icon" src="https://openweathermap.org/img/wn/${weatherIcon}@2x.png" />
-  <div class="current__date">${formattedDate}</div>`;
+  <div class="current__date">${formattedDate}</div>
+  <button class="weather__btn">Weather for Week</button>`;
 
   weatherBlock.innerHTML = template;
 }
@@ -114,3 +116,92 @@ function showLoading() {
 function hideLoading() {
   loading.style.display = 'none';
 }
+
+// // Обработчик клика на кнопку "Weather for Week"
+// weatherBtn.addEventListener('click', onWeatherBtnClick);
+
+// export async function onWeatherBtnClick(event) {
+//   // cleanWeatherBlock();
+//   if (event.target.classList.contains('weather__btn')) {
+//     // showLoading();
+//     try {
+//       const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=7&units=metric&appid=${API_KEY}`;
+//       const response = await fetch(apiUrl);
+//       const data = await response.json();
+//       // console.log(data);
+//       if (response.ok) {
+//         // hideLoading();
+//         showWeatherTable(data.daily);
+//       } else {
+//         console.log(error);
+//       }
+//     } catch (error) {
+//       console.log(error);
+//       // hideLoading();
+//     }
+//   }
+// }
+
+// // Функция отображения таблицы с прогнозом на неделю
+// function showWeatherTable(dailyData) {
+//   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+//   const tableRows = dailyData
+//     .map(day => {
+//       const date = new Date(day.dt * 1000);
+//       const dayOfWeek = daysOfWeek[date.getDay()];
+//       const dayOfMonth = date.getDate();
+//       const months = [
+//         'Jan',
+//         'Feb',
+//         'Mar',
+//         'Apr',
+//         'May',
+//         'June',
+//         'July',
+//         'Aug',
+//         'Sep',
+//         'Oct',
+//         'Nov',
+//         'Dec',
+//       ];
+
+//       const month = months[date.getMonth()];
+//       const year = date.getFullYear();
+//       const formattedDate = `${dayOfWeek} ${dayOfMonth} ${month} ${year}`;
+//       const weatherIcon = day.weather[0].icon;
+//       const weatherDescription = day.weather[0].main;
+//       const minTemp = Math.round(day.temp.min);
+//       const maxTemp = Math.round(day.temp.max);
+//       return `
+//       <tr>
+//         <td>${formattedDate}</td>
+//         <td><img src="https://openweathermap.org/img/wn/${weatherIcon}@2x.png" alt="${weatherDescription}" /></td>
+//         <td>${minTemp}&deg;</td>
+//         <td>${maxTemp}&deg;</td>
+//       </tr>
+//     `;
+//     })
+//     .join('');
+
+//   const table = `
+//     <table>
+//       <thead>
+//         <tr>
+//           <th>Date</th>
+//           <th>Weather</th>
+//           <th>Min Temp</th>
+//           <th>Max Temp</th>
+//         </tr>
+//       </thead>
+//       <tbody>
+//         ${tableRows}
+//       </tbody>
+//     </table>
+//   `;
+
+//   weatherBlock.innerHTML = table;
+// }
+
+// function cleanWeatherBlock() {
+//   weatherBlock.innerHTML = '';
+// }

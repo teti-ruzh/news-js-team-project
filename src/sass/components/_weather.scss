@@ -103,6 +103,29 @@
             margin-bottom: 90px;
         }
     }
+
+    &__btn {
+        color: $color-white;
+        height: 32px;
+        padding: 8px 10px;
+        font-size: 16px;
+        background-color: $bg-weather-translucent;
+        border-radius: 10px;
+        margin-right: auto;
+        margin-left: auto;
+        
+        line-height: 1.15;
+        transition: background-color 0.25s;
+        display: block;
+        outline: none;
+        border: none;
+        cursor: pointer;
+    }
+    
+    &__btn:hover {
+        background-color: rgba(254, 254, 255, 0.1);
+    }
+
 }
 
 .current__date {
@@ -110,28 +133,13 @@
     font-size: 28px;
     line-height: 1.18;
     text-align: center;
-    margin-bottom: 84px;
+    margin-bottom: 12px;
 
     @include tablet-up {
         font-size: 36px;
         line-height: 1.17;
-        margin-bottom: 130px;
+        margin-bottom: 20px;
     }
-}
-
-#loading {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-
-   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: $color-brand; 
-  z-index: 9999; 
-  
 }
   
 #loading img {
@@ -142,3 +150,4 @@
    max-width: 80px;
    
 }
+
