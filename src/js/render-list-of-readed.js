@@ -31,7 +31,7 @@ function renderReadedGallery() {
     const cardMarkup = readedNewsArray.filter(
       news => news.date === sortedReadDates[i]
     )
-    // .sort((news[i].clickID, news[i+1].clickID) => {news[i+1].clickID - news[i].clickID})
+    .sort(sortId)
     .map(news => readNewsCardMarkup(news)).join('');
 
 
@@ -150,4 +150,10 @@ function readNewsCardMarkup
       : 'Remove from favorite';
     favoriteButton.classList.toggle('news__favorite-button--active');
   }
+}
+
+function sortId(a,b){
+  if(a.clickID>b.clickID)return -1;
+  if(a.clickID<b.clickID)return 1;
+  return 0;
 }
