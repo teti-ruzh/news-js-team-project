@@ -1,5 +1,6 @@
-import { weatherBlock } from './weather-service';
+// import { weatherBlock } from './weather-service';
 import newsCardMarkup from './news-card-markup';
+import { createPagination } from './pagination';
 
 const API_KEY = 'RHHupiQoPYaFAPG2zSM05OivdA2ggJN2';
 const URL_MOST_POPULAR =
@@ -51,26 +52,22 @@ function cleanNewsGallery() {
 }
 
 // Відображення сторінки помилки
-const errorImage = document.querySelector('.errorImage');
-const paginationEl = document.querySelector('.page-pagination');
-//============================================================================
+// const errorImage = document.querySelector('.errorImage');
 
 //=========================================================================================================================================
 // Відображення популярних статей. Загальна кільксть статей 20шт
-// fetchMostpopularData();
-
 async function fetchMostpopularData() {
   try {
     const response = await fetch(`${URL_MOST_POPULAR}?api-key=${API_KEY}`);
 
     const dataNews = await response.json();
-    return dataNews.results;
-
-    // renderNews(dataNews.results);
+    const data = dataNews.results;
+    createPagination(data, renderNews);
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
   }
 }
+fetchMostpopularData()
 
 function renderNews(newsArray) {
   containerRenderNewsCardMarkup(newsArray);
@@ -101,7 +98,7 @@ function renderNews(newsArray) {
     newsList.insertAdjacentHTML('beforeend', markup);
   }
 
-  addWeatherWidget();
+  // addWeatherWidget();
 
   // Фильтер по популярным новостям по ДАТЕ ПУБЛИКАЦИИ ==============
 
@@ -118,9 +115,9 @@ function renderNews(newsArray) {
         renderNewDateFormat(news.published_date)
     );
 
-    containerRenderNewsCardMarkup(newsPopularFilterData);
+    createPagination(newsPopularFilterData, containerRenderNewsCardMarkup);
+    // containerRenderNewsCardMarkup(newsPopularFilterData);
 
-    paginationEl.classList.add('hidden');
     // localStorage.setItem('selectedDate', '');
   }
 }
@@ -145,10 +142,7 @@ function onSearch(event) {
   localStorage.setItem('selectedDate', '');
 
   // Додавання класу щоб прибрати відображення сторінки помилки
-  errorImage.classList.add('visually-hidden');
-
-  paginationEl.classList.add('hidden');
-  //============================================================================
+  // errorImage.classList.add('visually-hidden');
 }
 
 // function cleanNewsGallery() {
@@ -183,17 +177,15 @@ async function fetchArticleSearch() {
     const response = await fetch(`${URL_ARTICLE_SEARCH}?` + params.toString());
 
     const dataNews = await response.json();
+
     // перевірка на пустий масив і прибирання класу щоб сторінка помилки відобразилась
-    if (dataNews.response.docs.length === 0) {
-      errorImage.classList.remove('visually-hidden');
-
-      // видалення пагінатора при помилці на сторінці
-      paginationEl.classList.add('hidden');
-
-      return;
-    }
+    // if (dataNews.response.docs.length === 0) {
+    //   errorImage.classList.remove('visually-hidden');
+    //   return;
+    // }
     //============================================================================
-    renderNewsSearch(dataNews.response.docs);
+    createPagination(dataNews.response.docs, renderNewsSearch);
+    // renderNewsSearch(dataNews.response.docs);
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
   }
@@ -259,8 +251,7 @@ function onSearchSection(event) {
 
   fetchArticleSearchSection();
   localStorage.setItem('selectedDate', '');
-  errorImage.classList.add('visually-hidden');
-  paginationEl.classList.remove('hidden');
+  // errorImage.classList.add('visually-hidden');
 }
 
 async function fetchArticleSearchSection() {
@@ -291,15 +282,15 @@ async function fetchArticleSearchSection() {
 
     const dataNews = await response.json();
 
-    if (dataNews.response.docs.length === 0) {
-      errorImage.classList.remove('visually-hidden');
-      paginationEl.classList.add('hidden');
-      return;
-    }
+    // if (dataNews.response.docs.length === 0) {
+    //   errorImage.classList.remove('visually-hidden');
+    //   return;
+    // }
 
     // console.log(dataNews.response.docs);
 
-    renderNewsSearch(dataNews.response.docs);
+    createPagination(dataNews.response.docs, renderNewsSearch)
+    // renderNewsSearch(dataNews.response.docs);
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
   }
@@ -335,20 +326,20 @@ newsList.addEventListener('click', event => {
 
 //================================================================================================================
 // Додамо віджет погоди Олексія
-function addWeatherWidget() {
-  const viewportWidth = window.innerWidth;
-  let index = 0;
-  if (viewportWidth < 768) {
-    index = 0;
-  } else if (viewportWidth >= 768 && viewportWidth < 1280) {
-    index = 1;
-  } else {
-    index = 2;
-  }
-  newsList.insertBefore(weatherBlock, newsList.children[index]);
-}
+// function addWeatherWidget() {
+//   const viewportWidth = window.innerWidth;
+//   let index = 0;
+//   if (viewportWidth < 768) {
+//     index = 0;
+//   } else if (viewportWidth >= 768 && viewportWidth < 1280) {
+//     index = 1;
+//   } else {
+//     index = 2;
+//   }
+//   newsList.insertBefore(weatherBlock, newsList.children[index]);
+// }
 
 //================================================================================================================
 //Фільтер популярних новин по даті
 
-export { fetchMostpopularData, renderNews };
+// export { fetchMostpopularData, renderNews };
