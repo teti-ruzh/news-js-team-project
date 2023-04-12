@@ -190,17 +190,16 @@ function onBtnRightClick(dataPage) {
 function listNewsCards(dataPage) {
   const { curPage, arrNews, newsPerPage, renderNewsCards } = dataPage;
   newsList.innerHTML = '';
-  page = curPage;
 
-  if (page === 1) {
-    const start = (page - 1) * newsPerPage;
+  if (curPage === 1) {
+    const start = (curPage - 1) * newsPerPage;
     const end = start + newsPerPage;
     const paginedData = arrNews.slice(start, end);
     renderNewsCards(paginedData);
     addWeatherWidget()
     pagination(dataPage);
   } else {
-    const start = (page - 1) * (newsPerPage + 1) - 1;
+    const start = (curPage - 1) * (newsPerPage + 1) - 1;
     const end = start + (newsPerPage + 1);
     const paginedData = arrNews.slice(start, end);
     renderNewsCards(paginedData);
