@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "calendar-dates": "^2.7.2",
-    "firebase": "^9.19.1",
+    "firebase": "^9.23.0",
     "jquery": "^3.6.4",
     "lodash.throttle": "^4.1.1",
     "modern-normalize": "^1.1.0",
